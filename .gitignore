@@ -1,0 +1,4 @@
+_output/
+.quarto/
+/_site/
+.DS_Store

@@ -1,0 +1,133 @@
+---
+title: "Emmanuel Bruno"
+subtitle: "Maître de conférences — Université de Toulon"
+---
+
+::: {.hero}
+:::{.card .border-0 .shadow-sm}
+::: {.card-body}
+![Logo](images/logo.png){.float-start.me-3 width="96"}
+
+# Emmanuel Bruno {.hero-title}
+
+**Maître de conférences** · [Université de Toulon](http://www.univ-tln.fr) · UFR Sciences et Techniques
+
+Chercheur au [Laboratoire d'Informatique et Systèmes (LIS, UMR 7020)](http://www.lis-lab.fr), équipe [R2I](https://www.lis-lab.fr/r2i), site de Toulon.
+
+::: {.callout-note-fill .mt-3}
+## Domaines
+Data Management · Information Retrieval · Large Language Models · Multi-Agent Systems · Affective Computing
+:::
+
+[ORCID](https://orcid.org/0000-0001-5171-2268){.btn .btn-outline-primary .btn-sm}
+[DBLP](https://dblp.org/pid/05/1898){.btn .btn-outline-primary .btn-sm}
+[Google Scholar](https://scholar.google.com/citations?user=TuDSngwAAAAJ){.btn .btn-outline-primary .btn-sm}
+[GitHub](https://github.com/emmanuelbruno){.btn .btn-outline-primary .btn-sm}
+[Publications (HAL)](https://amu.hal.science/LIS-LAB/search/index/?q=%2A&rows=30&authIdPerson_i=174187&sort=publicationDate_tdate+desc){.btn .btn-outline-primary .btn-sm}
+[Équipe R2I](https://www.lis-lab.fr/r2i/#4){.btn .btn-outline-primary .btn-sm}
+[Email](mailto:emmanuel.bruno@univ-tln.fr){.btn .btn-outline-primary .btn-sm}
+:::
+:::
+:::
+
+## Recherche {#recherche}
+
+Mes travaux portent sur la **gestion des données**, la **recherche d'information** et les **interactions entre intelligence artificielle et humains**. Mes recherches actuelles s'articulent autour de deux axes principaux, tous deux menés en collaboration avec **Elisabeth Murisasco** et **Patrice Bellot**.
+
+### Interaction humains–grands modèles de langage
+
+Ces travaux prolongent la thèse de **Xavier Daull**, co-encadrée avec Elisabeth Murisasco et Patrice Bellot. Je conçois des architectures combinant **grands modèles de langage (LLM)** et expertise humaine pour résoudre des problèmes complexes, notamment dans des contextes impliquant des données sensibles.
+
+Ces architectures sont **multi-agents avec expert dans la boucle** : plusieurs agents LLM collaborent afin de concevoir, vérifier et capitaliser des outils réutilisables. Les applications concernent notamment la génération de documents scientifiques (articles, brevets) à partir d'informations initiales limitées telles qu'un titre et un résumé.
+
+### Analyse des émotions et des sentiments
+
+Ces travaux s'inscrivent dans la continuité de la thèse de **Soelie Lerch**, co-encadrée avec Elisabeth Murisasco et Patrice Bellot. Je développe des approches **multimodales** combinant texte, audio, vidéo et signaux physiologiques afin de modéliser l'émotion ressentie et d'étudier la proximité émotionnelle entre contenus. Cette thèse a abouti au projet **EMOLIS**, consacré à l'analyse émotionnelle, aux jeux de données multimodaux et à la recommandation de contenus adaptés.
+
+## Enseignement {#enseignement}
+
+### Domaines d'enseignement
+
+Mes enseignements portent sur le **développement logiciel** et les **architectures distribuées**, avec un accent sur les pratiques modernes d'ingénierie : **Programmation Java et objet**, développement collaboratif avec **Git**, méthodes agiles et **intégration continue (CI/CD)**, conception de **services web REST**, accès aux données avec **JPA**, ainsi que architectures **microservices**, conteneurs et développement web et mobile.
+
+### Supports de cours
+
+| Diplôme | UE | Enseignement |
+|---|---|---|
+| Master Informatique — M1 S1 | I111 | [DEV_OOCOL (POO, Java, Git)](https://bruno.univ-tln.fr/I111.html) |
+| Master Informatique — M1 S2 | — | [DEV_ADV (Conteneurs, JPA, REST)](https://bruno.univ-tln.fr/Courses/DEV_ADV/) |
+| Master Informatique — M1 S2 | I211 | [DEV_ADV (legacy 2024-25)](https://bruno.univ-tln.fr/I211.html) |
+| Master Informatique — M2 S1 | I311 | [DEV_EXP (Serveurs d'applications)](https://bruno.univ-tln.fr/I311.html) |
+| Ingénieur CNAM | PO43 | [PO44 (POO, Git, Conteneurs)](https://bruno.univ-tln.fr/PO43.html) |
+| Ingénieur CNAM | PM44 | [PM53 (Dev. Mobile)](https://bruno.univ-tln.fr/PM44.html) |
+| Licence pro ECMN | LP | [LPECMN (AI & Web Languages)](https://bruno.univ-tln.fr/lp_ecmn.html) |
+
+### Catalogue des supports pédagogiques
+
+J'ai regroupé mes supports de cours, notebooks, présentations, documents HTML/PDF et exemples fonctionnels dans un catalogue dédié. Les ressources sont organisées par enseignement et produites selon des pratiques d'intégration continue (CI/CD).
+
+::: {.callout-note}
+[**Accéder au catalogue pédagogique**](https://bruno.univ-tln.fr/teaching-material/catalog/)
+:::
+
+## Publications sélectionnées {#publications}
+
+Toutes les publications : [HAL](https://hal.science/search/index/?q=%2A&rows=30&authIdPerson_i=174187&sort=publicationDate_tdate+desc) · [DBLP](https://dblp.org/pid/05/1898) · [Google Scholar](https://scholar.google.com/citations?user=TuDSngwAAAAJ)
+
+### Interaction LLM–humain
+
+**A Flexible Multi-Agent LLM-Human Framework for Fast Human Validated Tool Building** — X. Daull, P. Bellot, **E. Bruno**, V. Martin, E. Murisasco. *IEEE/WIC WI-IAT 2025*, 2025.
+CollabToolBuilder : cadre multi-agents (Coach, Coder, Critic, Capitalizer) avec expert dans la boucle pour générer, valider et capitaliser des outils réutilisables.
+[DOI](https://doi.org/10.1109/wi-iat67162.2025.00058) · [HAL](https://hal.science/hal-05374425)
+
+**An Adaptive Agentic Tool Building Architecture leveraging Expert-in-the-Loop Guidance, applied to Document Generation** — X. Daull, E. Murisasco, P. Bellot, **E. Bruno**, V. Martin. *ACM DocEng 2025*, 2025.
+Architecture agentique générique exploitant plusieurs agents LLM et la supervision d'un expert humain pour rechercher l'information et générer des documents.
+[DOI](https://doi.org/10.1145/3704268.3748670) · [HAL](https://hal.science/hal-05261897)
+
+**Développement collaboratif d'outils par des agents LLM et humains : application à la synthèse scientifique** — X. Daull, E. Murisasco, P. Bellot, **E. Bruno**, V. Martin. *EGC 2025 / RNTI-E-41*, 2025.
+Approche collaborative LLM–humain permettant de générer et valider des fonctions neuro-symboliques Python et de construire progressivement des outils réutilisables.
+[HAL](https://hal.science/hal-05173669)
+
+**Complex QA and language models hybrid architectures — Survey** — X. Daull, P. Bellot, **E. Bruno**, V. Martin, E. Murisasco. *Prépublication*, 2023 (v. 2025).
+État de l'art sur les limites des grands modèles de langage et les architectures hybrides combinant raisonnement, outils externes et supervision humaine.
+[DOI](https://doi.org/10.48550/arXiv.2302.09051) · [arXiv](https://arxiv.org/abs/2302.09051) · [HAL](https://hal.science/hal-05173860)
+
+### Analyse émotionnelle
+
+**EMOLIS App and Dataset to Find Emotionally Close Cartoons** — S. Lerch, P. Bellot, **E. Bruno**, E. Murisasco. *LREC-COLING 2024*, 2024.
+Jeu de données multimodal associant transcriptions émotionnelles et signaux physiologiques, accompagné d'une application de recommandation de contenus émotionnellement proches.
+[DOI](https://doi.org/10.63317/456gz9oyxe8w) · [ACL](https://aclanthology.org/2024.lrec-main.502/) · [HAL](https://hal.science/hal-05368513)
+
+### Classification documentaire
+
+**Exploiting Label Dependencies for Multi-Label Document Classification Using Transformers** — H. Fallah, **E. Bruno**, P. Bellot, E. Murisasco. *ACM DocEng 2023*, 2023.
+Approche exploitant les dépendances entre labels afin d'améliorer la classification documentaire multi-étiquette basée sur les Transformers.
+[DOI](https://doi.org/10.1145/3573128.3609356) · [HAL](https://hal.science/hal-04222602)
+
+## Contact {#contact}
+
+::: {.columns}
+::: {.column width="50%"}
+### Coordonnées
+
+**Emmanuel Bruno**
+
+Université de Toulon
+
+Avenue de l'Université
+
+BP 20132
+
+83957 La Garde Cedex — France
+
+<https://bruno.univ-tln.fr>
+
+<emmanuel.bruno@univ-tln.fr>
+:::
+::: {.column width="50%"}
+### Clé PGP
+
+Clé publique :
+[`116C CE5F BA2C 0D37 D355 940E 400F 583C 1F81 2EDB`](https://bruno.univ-tln.fr/_media/contact/bruno_univ-tln.fr_2016_public.txt)
+:::
+:::

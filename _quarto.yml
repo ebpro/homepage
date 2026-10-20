@@ -1,0 +1,32 @@
+project:
+  type: website
+
+website:
+  title: "Emmanuel Bruno"
+  lang: fr
+  navbar:
+    logo: images/logo.png
+    left:
+      - href: "#recherche"
+        text: "Recherche"
+      - href: "#enseignement"
+        text: "Enseignement"
+      - href: "#publications"
+        text: "Publications"
+      - href: https://bruno.univ-tln.fr/teaching-material/catalog/
+        text: "Catalogue pédagogique"
+    right:
+      - href: "#contact"
+        text: "Contact"
+  page-footer:
+    left: "© Emmanuel Bruno — Université de Toulon"
+    center: >-
+      Licence [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr)
+    right: "[ORCID](https://orcid.org/0000-0001-5171-2268) · [DBLP](https://dblp.org/pid/05/1898) · [GitHub](https://github.com/emmanuelbruno)"
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: false
+    lang: fr

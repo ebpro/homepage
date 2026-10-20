@@ -1,0 +1,24 @@
+/* Site personnel — styles minimales (projet Quarto autonome) */
+
+.hero {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.hero-title {
+  margin-top: 0;
+}
+
+main nav#quarto-navbar a[href^="#"] {
+  scroll-margin-top: 4rem;
+}
+
+section h2 {
+  margin-top: 2.5rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid var(--bs-primary);
+}
+
+.quarto-page-footer a {
+  text-decoration: none;
+}
