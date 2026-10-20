@@ -1,0 +1,33 @@
+---
+// One catalogue card. Data comes from the vendored manifest (see
+// src/pages/index.astro for the liveness degradation note).
+interface Props {
+  repo: {
+    name: string;
+    description: string;
+    status: string;
+    formation?: string;
+    filiere?: string;
+    github_url: string;
+    dates?: { latest_ref?: string; latest?: string };
+    default_branch?: string;
+    pushed_at?: string;
+  };
+  siteUrl: string;
+  statusLabel?: string;
+  updated?: string;
+}
+const { repo, siteUrl, statusLabel, updated } = Astro.props;
+const badge = statusLabel && repo.status !== 'active' ? statusLabel : null;
+---
+
+<article class="card">
+  <h4 class="card-title"><a href={siteUrl}>{repo.name}</a></h4>
+  <p class="card-desc">{repo.description}</p>
+  <p class="card-meta">
+    {badge && <span class="badge">{badge}</span>}
+    {repo.filiere && <span class="tag">{repo.filiere}</span>}
+    {updated && <time datetime={updated}>{updated}</time>}
+    <a class="card-src" href={repo.github_url}>Source</a>
+  </p>
+</article>
