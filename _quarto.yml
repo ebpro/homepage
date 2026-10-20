@@ -3,7 +3,6 @@ project:
 
 website:
   title: "Emmanuel Bruno"
-  lang: fr
   navbar:
     logo: images/logo.png
     left:
