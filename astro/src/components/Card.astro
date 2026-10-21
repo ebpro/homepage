@@ -12,6 +12,7 @@ interface Props {
     dates?: { latest_ref?: string; latest?: string };
     default_branch?: string;
     pushed_at?: string;
+    site_live?: boolean;
   };
   siteUrl: string;
   statusLabel?: string;
@@ -19,14 +20,22 @@ interface Props {
 }
 const { repo, siteUrl, statusLabel, updated } = Astro.props;
 const badge = statusLabel && repo.status !== 'active' ? statusLabel : null;
+// Defensive dead-link state: only when the manifest explicitly ships
+// site_live === false (catalog v8.6+). Absent field = current behaviour.
+const dead = repo.site_live === false;
 ---
 
-<article class="card">
-  <h4 class="card-title"><a href={siteUrl}>{repo.name}</a></h4>
+<article class="card" class:list={[{ 'card--dead': dead }]}>
+  <h4 class="card-title">
+    {dead
+      ? <span>{repo.name}</span>
+      : <a href={siteUrl}>{repo.name}</a>}
+  </h4>
   <p class="card-desc">{repo.description}</p>
   <p class="card-meta">
     {badge && <span class="badge">{badge}</span>}
     {repo.filiere && <span class="tag">{repo.filiere}</span>}
+    {dead && <span class="chip-off">Non publié</span>}
     {updated && <time datetime={updated}>{updated}</time>}
     <a class="card-src" href={repo.github_url}>Source</a>
   </p>
