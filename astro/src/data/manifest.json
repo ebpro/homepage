@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-20T22:33:38Z",
+  "generated_at": "2026-10-21T18:25:06Z",
   "org": "ebpro",
-  "count": 74,
+  "count": 116,
   "repos": [
     {
       "name": "lecture-CNAM-MI_A2-PM44",
@@ -21,17 +21,18 @@
       "status": "active",
       "formation": "cnam",
       "filiere": "mi-a2",
-      "pushed_at": "2026-10-20T17:35:03Z",
+      "pushed_at": "2026-10-21T08:02:57Z",
       "github_url": "https://github.com/ebpro/lecture-CNAM-MI_A2-PM44",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:35:02Z",
+        "latest": "2026-10-21T08:02:57Z",
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "lecture-CNAM-MI_A2-PO43",
@@ -53,17 +54,18 @@
       "status": "active",
       "formation": "cnam",
       "filiere": "mi-a2",
-      "pushed_at": "2026-10-20T21:54:28Z",
+      "pushed_at": "2026-10-21T08:02:55Z",
       "github_url": "https://github.com/ebpro/lecture-CNAM-MI_A2-PO43",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T21:54:28Z",
+        "latest": "2026-10-21T08:02:55Z",
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "lecture-UTLN-LP_ECMN-WebLang",
@@ -84,7 +86,7 @@
       "status": "active",
       "formation": "utln",
       "filiere": "lp-ecmn",
-      "pushed_at": "2026-10-19T23:28:41Z",
+      "pushed_at": "2026-10-21T01:23:36Z",
       "github_url": "https://github.com/ebpro/lecture-UTLN-LP_ECMN-WebLang",
       "branches": [
         "chore/elotip-after-hidden-fix",
@@ -96,7 +98,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-19T23:28:41Z",
+        "latest": "2026-10-21T01:23:35Z",
         "stable": null,
         "branches": {
           "chore/elotip-after-hidden-fix": "2026-10-19T09:55:45Z",
@@ -106,7 +108,38 @@
           "fix/english-locale-root": "2026-10-19T23:28:21Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
+    },
+    {
+      "name": "dev-oocol-fil-rouge",
+      "description": "Fil rouge DEV-OOCOL (M1 Info & Math) : projet Java multi-module guidé — domaine transport public Trans'U",
+      "topics": [
+        "area-lecture",
+        "filiere-m1-info-math",
+        "formation-utln",
+        "java",
+        "maven",
+        "status-active"
+      ],
+      "category": "lecture",
+      "default_branch": "develop",
+      "private": true,
+      "status": "active",
+      "formation": "utln",
+      "filiere": "m1-info-math",
+      "pushed_at": "2026-10-21T16:15:19Z",
+      "github_url": "https://github.com/ebpro/dev-oocol-fil-rouge",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2026-10-21T16:15:09Z",
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "lecture-UTLN-M1_Info_Math-DEV-ADV",
@@ -127,7 +160,7 @@
       "status": "active",
       "formation": "utln",
       "filiere": "m1-info-math",
-      "pushed_at": "2026-10-20T17:35:04Z",
+      "pushed_at": "2026-10-21T08:02:59Z",
       "github_url": "https://github.com/ebpro/lecture-UTLN-M1_Info_Math-DEV-ADV",
       "branches": [
         "feature/upgrade-2026"
@@ -135,13 +168,14 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:35:03Z",
+        "latest": "2026-10-21T08:02:58Z",
         "stable": null,
         "branches": {
           "feature/upgrade-2026": "2026-10-14T14:40:18Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "lecture-UTLN-M1_Info_Math-DEV-OOCOL",
@@ -161,7 +195,7 @@
       "status": "active",
       "formation": "utln",
       "filiere": "m1-info-math",
-      "pushed_at": "2026-10-20T17:35:07Z",
+      "pushed_at": "2026-10-21T08:03:03Z",
       "github_url": "https://github.com/ebpro/lecture-UTLN-M1_Info_Math-DEV-OOCOL",
       "branches": [
         "feature/retone-2027",
@@ -170,14 +204,15 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:35:06Z",
+        "latest": "2026-10-21T08:03:02Z",
         "stable": null,
         "branches": {
           "feature/retone-2027": "2026-10-20T13:24:25Z",
           "feature/upgrade-2026": "2026-10-17T15:47:21Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "lecture-UTLN-M2_Info_Math-DEV-EXP",
@@ -198,25 +233,25 @@
       "status": "active",
       "formation": "utln",
       "filiere": "m2-info-math",
-      "pushed_at": "2026-10-20T17:35:06Z",
+      "pushed_at": "2026-10-21T08:03:01Z",
       "github_url": "https://github.com/ebpro/lecture-UTLN-M2_Info_Math-DEV-EXP",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:35:05Z",
+        "latest": "2026-10-21T08:03:00Z",
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
-      "name": "lecture-UTLN-M1_Info_Math-DEV-ADV_devenv",
-      "description": "Devcontainer environment for DEV-ADV lecture",
+      "name": "ConflictBot",
+      "description": "Dépôt Java/Maven minimal de support aux exercices Git du cours : fusions et conflits de branches.",
       "topics": [
-        "area-infra",
-        "devcontainer",
-        "solen",
+        "area-lecture",
+        "area-sample",
         "status-active"
       ],
       "category": "lecture",
@@ -225,17 +260,109 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-07-09T15:45:16Z",
-      "github_url": "https://github.com/ebpro/lecture-UTLN-M1_Info_Math-DEV-ADV_devenv",
+      "pushed_at": "2026-01-26T21:53:18Z",
+      "github_url": "https://github.com/ebpro/ConflictBot",
+      "branches": [
+        "dependabot/maven/org.assertj-assertj-core-3.27.7"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2024-11-14T08:24:43Z",
+        "stable": null,
+        "branches": {
+          "dependabot/maven/org.assertj-assertj-core-3.27.7": "2026-01-26T21:53:17Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "HelloGit",
+      "description": "Dépôt Java/Maven minimal de support aux exercices Git du cours : clonage, commits, branches et tags.",
+      "topics": [
+        "area-lecture",
+        "area-sample",
+        "status-active"
+      ],
+      "category": "lecture",
+      "default_branch": "master",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2025-09-12T10:01:29Z",
+      "github_url": "https://github.com/ebpro/HelloGit",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "sample-jakarta-rest-full",
+      "description": "Exemple JAX-RS complet (Jakarta REST)",
+      "topics": [
+        "area-lecture",
+        "area-sample",
+        "java",
+        "jax-rs",
+        "rest",
+        "status-partial"
+      ],
+      "category": "lecture",
+      "default_branch": "develop",
+      "private": false,
+      "status": "partial",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-07T12:24:55Z",
+      "github_url": "https://github.com/ebpro/sample-jakarta-rest-full",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-07-09T15:45:07Z",
+        "latest": "2026-10-07T12:24:54Z",
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "sample-java-tcp-client-server",
+      "description": "Exemple TCP Client/Server Java",
+      "topics": [
+        "area-lecture",
+        "area-sample",
+        "java",
+        "network",
+        "status-partial",
+        "tcp"
+      ],
+      "category": "lecture",
+      "default_branch": "develop",
+      "private": false,
+      "status": "partial",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-07T12:24:53Z",
+      "github_url": "https://github.com/ebpro/sample-java-tcp-client-server",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2026-10-07T12:24:51Z",
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "notebook-ci",
@@ -253,7 +380,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T20:34:01Z",
+      "pushed_at": "2026-10-21T08:01:47Z",
       "github_url": "https://github.com/ebpro/notebook-ci",
       "branches": [
         "test/hang-canary-a",
@@ -264,7 +391,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T20:34:00Z",
+        "latest": "2026-10-21T08:01:46Z",
         "stable": null,
         "branches": {
           "test/hang-canary-a": "2026-10-17T09:00:55Z",
@@ -273,7 +400,8 @@
           "test/hang-e3-image": "2026-10-17T17:26:56Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-containers-intro",
@@ -293,71 +421,18 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T17:33:54Z",
+      "pushed_at": "2026-10-21T08:02:03Z",
       "github_url": "https://github.com/ebpro/notebook-containers-intro",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:33:53Z",
+        "latest": "2026-10-21T08:02:02Z",
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
-    },
-    {
-      "name": "notebook-containers-intro-sample-java",
-      "description": "Exemple Java pour containers-intro",
-      "topics": [
-        "area-sample",
-        "docker",
-        "java",
-        "status-active"
-      ],
-      "category": "notebook",
-      "default_branch": "develop",
-      "private": false,
-      "status": "active",
-      "formation": "",
-      "filiere": "",
-      "pushed_at": "2025-02-07T07:57:14Z",
-      "github_url": "https://github.com/ebpro/notebook-containers-intro-sample-java",
-      "branches": [],
-      "latest_vtag": null,
-      "dates": {
-        "latest_ref": "develop",
-        "latest": "2025-02-07T07:56:15Z",
-        "stable": null,
-        "branches": {}
-      },
-      "releases_live": false
-    },
-    {
-      "name": "notebook-containers-intro-sample-python",
-      "description": "Exemple Python pour containers-intro",
-      "topics": [
-        "area-sample",
-        "docker",
-        "python",
-        "status-active"
-      ],
-      "category": "notebook",
-      "default_branch": "develop",
-      "private": false,
-      "status": "active",
-      "formation": "",
-      "filiere": "",
-      "pushed_at": "2025-02-07T07:57:21Z",
-      "github_url": "https://github.com/ebpro/notebook-containers-intro-sample-python",
-      "branches": [],
-      "latest_vtag": null,
-      "dates": {
-        "latest_ref": "develop",
-        "latest": "2025-02-07T07:56:16Z",
-        "stable": null,
-        "branches": {}
-      },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-dev-web",
@@ -378,7 +453,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T06:00:11Z",
+      "pushed_at": "2026-10-21T01:23:38Z",
       "github_url": "https://github.com/ebpro/notebook-dev-web",
       "branches": [
         "feature/hanoi2025",
@@ -397,7 +472,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-19T09:54:49Z",
+        "latest": "2026-10-21T01:23:37Z",
         "stable": null,
         "branches": {
           "feature/hanoi2025": "2026-10-08T11:07:50Z",
@@ -414,7 +489,8 @@
           "weblang/clean-consolidation-2026": "2026-10-14T07:25:43Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-filrouge-jparest",
@@ -443,7 +519,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "notebook-git",
@@ -460,7 +537,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T17:33:41Z",
+      "pushed_at": "2026-10-21T08:01:59Z",
       "github_url": "https://github.com/ebpro/notebook-git",
       "branches": [
         "feature/retone-2027-git",
@@ -469,14 +546,15 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:33:40Z",
+        "latest": "2026-10-21T08:01:59Z",
         "stable": null,
         "branches": {
           "feature/retone-2027-git": "2026-10-19T13:19:34Z",
           "feature/upgrade-2026": "2026-10-16T13:24:59Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-after8",
@@ -495,7 +573,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T19:11:08Z",
+      "pushed_at": "2026-10-21T08:01:11Z",
       "github_url": "https://github.com/ebpro/notebook-java-after8",
       "branches": [
         "feature/retone-2027",
@@ -504,14 +582,15 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T19:11:07Z",
+        "latest": "2026-10-21T08:01:10Z",
         "stable": null,
         "branches": {
           "feature/retone-2027": "2026-10-18T09:22:50Z",
           "feature/upgrade-2026": "2026-10-15T15:11:51Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-annotations",
@@ -532,17 +611,18 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T19:11:12Z",
+      "pushed_at": "2026-10-21T08:01:15Z",
       "github_url": "https://github.com/ebpro/notebook-java-annotations",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T19:11:11Z",
+        "latest": "2026-10-21T08:01:14Z",
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-asynchronous",
@@ -560,7 +640,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T17:10:37Z",
+      "pushed_at": "2026-10-21T07:59:42Z",
       "github_url": "https://github.com/ebpro/notebook-java-asynchronous",
       "branches": [
         "master"
@@ -568,13 +648,14 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:01:47Z",
+        "latest": "2026-10-21T07:59:41Z",
         "stable": null,
         "branches": {
           "master": "2024-11-23T08:33:18Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-bases",
@@ -593,7 +674,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T17:10:39Z",
+      "pushed_at": "2026-10-21T07:59:51Z",
       "github_url": "https://github.com/ebpro/notebook-java-bases",
       "branches": [
         "feature/upgrade-2026"
@@ -601,13 +682,14 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:01:48Z",
+        "latest": "2026-10-21T07:59:50Z",
         "stable": null,
         "branches": {
           "feature/upgrade-2026": "2026-10-14T15:20:57Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-beanvalidation",
@@ -626,17 +708,18 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T19:11:16Z",
+      "pushed_at": "2026-10-21T08:01:18Z",
       "github_url": "https://github.com/ebpro/notebook-java-beanvalidation",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T19:11:15Z",
+        "latest": "2026-10-21T08:01:18Z",
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-cdi",
@@ -665,7 +748,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "notebook-java-collections",
@@ -683,7 +767,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T17:10:40Z",
+      "pushed_at": "2026-10-21T08:00:00Z",
       "github_url": "https://github.com/ebpro/notebook-java-collections",
       "branches": [
         "feature/retone-2027",
@@ -692,14 +776,15 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:01:48Z",
+        "latest": "2026-10-21T07:59:59Z",
         "stable": null,
         "branches": {
           "feature/retone-2027": "2026-10-19T12:37:32Z",
           "feature/upgrade-2026": "2026-10-15T15:11:50Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-ejb",
@@ -728,7 +813,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "notebook-java-exceptions",
@@ -756,7 +842,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-heritage",
@@ -775,7 +862,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T17:33:47Z",
+      "pushed_at": "2026-10-21T08:00:09Z",
       "github_url": "https://github.com/ebpro/notebook-java-heritage",
       "branches": [
         "feature/upgrade-2026"
@@ -783,17 +870,18 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:33:45Z",
+        "latest": "2026-10-21T08:00:08Z",
         "stable": null,
         "branches": {
           "feature/upgrade-2026": "2026-10-15T00:20:08Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-install",
-      "description": null,
+      "description": "Module Java 101 : installation du JDK, compilation et premiers outils, leçons et TP publiés en notes et slides.",
       "topics": [
         "area-notebook",
         "compilation",
@@ -808,7 +896,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T17:33:57Z",
+      "pushed_at": "2026-10-21T08:00:42Z",
       "github_url": "https://github.com/ebpro/notebook-java-install",
       "branches": [
         "feature/retone-2027-java",
@@ -817,18 +905,19 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:33:56Z",
+        "latest": "2026-10-21T08:00:41Z",
         "stable": null,
         "branches": {
           "feature/retone-2027-java": "2026-10-18T08:13:12Z",
           "feature/upgrade-2026": "2026-10-14T23:09:35Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-introduction",
-      "description": null,
+      "description": "Module Java 101 : introduction au langage Java, leçons et travaux pratiques publiés en notes et slides.",
       "topics": [
         "area-notebook",
         "introduction",
@@ -842,7 +931,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T17:33:54Z",
+      "pushed_at": "2026-10-21T08:00:34Z",
       "github_url": "https://github.com/ebpro/notebook-java-introduction",
       "branches": [
         "feature/test-cf-preview",
@@ -851,14 +940,15 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:33:53Z",
+        "latest": "2026-10-21T08:00:33Z",
         "stable": null,
         "branches": {
           "feature/test-cf-preview": "2026-10-08T10:03:08Z",
           "feature/upgrade-2026": "2026-10-15T15:11:48Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-io",
@@ -876,17 +966,18 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T17:33:49Z",
+      "pushed_at": "2026-10-21T08:00:17Z",
       "github_url": "https://github.com/ebpro/notebook-java-io",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:33:48Z",
+        "latest": "2026-10-21T08:00:17Z",
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-java101",
@@ -915,7 +1006,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-javafx",
@@ -934,17 +1026,18 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T19:11:20Z",
+      "pushed_at": "2026-10-21T08:01:22Z",
       "github_url": "https://github.com/ebpro/notebook-java-javafx",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T19:11:19Z",
+        "latest": "2026-10-21T08:01:22Z",
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-javasecurity",
@@ -973,7 +1066,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "notebook-java-jdbc",
@@ -994,7 +1088,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T19:11:24Z",
+      "pushed_at": "2026-10-21T08:01:27Z",
       "github_url": "https://github.com/ebpro/notebook-java-jdbc",
       "branches": [
         "feature/retone-2027"
@@ -1002,13 +1096,14 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T19:11:23Z",
+        "latest": "2026-10-21T08:01:27Z",
         "stable": null,
         "branches": {
           "feature/retone-2027": "2026-10-18T10:10:15Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-jee",
@@ -1027,7 +1122,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T19:11:28Z",
+      "pushed_at": "2026-10-21T08:01:32Z",
       "github_url": "https://github.com/ebpro/notebook-java-jee",
       "branches": [
         "dependabot/maven/resources/sample-cdi/org.apache.opennlp-opennlp-tools-2.5.9",
@@ -1040,7 +1135,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T19:11:27Z",
+        "latest": "2026-10-21T08:01:31Z",
         "stable": null,
         "branches": {
           "dependabot/maven/resources/sample-cdi/org.apache.opennlp-opennlp-tools-2.5.9": "2026-10-05T21:39:51Z",
@@ -1051,7 +1146,8 @@
           "feat/java-transactions-restructure-2026": "2026-10-09T00:39:58Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-jpa",
@@ -1071,21 +1167,22 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T21:42:52Z",
+      "pushed_at": "2026-10-21T08:01:55Z",
       "github_url": "https://github.com/ebpro/notebook-java-jpa",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T21:42:51Z",
+        "latest": "2026-10-21T08:01:54Z",
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-maven",
-      "description": null,
+      "description": "Module Java 101 : présentation de Maven, structure de projet, cycle de vie et dépendances, leçons et TP.",
       "topics": [
         "area-notebook",
         "build",
@@ -1099,7 +1196,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T17:33:59Z",
+      "pushed_at": "2026-10-21T08:00:51Z",
       "github_url": "https://github.com/ebpro/notebook-java-maven",
       "branches": [
         "feature/upgrade-2026"
@@ -1107,13 +1204,14 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:33:58Z",
+        "latest": "2026-10-21T08:00:50Z",
         "stable": null,
         "branches": {
           "feature/upgrade-2026": "2026-10-14T15:19:06Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-ontologies",
@@ -1144,7 +1242,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "notebook-java-reactive",
@@ -1172,7 +1271,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "notebook-java-restfulws",
@@ -1193,17 +1293,18 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T20:05:13Z",
+      "pushed_at": "2026-10-21T08:01:36Z",
       "github_url": "https://github.com/ebpro/notebook-java-restfulws",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T20:05:13Z",
+        "latest": "2026-10-21T08:01:35Z",
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-revisions",
@@ -1231,7 +1332,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-serialisation",
@@ -1248,17 +1350,18 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T17:33:52Z",
+      "pushed_at": "2026-10-21T08:00:26Z",
       "github_url": "https://github.com/ebpro/notebook-java-serialisation",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:33:51Z",
+        "latest": "2026-10-21T08:00:25Z",
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-java-tests",
@@ -1287,7 +1390,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "notebook-java-websocket",
@@ -1317,7 +1421,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "notebook-microservices-101",
@@ -1334,17 +1439,18 @@
       "status": "stub",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T20:05:17Z",
+      "pushed_at": "2026-10-21T08:01:39Z",
       "github_url": "https://github.com/ebpro/notebook-microservices-101",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T20:05:17Z",
+        "latest": "2026-10-21T08:01:39Z",
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-mobiledev-101",
@@ -1363,46 +1469,18 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T20:05:29Z",
+      "pushed_at": "2026-10-21T08:01:51Z",
       "github_url": "https://github.com/ebpro/notebook-mobiledev-101",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T20:05:28Z",
+        "latest": "2026-10-21T08:01:50Z",
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
-    },
-    {
-      "name": "notebook-mobiledev-kotlin-persistence",
-      "description": "Kotlin Persistence : Room et stockage mobile",
-      "topics": [
-        "android",
-        "area-sample",
-        "kotlin",
-        "persistence",
-        "room",
-        "status-active"
-      ],
-      "category": "notebook",
-      "default_branch": "develop",
-      "private": true,
-      "status": "active",
-      "formation": "",
-      "filiere": "",
-      "pushed_at": "2026-10-04T20:26:25Z",
-      "github_url": "https://github.com/ebpro/notebook-mobiledev-kotlin-persistence",
-      "branches": [],
-      "latest_vtag": null,
-      "dates": {
-        "latest_ref": "develop",
-        "latest": "2025-07-22T07:49:19Z",
-        "stable": null,
-        "branches": {}
-      },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-quarto-sample",
@@ -1432,11 +1510,12 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-revision-java",
-      "description": null,
+      "description": "Remise à niveau Java, Maven, Git, JDBC et JUnit via une application console de planification de séances de sport.",
       "topics": [
         "area-notebook",
         "java",
@@ -1449,7 +1528,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T17:10:35Z",
+      "pushed_at": "2026-10-21T07:59:23Z",
       "github_url": "https://github.com/ebpro/notebook-revision-java",
       "branches": [
         "feature/upgrade-2026"
@@ -1457,13 +1536,14 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:01:46Z",
+        "latest": "2026-10-21T07:59:23Z",
         "stable": null,
         "branches": {
           "feature/upgrade-2026": "2026-10-14T14:40:36Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-revision-shell",
@@ -1480,17 +1560,18 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T17:01:53Z",
+      "pushed_at": "2026-10-21T07:59:14Z",
       "github_url": "https://github.com/ebpro/notebook-revision-shell",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:01:46Z",
+        "latest": "2026-10-21T07:59:14Z",
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-revision-sql",
@@ -1508,17 +1589,18 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T17:10:36Z",
+      "pushed_at": "2026-10-21T07:59:32Z",
       "github_url": "https://github.com/ebpro/notebook-revision-sql",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T17:01:47Z",
+        "latest": "2026-10-21T07:59:31Z",
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
       "name": "notebook-se-101",
@@ -1537,51 +1619,56 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-20T20:05:21Z",
+      "pushed_at": "2026-10-21T08:01:43Z",
       "github_url": "https://github.com/ebpro/notebook-se-101",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-10-20T20:05:21Z",
+        "latest": "2026-10-21T08:01:42Z",
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": true
     },
     {
-      "name": "ConflictBot",
-      "description": null,
+      "name": "ecommerce-catalog",
+      "description": "Product-catalog monorepo : API REST Express et PostgreSQL (Drizzle ORM) avec client React Vite Tailwind.",
       "topics": [
-        "area-lecture",
         "area-sample",
         "status-active"
       ],
       "category": "sample",
-      "default_branch": "develop",
+      "default_branch": "main",
       "private": true,
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-01-26T21:53:18Z",
-      "github_url": "https://github.com/ebpro/ConflictBot",
+      "pushed_at": "2026-10-16T03:07:29Z",
+      "github_url": "https://github.com/ebpro/ecommerce-catalog",
       "branches": [
-        "dependabot/maven/org.assertj-assertj-core-3.27.7"
+        "dependabot/npm_and_yarn/multi-ab7d3a7fa5",
+        "dependabot/npm_and_yarn/multi-d49ef80a9c",
+        "dependabot/npm_and_yarn/vite-6.4.3"
       ],
       "latest_vtag": null,
       "dates": {
-        "latest_ref": "develop",
-        "latest": "2024-11-14T08:24:43Z",
+        "latest_ref": null,
+        "latest": null,
         "stable": null,
         "branches": {
-          "dependabot/maven/org.assertj-assertj-core-3.27.7": "2026-01-26T21:53:17Z"
+          "dependabot/npm_and_yarn/multi-ab7d3a7fa5": "2026-10-16T03:07:23Z",
+          "dependabot/npm_and_yarn/multi-d49ef80a9c": "2026-10-16T03:07:28Z",
+          "dependabot/npm_and_yarn/vite-6.4.3": "2026-10-16T03:07:26Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "fullstack-minimal-app",
-      "description": null,
+      "description": "Minimal full-stack product catalogue (React, Express, MySQL, Docker), teaching sample of the WebLang course.",
       "topics": [
         "area-sample",
         "status-active"
@@ -1612,24 +1699,24 @@
           "master": "2025-10-02T06:28:39Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
-      "name": "HelloGit",
-      "description": null,
+      "name": "kubernetes-quarkus-demo",
+      "description": "Application Quarkus de raccourcisseur de liens, démontrée comme charge de travail sur Kubernetes.",
       "topics": [
-        "area-lecture",
         "area-sample",
         "status-active"
       ],
       "category": "sample",
-      "default_branch": "master",
-      "private": false,
+      "default_branch": "main",
+      "private": true,
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2025-09-12T10:01:29Z",
-      "github_url": "https://github.com/ebpro/HelloGit",
+      "pushed_at": "2026-09-05T12:07:49Z",
+      "github_url": "https://github.com/ebpro/kubernetes-quarkus-demo",
       "branches": [],
       "latest_vtag": null,
       "dates": {
@@ -1638,11 +1725,124 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "lab-quarto-lookandfeel",
+      "description": "Sandbox galerie de thèmes Quarto — comparaison visuelle baseline + 3 thèmes académiques (html/revealjs/typst)",
+      "topics": [
+        "area-sample",
+        "status-active"
+      ],
+      "category": "sample",
+      "default_branch": "develop",
+      "private": true,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-21T01:23:35Z",
+      "github_url": "https://github.com/ebpro/lab-quarto-lookandfeel",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2026-10-21T01:23:33Z",
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": true
+    },
+    {
+      "name": "notebook-containers-intro-sample-java",
+      "description": "Exemple Java pour containers-intro",
+      "topics": [
+        "area-sample",
+        "docker",
+        "java",
+        "status-active"
+      ],
+      "category": "sample",
+      "default_branch": "develop",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2025-02-07T07:57:14Z",
+      "github_url": "https://github.com/ebpro/notebook-containers-intro-sample-java",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2025-02-07T07:56:15Z",
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "notebook-containers-intro-sample-python",
+      "description": "Exemple Python pour containers-intro",
+      "topics": [
+        "area-sample",
+        "docker",
+        "python",
+        "status-active"
+      ],
+      "category": "sample",
+      "default_branch": "develop",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2025-02-07T07:57:21Z",
+      "github_url": "https://github.com/ebpro/notebook-containers-intro-sample-python",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2025-02-07T07:56:16Z",
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "notebook-mobiledev-kotlin-persistence",
+      "description": "Kotlin Persistence : Room et stockage mobile",
+      "topics": [
+        "android",
+        "area-sample",
+        "kotlin",
+        "persistence",
+        "room",
+        "status-active"
+      ],
+      "category": "sample",
+      "default_branch": "develop",
+      "private": true,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-04T20:26:25Z",
+      "github_url": "https://github.com/ebpro/notebook-mobiledev-kotlin-persistence",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2025-07-22T07:49:19Z",
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-annotationprocessor",
-      "description": null,
+      "description": "Exemple d'annotation processor Java : l'annotation @DTO génère des classes DTO à la compilation.",
       "topics": [
         "area-sample",
         "status-frozen"
@@ -1663,11 +1863,12 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-cdi",
-      "description": null,
+      "description": "Exemple CDI et Jakarta EE : qualifiers, producers, interceptors et decorators, exécutable en SE ou en serveur.",
       "topics": [
         "area-sample",
         "status-frozen"
@@ -1692,7 +1893,8 @@
           "dependabot/maven/org.assertj-assertj-core-3.27.7": "2026-01-26T21:53:42Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-containers-c",
@@ -1719,7 +1921,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-containers-exercices-images",
@@ -1747,7 +1950,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-containers-helloworld",
@@ -1774,7 +1978,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-containers-java-helloworld",
@@ -1801,7 +2006,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-containers-java-restjpa",
@@ -1834,7 +2040,8 @@
           "feature/quarkus": "2026-01-28T06:25:47Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-containers-multiarch",
@@ -1861,7 +2068,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-containers-python-helloworld",
@@ -1888,7 +2096,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-containers-python-rest",
@@ -1920,7 +2129,8 @@
           "dependabot/pip/flask-3.1.3": "2026-10-04T21:12:44Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-containers-rabbitmq",
@@ -1945,7 +2155,8 @@
         "stable": "2026-08-29T10:46:01Z",
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-containers-sqlite",
@@ -1972,11 +2183,12 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-hellojpa",
-      "description": null,
+      "description": "Exemple JPA hello world : entités, associations one-to-many et many-to-many, transactions et tests.",
       "topics": [
         "area-sample",
         "status-frozen"
@@ -2003,65 +2215,8 @@
           "dependabot/maven/org.postgresql-postgresql-42.7.2": "2024-02-21T00:10:02Z"
         }
       },
-      "releases_live": false
-    },
-    {
-      "name": "sample-jakarta-rest-full",
-      "description": "Exemple JAX-RS complet (Jakarta REST)",
-      "topics": [
-        "area-lecture",
-        "area-sample",
-        "java",
-        "jax-rs",
-        "rest",
-        "status-partial"
-      ],
-      "category": "sample",
-      "default_branch": "develop",
-      "private": false,
-      "status": "partial",
-      "formation": "",
-      "filiere": "",
-      "pushed_at": "2026-10-07T12:24:55Z",
-      "github_url": "https://github.com/ebpro/sample-jakarta-rest-full",
-      "branches": [],
-      "latest_vtag": null,
-      "dates": {
-        "latest_ref": "develop",
-        "latest": "2026-10-07T12:24:54Z",
-        "stable": null,
-        "branches": {}
-      },
-      "releases_live": false
-    },
-    {
-      "name": "sample-java-tcp-client-server",
-      "description": "Exemple TCP Client/Server Java",
-      "topics": [
-        "area-lecture",
-        "area-sample",
-        "java",
-        "network",
-        "status-partial",
-        "tcp"
-      ],
-      "category": "sample",
-      "default_branch": "develop",
-      "private": false,
-      "status": "partial",
-      "formation": "",
-      "filiere": "",
-      "pushed_at": "2026-10-07T12:24:53Z",
-      "github_url": "https://github.com/ebpro/sample-java-tcp-client-server",
-      "branches": [],
-      "latest_vtag": null,
-      "dates": {
-        "latest_ref": "develop",
-        "latest": "2026-10-07T12:24:51Z",
-        "stable": null,
-        "branches": {}
-      },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-javafx-client",
@@ -2088,11 +2243,12 @@
         "stable": "2026-10-16T13:50:29Z",
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-jdbcdao",
-      "description": null,
+      "description": "Exemple de DAO JDBC générique sur base H2 : opérations de CRUD et datasource DBCP configuré par propriétés.",
       "topics": [
         "area-sample",
         "status-frozen"
@@ -2117,7 +2273,8 @@
           "master": "2023-10-11T11:00:04Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-jpa",
@@ -2148,11 +2305,12 @@
           "dependabot/maven/com.h2database-h2-2.1.210": "2022-01-21T23:49:04Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-jpalibrary",
-      "description": null,
+      "description": "Exemple JPA/Hibernate : gestion de bibliothèque, relations d'entités, transactions et tests de persistance.",
       "topics": [
         "area-sample",
         "status-frozen"
@@ -2179,7 +2337,8 @@
           "feature/repository": "2025-02-03T14:04:27Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-kotlin-basic-exercises",
@@ -2207,7 +2366,8 @@
         "stable": null,
         "branches": {}
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-quarkus-rest",
@@ -2239,7 +2399,8 @@
           "feat/ai-review-integration": "2026-10-17T14:26:26Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "sample-websocket",
@@ -2276,7 +2437,1302 @@
           "dependabot/maven/org.apache.commons-commons-lang3-3.18.0": "2025-07-12T01:09:29Z"
         }
       },
-      "releases_live": false
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "demo-java-librarymanager",
+      "description": "Démo Java gestion de bibliothèque : pom agrégateur hérité (Travis CI), sans code source.",
+      "topics": [
+        "area-standard",
+        "review",
+        "status-frozen"
+      ],
+      "category": "standard",
+      "default_branch": "development",
+      "private": true,
+      "status": "frozen",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2023-10-23T19:58:48Z",
+      "github_url": "https://github.com/ebpro/demo-java-librarymanager",
+      "branches": [
+        "master"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": null,
+        "branches": {
+          "master": "2023-10-23T17:19:39Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "demo-java-librarymanager-core",
+      "description": "Démo Java de gestion de bibliothèque, partie cœur : modèle objet du domaine (bibliothèque, personnes, emprunts).",
+      "topics": [
+        "area-standard",
+        "review",
+        "status-frozen"
+      ],
+      "category": "standard",
+      "default_branch": "master",
+      "private": false,
+      "status": "frozen",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2020-10-13T16:55:52Z",
+      "github_url": "https://github.com/ebpro/demo-java-librarymanager-core",
+      "branches": [
+        "dependabot/maven/junit-junit-4.13.1",
+        "development"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": null,
+        "branches": {
+          "dependabot/maven/junit-junit-4.13.1": "2020-10-13T16:55:49Z",
+          "development": "2017-10-10T21:58:50Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "demo-java-librarymanager-observablelibrary",
+      "description": "Démo Java gestion de bibliothèque, variante observable : modèle observable et application console.",
+      "topics": [
+        "area-standard",
+        "review",
+        "status-frozen"
+      ],
+      "category": "standard",
+      "default_branch": "master",
+      "private": false,
+      "status": "frozen",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2020-12-18T16:01:58Z",
+      "github_url": "https://github.com/ebpro/demo-java-librarymanager-observablelibrary",
+      "branches": [
+        "dependabot/maven/junit-junit-4.13.1",
+        "development"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": null,
+        "branches": {
+          "dependabot/maven/junit-junit-4.13.1": "2020-12-18T16:01:56Z",
+          "development": "2017-10-10T22:10:28Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "demo-java-librarymanager-simplegui",
+      "description": "Démo Java gestion de bibliothèque, variante interface graphique Swing simple (modèle-vue-contrôleur).",
+      "topics": [
+        "area-standard",
+        "review",
+        "status-frozen"
+      ],
+      "category": "standard",
+      "default_branch": "master",
+      "private": false,
+      "status": "frozen",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2020-10-13T16:55:51Z",
+      "github_url": "https://github.com/ebpro/demo-java-librarymanager-simplegui",
+      "branches": [
+        "dependabot/maven/junit-junit-4.13.1",
+        "development"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": null,
+        "branches": {
+          "dependabot/maven/junit-junit-4.13.1": "2020-10-13T16:55:49Z",
+          "development": "2017-10-10T22:17:43Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "demo-jfx",
+      "description": "Démo JavaFX : application de gestion de personnes avec modèle d'accès aux données et build Maven.",
+      "topics": [
+        "area-standard",
+        "status-frozen"
+      ],
+      "category": "standard",
+      "default_branch": "develop",
+      "private": false,
+      "status": "frozen",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2023-10-18T08:13:44Z",
+      "github_url": "https://github.com/ebpro/demo-jfx",
+      "branches": [
+        "dependabot/maven/com.h2database-h2-2.2.220"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2023-10-18T08:12:16Z",
+        "stable": null,
+        "branches": {
+          "dependabot/maven/com.h2database-h2-2.2.220": "2023-10-18T08:13:42Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "demo-simple-sensors",
+      "description": "A comprehensive example project demonstrating core Java concepts through a sensor network simulation.",
+      "topics": [
+        "area-standard",
+        "status-frozen"
+      ],
+      "category": "standard",
+      "default_branch": "develop",
+      "private": false,
+      "status": "frozen",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-01-26T21:54:27Z",
+      "github_url": "https://github.com/ebpro/demo-simple-sensors",
+      "branches": [
+        "dependabot/maven/org.assertj-assertj-core-3.27.7"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2024-12-20T13:22:59Z",
+        "stable": null,
+        "branches": {
+          "dependabot/maven/org.assertj-assertj-core-3.27.7": "2026-01-26T21:54:27Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "DemoJAXRS",
+      "description": "A simple JAX-RS Application",
+      "topics": [
+        "area-standard",
+        "status-frozen"
+      ],
+      "category": "standard",
+      "default_branch": "develop",
+      "private": false,
+      "status": "frozen",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-09-20T15:03:11Z",
+      "github_url": "https://github.com/ebpro/DemoJAXRS",
+      "branches": [
+        "ci/standardize-runs-on-ebpro-org-20260829"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2026-09-20T15:03:10Z",
+        "stable": null,
+        "branches": {
+          "ci/standardize-runs-on-ebpro-org-20260829": "2026-08-29T10:05:00Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "DemoJlinkDocker",
+      "description": "Démo d'application Java Maven empaquetée en image Docker avec un runtime personnalisé généré par jlink.",
+      "topics": [
+        "area-standard",
+        "status-frozen"
+      ],
+      "category": "standard",
+      "default_branch": "develop",
+      "private": false,
+      "status": "frozen",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2021-11-18T08:30:48Z",
+      "github_url": "https://github.com/ebpro/DemoJlinkDocker",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2021-11-18T08:30:33Z",
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "DemoJPA",
+      "description": "A simple JPA Application",
+      "topics": [
+        "area-standard",
+        "status-frozen"
+      ],
+      "category": "standard",
+      "default_branch": "develop",
+      "private": true,
+      "status": "frozen",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-08-29T10:05:06Z",
+      "github_url": "https://github.com/ebpro/DemoJPA",
+      "branches": [
+        "ci/standardize-runs-on-ebpro-org-20260829",
+        "feature/jakarta"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2021-01-07T12:55:36Z",
+        "stable": null,
+        "branches": {
+          "ci/standardize-runs-on-ebpro-org-20260829": "2026-08-29T10:05:06Z",
+          "feature/jakarta": "2020-12-31T07:49:53Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "DemoWebSocket",
+      "description": "A simple WebSocket Application",
+      "topics": [
+        "area-standard",
+        "java",
+        "status-frozen",
+        "websocket"
+      ],
+      "category": "standard",
+      "default_branch": "develop",
+      "private": true,
+      "status": "frozen",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-08-29T10:05:12Z",
+      "github_url": "https://github.com/ebpro/DemoWebSocket",
+      "branches": [
+        "ci/standardize-runs-on-ebpro-org-20260829",
+        "dependabot/maven/com.fasterxml.jackson.core-jackson-core-2.18.6"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2022-11-16T08:20:37Z",
+        "stable": null,
+        "branches": {
+          "ci/standardize-runs-on-ebpro-org-20260829": "2026-08-29T10:05:12Z",
+          "dependabot/maven/com.fasterxml.jackson.core-jackson-core-2.18.6": "2026-03-01T21:37:33Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "jakartaee-minimal-jpa-jaxrs",
+      "description": "A simple JakartaEE application with JPA and JAX-RS, launched via Docker Compose (Payara Micro + PostgreSQL).",
+      "topics": [
+        "area-standard",
+        "status-frozen"
+      ],
+      "category": "standard",
+      "default_branch": "develop",
+      "private": false,
+      "status": "frozen",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-09-23T17:52:50Z",
+      "github_url": "https://github.com/ebpro/jakartaee-minimal-jpa-jaxrs",
+      "branches": [
+        "ci/standardize-runs-on-ebpro-org-20260829",
+        "dependabot/github_actions/dot-github/workflows/rlespinasse/github-slug-action-4.4.1",
+        "dependabot/maven/org.postgresql-postgresql-42.7.2",
+        "feature/betterci",
+        "feature/payaramicro",
+        "master"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2026-09-23T17:50:03Z",
+        "stable": null,
+        "branches": {
+          "ci/standardize-runs-on-ebpro-org-20260829": "2026-08-29T10:05:54Z",
+          "dependabot/github_actions/dot-github/workflows/rlespinasse/github-slug-action-4.4.1": "2023-12-19T13:06:21Z",
+          "dependabot/maven/org.postgresql-postgresql-42.7.2": "2024-02-21T00:08:16Z",
+          "feature/betterci": "2023-12-23T13:39:48Z",
+          "feature/payaramicro": "2023-11-20T19:52:59Z",
+          "master": "2023-11-07T12:16:32Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "maven-parentpom",
+      "description": "Production-ready parent POM for Java 25 + Maven 3.9 + Docker CI/CD (quality gates, security scanning, app.image packaging (libs/jlink/native), Central Portal release)",
+      "topics": [
+        "area-standard",
+        "central-portal",
+        "ci-cd",
+        "docker",
+        "graalvm",
+        "java-25",
+        "jlink",
+        "jpms",
+        "maven",
+        "native-image",
+        "owasp",
+        "parent-pom",
+        "sbom",
+        "status-active"
+      ],
+      "category": "standard",
+      "default_branch": "main",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-03T12:57:17Z",
+      "github_url": "https://github.com/ebpro/maven-parentpom",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "mini-jdbc-jpa",
+      "description": "Démo Java minimale d'accès aux données JDBC et JPA avec PostgreSQL (Docker Compose, scripts DDL).",
+      "topics": [
+        "area-standard",
+        "status-active"
+      ],
+      "category": "standard",
+      "default_branch": "develop",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-05-06T15:59:55Z",
+      "github_url": "https://github.com/ebpro/mini-jdbc-jpa",
+      "branches": [
+        "dependabot/maven/com.mchange-c3p0-0.12.0",
+        "dependabot/maven/org.postgresql-postgresql-42.7.11"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2024-11-14T13:23:26Z",
+        "stable": null,
+        "branches": {
+          "dependabot/maven/com.mchange-c3p0-0.12.0": "2026-02-25T18:36:12Z",
+          "dependabot/maven/org.postgresql-postgresql-42.7.11": "2026-05-06T15:59:48Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "minimal-jpa",
+      "description": "Minimal JPA is a simple application that uses Jakarta Persistence to interact with a PostgreSQL database.",
+      "topics": [
+        "area-standard",
+        "status-active"
+      ],
+      "category": "standard",
+      "default_branch": "develop",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2024-02-21T00:10:05Z",
+      "github_url": "https://github.com/ebpro/minimal-jpa",
+      "branches": [
+        "dependabot/maven/org.postgresql-postgresql-42.7.2"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2024-02-13T14:27:18Z",
+        "stable": null,
+        "branches": {
+          "dependabot/maven/org.postgresql-postgresql-42.7.2": "2024-02-21T00:10:03Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "quarkus-ms-platform",
+      "description": "Quarkus Microservices Platform: shared build parents, BOM, and domain/application/infrastructure commons libraries (fr.ebpro)",
+      "topics": [
+        "area-standard",
+        "status-active"
+      ],
+      "category": "standard",
+      "default_branch": "main",
+      "private": true,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-09-25T18:43:26Z",
+      "github_url": "https://github.com/ebpro/quarkus-ms-platform",
+      "branches": [],
+      "latest_vtag": "v1.0.0",
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": "2026-09-25T18:41:57Z",
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "simple-jsf",
+      "description": "Démo Jakarta Faces (JSF) avec PrimeFaces, Maven et Docker Compose.",
+      "topics": [
+        "area-standard",
+        "status-frozen"
+      ],
+      "category": "standard",
+      "default_branch": "develop",
+      "private": false,
+      "status": "frozen",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2023-11-27T14:00:16Z",
+      "github_url": "https://github.com/ebpro/simple-jsf",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2023-11-27T14:00:12Z",
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "simplejee91",
+      "description": "A quickstart for JakartaEE 9 (Hello World, REST API, CDI) on Payara, based on Payara blog tutorials.",
+      "topics": [
+        "area-standard",
+        "status-frozen"
+      ],
+      "category": "standard",
+      "default_branch": "develop",
+      "private": false,
+      "status": "frozen",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2022-11-18T00:31:04Z",
+      "github_url": "https://github.com/ebpro/simplejee91",
+      "branches": [
+        "master"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2022-11-18T00:30:18Z",
+        "stable": null,
+        "branches": {
+          "master": "2022-11-18T00:30:07Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "ai-review",
+      "description": "Canonical ebpro AI code-review reusable workflow (11 opencode agents on self-hosted runners)",
+      "topics": [
+        "area-cicd",
+        "status-active"
+      ],
+      "category": "tooling",
+      "default_branch": "main",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-17T14:42:54Z",
+      "github_url": "https://github.com/ebpro/ai-review",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "ci-java",
+      "description": "Shared GitHub Actions workflows for ebpro Java/Maven samples (reusable SonarQube)",
+      "topics": [
+        "area-cicd",
+        "status-active"
+      ],
+      "category": "tooling",
+      "default_branch": "main",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-02T10:59:19Z",
+      "github_url": "https://github.com/ebpro/ci-java",
+      "branches": [],
+      "latest_vtag": "v1.0.0",
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": "2026-09-05T11:46:15Z",
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "ci-java-build-action",
+      "description": "GitHub composite action building a Java Maven project with Docker for CI.",
+      "topics": [
+        "area-cicd",
+        "ci",
+        "github-actions",
+        "java",
+        "status-active"
+      ],
+      "category": "tooling",
+      "default_branch": "develop",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2023-05-11T05:41:26Z",
+      "github_url": "https://github.com/ebpro/ci-java-build-action",
+      "branches": [],
+      "latest_vtag": "v0.7",
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2023-05-11T05:41:25Z",
+        "stable": "2022-10-28T14:34:50Z",
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "ci-java-site-action",
+      "description": "GitHub composite action building and deploying the Maven site of a Java project.",
+      "topics": [
+        "area-cicd",
+        "status-active"
+      ],
+      "category": "tooling",
+      "default_branch": "develop",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2023-05-11T06:08:21Z",
+      "github_url": "https://github.com/ebpro/ci-java-site-action",
+      "branches": [
+        "master"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2023-05-11T06:08:21Z",
+        "stable": null,
+        "branches": {
+          "master": "2022-10-28T15:26:28Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "ci-java-sonar-action",
+      "description": "GitHub composite action running SonarQube analysis on a Java Maven project.",
+      "topics": [
+        "area-cicd",
+        "status-active"
+      ],
+      "category": "tooling",
+      "default_branch": "develop",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2023-05-11T06:07:34Z",
+      "github_url": "https://github.com/ebpro/ci-java-sonar-action",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2023-05-11T06:07:34Z",
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "ci-utils-java",
+      "description": "Utilitaires de CI pour projets Java : fichier Maven ci-settings.xml générique piloté par variables d'environnement.",
+      "topics": [
+        "area-cicd",
+        "status-active"
+      ],
+      "category": "tooling",
+      "default_branch": "develop",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-03T15:29:40Z",
+      "github_url": "https://github.com/ebpro/ci-utils-java",
+      "branches": [
+        "fix/remove-dead-mirror"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2026-10-03T15:29:31Z",
+        "stable": null,
+        "branches": {
+          "fix/remove-dead-mirror": "2026-09-24T13:26:43Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "ciwrappers",
+      "description": "Ensemble de fonctions bash utilitaires pour la Continuous Integration, installables par curl.",
+      "topics": [
+        "area-cicd",
+        "ci",
+        "docker",
+        "java",
+        "status-active",
+        "vagrant"
+      ],
+      "category": "tooling",
+      "default_branch": "develop",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2024-01-22T12:42:32Z",
+      "github_url": "https://github.com/ebpro/ciwrappers",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2024-01-22T12:42:31Z",
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "devcontainer-sql-postgres",
+      "description": "TP SQL et PostgreSQL avec Jupyter : environnement préconfiguré dans un conteneur Dev Containers VS Code.",
+      "topics": [
+        "area-image",
+        "status-active"
+      ],
+      "category": "tooling",
+      "default_branch": "develop",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-08-26T09:15:55Z",
+      "github_url": "https://github.com/ebpro/devcontainer-sql-postgres",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2026-08-26T09:15:50Z",
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "gh-actions-shared-docker",
+      "description": "Workflow GitHub Actions réutilisable (workflow_call) pour la CI de construction d'images Docker avec QEMU.",
+      "topics": [
+        "area-cicd",
+        "ci",
+        "docker",
+        "github-actions",
+        "status-active"
+      ],
+      "category": "tooling",
+      "default_branch": "develop",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-08-29T10:05:45Z",
+      "github_url": "https://github.com/ebpro/gh-actions-shared-docker",
+      "branches": [
+        "ci/standardize-runs-on-ebpro-org-20260829"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2024-09-17T18:42:23Z",
+        "stable": null,
+        "branches": {
+          "ci/standardize-runs-on-ebpro-org-20260829": "2026-08-29T10:05:45Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "gh-actions-shared-java",
+      "description": "Workflow GitHub Actions réutilisable pour la CI de projets Java Maven, inspiré de maven-gh-actions-shared.",
+      "topics": [
+        "area-cicd",
+        "ci",
+        "github-actions",
+        "java",
+        "status-active"
+      ],
+      "category": "tooling",
+      "default_branch": "develop",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-02T17:22:47Z",
+      "github_url": "https://github.com/ebpro/gh-actions-shared-java",
+      "branches": [
+        "ci/standardize-runs-on-ebpro-org-20260829",
+        "feat/remove-sdkman"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2026-10-02T17:22:46Z",
+        "stable": null,
+        "branches": {
+          "ci/standardize-runs-on-ebpro-org-20260829": "2026-08-29T10:05:49Z",
+          "feat/remove-sdkman": "2026-09-23T20:44:31Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "gitops",
+      "description": "GitOps source of truth for the Kubernetes platform foundation, deployed with ArgoCD (core infrastructure and toolchain).",
+      "topics": [
+        "area-cicd",
+        "status-active"
+      ],
+      "category": "tooling",
+      "default_branch": "main",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-21T06:57:27Z",
+      "github_url": "https://github.com/ebpro/gitops",
+      "branches": [
+        "fix/sonarqube-265-reset",
+        "fix/sonarqube-267-e1-stock",
+        "fix/sonarqube-267-web-skew-test",
+        "fix/sonarqube-267-webapp-only-test",
+        "fix/sonarqube-db-pg18",
+        "fix/sq-jdbc-secret-source",
+        "preservation/arc-kyverno-arm64-taint",
+        "preservation/arc-kyverno-arm64-taint-2026-09-12",
+        "preservation/open-webui-sso-remediation-2026-09-12",
+        "preservation/opencode-sota-7a05f7b-20260912T182320Z",
+        "preservation/sonarqube-267-empty-projects-2026-09-12",
+        "renovate/argoproj-argo-cd-3.x",
+        "renovate/busybox-1.x",
+        "renovate/docker.io-gitea-gitea-1.x",
+        "renovate/docker.io-sonatype-nexus3-3.x",
+        "renovate/ghcr.io-open-telemetry-opentelemetry-operator-target-allocator-0.x",
+        "renovate/hashicorp-vault-1.x",
+        "renovate/mongo-4.x",
+        "renovate/postgres-16.x",
+        "renovate/quay.io-keycloak-keycloak-26.x",
+        "renovate/quay.io-microcks-microcks-postman-runtime-0.x"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": null,
+        "branches": {
+          "fix/sonarqube-265-reset": "2026-09-16T06:52:45Z",
+          "fix/sonarqube-267-e1-stock": "2026-09-15T08:06:18Z",
+          "fix/sonarqube-267-web-skew-test": "2026-09-14T07:00:08Z",
+          "fix/sonarqube-267-webapp-only-test": "2026-09-14T08:54:46Z",
+          "fix/sonarqube-db-pg18": "2026-09-16T17:01:13Z",
+          "fix/sq-jdbc-secret-source": "2026-09-18T22:19:43Z",
+          "preservation/arc-kyverno-arm64-taint": "2026-09-14T10:49:47Z",
+          "preservation/arc-kyverno-arm64-taint-2026-09-12": "2026-09-12T19:58:17Z",
+          "preservation/open-webui-sso-remediation-2026-09-12": "2026-09-12T20:19:17Z",
+          "preservation/opencode-sota-7a05f7b-20260912T182320Z": "2026-09-12T18:23:28Z",
+          "preservation/sonarqube-267-empty-projects-2026-09-12": "2026-09-12T20:49:24Z",
+          "renovate/argoproj-argo-cd-3.x": "2026-10-19T03:03:39Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "jupyter-base",
+      "description": "A base image for the UTLN Jupyter",
+      "topics": [
+        "area-image",
+        "docker",
+        "jupyter",
+        "python",
+        "status-active"
+      ],
+      "category": "tooling",
+      "default_branch": "develop",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-21T07:01:36Z",
+      "github_url": "https://github.com/ebpro/jupyter-base",
+      "branches": [
+        "dependabot/github_actions/docker/setup-buildx-action-4",
+        "feat/kotlin-kernel",
+        "feat/sonarqube-and-harbor",
+        "fix/buildah-native-amd64-test",
+        "master"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2026-10-21T07:01:30Z",
+        "stable": null,
+        "branches": {
+          "dependabot/github_actions/docker/setup-buildx-action-4": "2026-10-12T13:42:33Z",
+          "feat/kotlin-kernel": "2026-10-13T17:24:28Z",
+          "feat/sonarqube-and-harbor": "2026-09-15T15:40:43Z",
+          "fix/buildah-native-amd64-test": "2026-10-16T07:07:50Z",
+          "master": "2021-09-09T15:23:54Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "jupyter-db-pg",
+      "description": "A jupyter image for PostgreSQL Database",
+      "topics": [
+        "area-image",
+        "database",
+        "docker",
+        "jupyter",
+        "postgresql",
+        "status-active"
+      ],
+      "category": "tooling",
+      "default_branch": "develop",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-08-29T10:06:08Z",
+      "github_url": "https://github.com/ebpro/jupyter-db-pg",
+      "branches": [
+        "ci/standardize-runs-on-ebpro-org-20260829",
+        "master"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2025-11-23T10:28:58Z",
+        "stable": null,
+        "branches": {
+          "ci/standardize-runs-on-ebpro-org-20260829": "2026-08-29T10:06:08Z",
+          "master": "2021-10-21T07:40:04Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "jupyter-java",
+      "description": "A jupyter image for Java",
+      "topics": [
+        "area-image",
+        "docker",
+        "java",
+        "jupyter",
+        "status-active"
+      ],
+      "category": "tooling",
+      "default_branch": "develop",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-08-29T10:06:17Z",
+      "github_url": "https://github.com/ebpro/jupyter-java",
+      "branches": [
+        "ci/standardize-runs-on-ebpro-org-20260829",
+        "feature/minimal",
+        "master"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2025-02-13T19:52:44Z",
+        "stable": null,
+        "branches": {
+          "ci/standardize-runs-on-ebpro-org-20260829": "2026-08-29T10:06:17Z",
+          "feature/minimal": "2025-05-15T08:47:03Z",
+          "master": "2025-02-13T19:52:44Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "quarkus-ci-runner",
+      "description": "Custom ARC GitHub Actions runner image (Quarkus CI toolchain) - builds and deploys to Harbor + Kubernetes cluster",
+      "topics": [
+        "area-cicd",
+        "status-active"
+      ],
+      "category": "tooling",
+      "default_branch": "main",
+      "private": true,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-20T15:52:04Z",
+      "github_url": "https://github.com/ebpro/quarkus-ci-runner",
+      "branches": [
+        "fix/grype-db-harbor-cache"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": null,
+        "branches": {
+          "fix/grype-db-harbor-cache": "2026-10-20T08:22:59Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "tooling-visual-qa",
+      "description": "Deterministic visual-QA checker for rendered Quarto sites (Playwright, headless Chromium). S0 tool candidate.",
+      "topics": [
+        "area-cicd",
+        "status-active"
+      ],
+      "category": "tooling",
+      "default_branch": "main",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-20T13:42:23Z",
+      "github_url": "https://github.com/ebpro/tooling-visual-qa",
+      "branches": [
+        "feature/cli-audit-dials"
+      ],
+      "latest_vtag": "v0.1.5",
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": "2026-10-16T11:13:05Z",
+        "branches": {
+          "feature/cli-audit-dials": "2026-10-20T13:42:20Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "_quarto-utils",
+      "description": "Sous-module de configuration Quarto partagé : profils de rendu, filtres Lua, extensions et ressources communes.",
+      "topics": [
+        "area-infra",
+        "status-active"
+      ],
+      "category": "infra",
+      "default_branch": "develop",
+      "private": true,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-21T07:54:05Z",
+      "github_url": "https://github.com/ebpro/_quarto-utils",
+      "branches": [
+        "ci/converge-solen-68c5fb9",
+        "dependabot/github_actions/actions/cache-6",
+        "dependabot/github_actions/actions/checkout-7",
+        "dependabot/github_actions/actions/download-artifact-8",
+        "dependabot/github_actions/actions/upload-artifact-7",
+        "feat/isolated-dind-render",
+        "feat/nested-dind-cgroup-aware",
+        "feature/artifact-post-deploy-purge",
+        "feature/card-json-emitter",
+        "feature/cartouche-extension",
+        "feature/cell-ux-layer",
+        "feature/console-log-bundle",
+        "feature/debug-bundle-server-transport",
+        "feature/deploy-direct-no-artifact",
+        "feature/devcontainers",
+        "feature/diagram-filter",
+        "feature/hang-watchdog",
+        "feature/locale-neutral-config",
+        "feature/moderne-fleet-default",
+        "feature/opt-in-cell-labels",
+        "feature/pin-v1334-coupled",
+        "feature/runner-labels-input",
+        "feature/selftest-staging-transport",
+        "feature/seo-indexing-directives",
+        "feature/staging-handoff-modelB",
+        "feature/tab-badge-slides",
+        "feature/v1.3.25-freeze-cache",
+        "feature/v1.3.27-hygiene",
+        "feature/v1.3.28-freeze-sizegate",
+        "feature/visual-check-reusable",
+        "feature/visual-check-staging-source",
+        "fix/bridge-dind-docker-socket",
+        "fix/bump-timeout-60",
+        "fix/decktape-reveal-sniff",
+        "fix/dind-host-gateway",
+        "fix/drop-interactive-chromium-install",
+        "fix/gallery-search-nested-path",
+        "fix/gallery-slides-card-gate",
+        "fix/remove-dangling-clean-extension",
+        "fix/render-helper-dir-v1.1.8",
+        "fix/render-step-timeout-diagnostics",
+        "fix/run-scoped-render-label",
+        "fix/visual-check-log-digest",
+        "fix/watchdog-liveness-corroboration",
+        "main"
+      ],
+      "latest_vtag": "v1.3.41",
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2026-10-21T07:40:26Z",
+        "stable": "2026-10-21T07:40:26Z",
+        "branches": {
+          "ci/converge-solen-68c5fb9": "2026-10-21T01:24:00Z",
+          "dependabot/github_actions/actions/cache-6": "2026-10-20T23:52:21Z",
+          "dependabot/github_actions/actions/checkout-7": "2026-10-18T16:20:39Z",
+          "dependabot/github_actions/actions/download-artifact-8": "2026-10-20T16:47:03Z",
+          "dependabot/github_actions/actions/upload-artifact-7": "2026-10-21T06:38:53Z",
+          "feat/isolated-dind-render": "2026-09-24T22:37:53Z",
+          "feat/nested-dind-cgroup-aware": "2026-09-29T05:27:55Z",
+          "feature/artifact-post-deploy-purge": "2026-10-18T10:25:03Z",
+          "feature/card-json-emitter": "2026-10-21T07:20:19Z",
+          "feature/cartouche-extension": "2026-10-20T07:07:50Z",
+          "feature/cell-ux-layer": "2026-10-18T08:16:35Z",
+          "feature/console-log-bundle": "2026-10-20T07:52:11Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "giscus",
+      "description": "Dépôt vide, sans contenu versionné.",
+      "topics": [
+        "area-infra",
+        "status-active"
+      ],
+      "category": "infra",
+      "default_branch": "master",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2024-01-30T10:03:01Z",
+      "github_url": "https://github.com/ebpro/giscus",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "IJava",
+      "description": "A Jupyter kernel for executing Java code.",
+      "topics": [
+        "area-infra",
+        "status-active"
+      ],
+      "category": "infra",
+      "default_branch": "master",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-19T10:12:57Z",
+      "github_url": "https://github.com/ebpro/IJava",
+      "branches": [
+        "chore/build-correctness",
+        "feature/cleanup",
+        "feature/db-table-class",
+        "feature/metadata-case-fallback",
+        "feature/sonar-coverage-quality-gate",
+        "wip/sonar-handoff"
+      ],
+      "latest_vtag": "vlocal-smoke-test",
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": "2026-01-16T16:49:26Z",
+        "branches": {
+          "chore/build-correctness": "2026-09-04T16:45:12Z",
+          "feature/cleanup": "2026-08-26T09:07:29Z",
+          "feature/db-table-class": "2026-10-19T10:09:10Z",
+          "feature/metadata-case-fallback": "2026-10-19T10:12:02Z",
+          "feature/sonar-coverage-quality-gate": "2026-09-05T17:10:36Z",
+          "wip/sonar-handoff": "2026-09-12T19:26:13Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "lecture-UTLN-M1_Info_Math-DEV-ADV_devenv",
+      "description": "Devcontainer environment for DEV-ADV lecture",
+      "topics": [
+        "area-infra",
+        "devcontainer",
+        "solen",
+        "status-active"
+      ],
+      "category": "infra",
+      "default_branch": "develop",
+      "private": true,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-07-09T15:45:16Z",
+      "github_url": "https://github.com/ebpro/lecture-UTLN-M1_Info_Math-DEV-ADV_devenv",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2026-07-09T15:45:07Z",
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "maven-archetypes",
+      "description": "Best practices Maven archetype",
+      "topics": [
+        "archetype",
+        "area-infra",
+        "java",
+        "maven",
+        "status-active"
+      ],
+      "category": "infra",
+      "default_branch": "main",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-03T14:28:38Z",
+      "github_url": "https://github.com/ebpro/maven-archetypes",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "utterances",
+      "description": "Dépôt ne contenant qu'un README titré utterances, sans autre contenu.",
+      "topics": [
+        "area-infra",
+        "status-active"
+      ],
+      "category": "infra",
+      "default_branch": "master",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2025-02-06T14:07:33Z",
+      "github_url": "https://github.com/ebpro/utterances",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
     }
   ]
 }

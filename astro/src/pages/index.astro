@@ -134,14 +134,22 @@ function lastUpdated(repo) {
         <h2>Enseignement</h2>
         <p>
           Mes enseignements portent sur le développement logiciel et les
-          architectures distribuées : programmation Java et objet, Git,
-          intégration continue, services web REST, JPA, microservices,
-          conteneurs, développement web et mobile. Les supports ci-dessous
-          proviennent du catalogue pédagogique généré à partir de l'organisation
+          architectures distribuées, avec un accent sur les pratiques modernes
+          d'ingénierie. Les supports ci-dessous proviennent du catalogue
+          pédagogique généré à partir de l'organisation
           GitHub <a href="https://github.com/ebpro">ebpro</a>
           (<time datetime={manifest.generated_at}>données du
           {manifest.generated_at.slice(0, 10)}</time>).
         </p>
+
+        <div class="group">
+          <h3>Domaines d'enseignement</h3>
+          <p>
+            Java et programmation objet · Git · méthodes agiles · CI/CD ·
+            services REST · JPA · microservices · conteneurs · développement
+            web et mobile.
+          </p>
+        </div>
 
         {lectureGroups.map((group) => (
           <div class="group">
@@ -191,10 +199,22 @@ function lastUpdated(repo) {
           </div>
         </div>
 
-        <p class="catalogue-link">
-          Vue filtrable complète :
-          <a href="https://bruno.univ-tln.fr/teaching-material/catalog/">catalogue pédagogique</a>.
-        </p>
+        <div class="group">
+          <h3>Catalogue des supports pédagogiques</h3>
+          <p>
+            Mes supports de cours, notebooks, présentations, documents
+            HTML/PDF et exemples fonctionnels sont regroupés dans un catalogue
+            dédié, organisé par enseignement et produit selon des pratiques
+            d'intégration continue (CI/CD).
+          </p>
+          <p>
+            <a
+              class="catalogue-btn"
+              href="https://bruno.univ-tln.fr/teaching-material/catalog/"
+              >Accéder au catalogue pédagogique</a
+            >
+          </p>
+        </div>
       </section>
 
       <section id="recherche" class="page-section">
@@ -431,11 +451,11 @@ function lastUpdated(repo) {
           </div>
           <div>
             <h3>Clé PGP</h3>
+            <p>Empreinte de la clé publique :</p>
+            <pre class="pgp-fingerprint"><code>116C CE5F BA2C 0D37 D355 940E 400F 583C 1F81 2EDB</code></pre>
             <p>
-              Clé publique :
-              <a href="https://bruno.univ-tln.fr/_media/contact/bruno_univ-tln.fr_2016_public.txt">
-                <code>116C CE5F BA2C 0D37 D355 940E 400F 583C 1F81 2EDB</code>
-              </a>
+              Clé publique sur demande :
+              <a href="mailto:emmanuel.bruno@univ-tln.fr">emmanuel.bruno@univ-tln.fr</a>
             </p>
           </div>
         </div>

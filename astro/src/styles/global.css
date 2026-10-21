@@ -591,8 +591,50 @@ address a {
   color: var(--accent);
 }
 
-.catalogue-link {
-  margin-top: var(--space-6);
+/* PGP fingerprint: copyable monospace block (section Contact) */
+
+.pgp-fingerprint {
+  margin: 0 0 var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+}
+
+.pgp-fingerprint code {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--fg);
+  letter-spacing: 0.04em;
+  overflow-wrap: normal;
+}
+
+/* Catalogue CTA button (section Enseignement) */
+
+.catalogue-btn {
+  display: inline-block;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--fg);
+  box-shadow: var(--shadow-1);
+  transition: color 0.15s ease, border-color 0.15s ease,
+    background-color 0.15s ease, transform 0.15s ease;
+}
+
+.catalogue-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  text-decoration: none;
+  transform: translateY(-1px);
 }
 
 .site-footer {
