@@ -5,7 +5,8 @@ import { defineConfig } from 'astro/config';
 // `npm run data`).
 export default defineConfig({
   output: 'static',
-  base: '/homepage-astro',
+  base: '/homepage',
+  site: 'https://bruno.univ-tln.fr',
   trailingSlash: 'never',
   // Single self-contained HTML (deployed standalone behind the vai symlink):
   // inline the stylesheet into the page instead of emitting /_astro/*.css.
