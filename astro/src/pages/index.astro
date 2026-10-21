@@ -199,28 +199,219 @@ function lastUpdated(repo) {
 
       <section id="recherche" class="page-section">
         <h2>Recherche</h2>
-        <!-- TODO: porter la description détaillée des axes de recherche depuis
-             index.qmd (interaction humains-LLM, analyse des émotions) après
-             validation de la structure de cette page. Contenu volontairement
-             placeholder ici : ne rien inventer. -->
-        <p class="placeholder">
-          Description des axes de recherche en cours de portage. Détails actuels :
-          <a href="https://www.lis-lab.fr/r2i">équipe R2I du LIS</a>.
+        <p>
+          Mes travaux portent sur la <strong>gestion des données</strong>, la
+          <strong>recherche d'information</strong> et les <strong>interactions
+          entre intelligence artificielle et humains</strong>. Mes recherches
+          actuelles s'articulent autour de deux axes principaux, tous deux menés
+          en collaboration avec <strong>Elisabeth Murisasco</strong> et
+          <strong>Patrice Bellot</strong>.
         </p>
+
+        <div class="group">
+          <h3>Interaction humains–grands modèles de langage</h3>
+          <p>
+            Ces travaux prolongent la thèse de <strong>Xavier Daull</strong>,
+            co-encadrée avec Elisabeth Murisasco et Patrice Bellot. Je conçois
+            des architectures combinant <strong>grands modèles de langage
+            (LLM)</strong> et expertise humaine pour résoudre des problèmes
+            complexes, notamment dans des contextes impliquant des données
+            sensibles.
+          </p>
+          <p>
+            Ces architectures sont <strong>multi-agents avec expert dans la
+            boucle</strong> : plusieurs agents LLM collaborent afin de concevoir,
+            vérifier et capitaliser des outils réutilisables. Les applications
+            concernent notamment la génération de documents scientifiques
+            (articles, brevets) à partir d'informations initiales limitées
+            telles qu'un titre et un résumé.
+          </p>
+        </div>
+
+        <div class="group">
+          <h3>Analyse des émotions et des sentiments</h3>
+          <p>
+            Ces travaux s'inscrivent dans la continuité de la thèse de
+            <strong>Soelie Lerch</strong>, co-encadrée avec Elisabeth Murisasco
+            et Patrice Bellot. Je développe des approches
+            <strong>multimodales</strong> combinant texte, audio, vidéo et
+            signaux physiologiques afin de modéliser l'émotion ressentie et
+            d'étudier la proximité émotionnelle entre contenus. Cette thèse a
+            abouti au projet <strong>EMOLIS</strong>, consacré à l'analyse
+            émotionnelle, aux jeux de données multimodaux et à la recommandation
+            de contenus adaptés.
+          </p>
+        </div>
       </section>
 
       <section id="publications" class="page-section">
         <h2>Publications</h2>
-        <!-- TODO: lister les publications sélectionnées. Source autorisée :
-             index.qmd (section "Publications sélectionnées") et HAL
-             (authIdPerson_i=174187). Aucune entrée ne doit être inventée ni
-             recopiée sans relecture. -->
-        <p class="placeholder">
-          Liste des publications en cours de portage. Index complets :
-          <a href="https://amu.hal.science/LIS-LAB/search/index/?q=%2A&amp;rows=30&amp;authIdPerson_i=174187&amp;sort=publicationDate_tdate+desc">HAL</a>,
-          <a href="https://dblp.org/pid/05/1898">DBLP</a>,
-          <a href="https://scholar.google.com/citations?user=TuDSngwAAAAJ">Google Scholar</a>.
-        </p>
+        <p>Toutes les publications :</p>
+        <ul class="hero-links" aria-label="Index de publications">
+          <li>
+            <a
+              href="https://hal.science/search/index/?q=%2A&amp;rows=30&amp;authIdPerson_i=174187&amp;sort=publicationDate_tdate+desc"
+              >HAL</a
+            >
+          </li>
+          <li><a href="https://dblp.org/pid/05/1898">DBLP</a></li>
+          <li>
+            <a
+              href="https://scholar.google.com/citations?user=TuDSngwAAAAJ"
+              >Google Scholar</a
+            >
+          </li>
+        </ul>
+
+        <div class="group">
+          <h3>Interaction LLM–humain</h3>
+          <div class="grid">
+            <article class="card">
+              <h4 class="card-title">
+                <a href="https://doi.org/10.1109/wi-iat67162.2025.00058"
+                  >A Flexible Multi-Agent LLM-Human Framework for Fast Human
+                  Validated Tool Building</a
+                >
+              </h4>
+              <p class="card-authors">
+                X. Daull, P. Bellot, <strong>E. Bruno</strong>, V. Martin,
+                E. Murisasco
+              </p>
+              <p class="card-venue"><em>IEEE/WIC WI-IAT 2025</em>, 2025</p>
+              <p class="card-desc">
+                CollabToolBuilder : cadre multi-agents (Coach, Coder, Critic,
+                Capitalizer) avec expert dans la boucle pour générer, valider et
+                capitaliser des outils réutilisables.
+              </p>
+              <p class="card-meta">
+                <a href="https://doi.org/10.1109/wi-iat67162.2025.00058">DOI</a>
+                <a href="https://hal.science/hal-05374425">HAL</a>
+              </p>
+            </article>
+            <article class="card">
+              <h4 class="card-title">
+                <a href="https://doi.org/10.1145/3704268.3748670"
+                  >An Adaptive Agentic Tool Building Architecture leveraging
+                  Expert-in-the-Loop Guidance, applied to Document
+                  Generation</a
+                >
+              </h4>
+              <p class="card-authors">
+                X. Daull, E. Murisasco, P. Bellot, <strong>E. Bruno</strong>,
+                V. Martin
+              </p>
+              <p class="card-venue"><em>ACM DocEng 2025</em>, 2025</p>
+              <p class="card-desc">
+                Architecture agentique générique exploitant plusieurs agents LLM
+                et la supervision d'un expert humain pour rechercher
+                l'information et générer des documents.
+              </p>
+              <p class="card-meta">
+                <a href="https://doi.org/10.1145/3704268.3748670">DOI</a>
+                <a href="https://hal.science/hal-05261897">HAL</a>
+              </p>
+            </article>
+            <article class="card">
+              <h4 class="card-title">
+                <a href="https://hal.science/hal-05173669"
+                  >Développement collaboratif d'outils par des agents LLM et
+                  humains : application à la synthèse scientifique</a
+                >
+              </h4>
+              <p class="card-authors">
+                X. Daull, E. Murisasco, P. Bellot, <strong>E. Bruno</strong>,
+                V. Martin
+              </p>
+              <p class="card-venue"><em>EGC 2025 / RNTI-E-41</em>, 2025</p>
+              <p class="card-desc">
+                Approche collaborative LLM–humain permettant de générer et
+                valider des fonctions neuro-symboliques Python et de construire
+                progressivement des outils réutilisables.
+              </p>
+              <p class="card-meta">
+                <a href="https://hal.science/hal-05173669">HAL</a>
+              </p>
+            </article>
+            <article class="card">
+              <h4 class="card-title">
+                <a href="https://doi.org/10.48550/arXiv.2302.09051"
+                  >Complex QA and language models hybrid architectures —
+                  Survey</a
+                >
+              </h4>
+              <p class="card-authors">
+                X. Daull, P. Bellot, <strong>E. Bruno</strong>, V. Martin,
+                E. Murisasco
+              </p>
+              <p class="card-venue"><em>Prépublication</em>, 2023 (v. 2025)</p>
+              <p class="card-desc">
+                État de l'art sur les limites des grands modèles de langage et
+                les architectures hybrides combinant raisonnement, outils
+                externes et supervision humaine.
+              </p>
+              <p class="card-meta">
+                <a href="https://doi.org/10.48550/arXiv.2302.09051">DOI</a>
+                <a href="https://arxiv.org/abs/2302.09051">arXiv</a>
+                <a href="https://hal.science/hal-05173860">HAL</a>
+              </p>
+            </article>
+          </div>
+        </div>
+
+        <div class="group">
+          <h3>Analyse émotionnelle</h3>
+          <div class="grid">
+            <article class="card">
+              <h4 class="card-title">
+                <a href="https://doi.org/10.63317/456gz9oyxe8w"
+                  >EMOLIS App and Dataset to Find Emotionally Close
+                  Cartoons</a
+                >
+              </h4>
+              <p class="card-authors">
+                S. Lerch, P. Bellot, <strong>E. Bruno</strong>, E. Murisasco
+              </p>
+              <p class="card-venue"><em>LREC-COLING 2024</em>, 2024</p>
+              <p class="card-desc">
+                Jeu de données multimodal associant transcriptions émotionnelles
+                et signaux physiologiques, accompagné d'une application de
+                recommandation de contenus émotionnellement proches.
+              </p>
+              <p class="card-meta">
+                <a href="https://doi.org/10.63317/456gz9oyxe8w">DOI</a>
+                <a href="https://aclanthology.org/2024.lrec-main.502/">ACL</a>
+                <a href="https://hal.science/hal-05368513">HAL</a>
+              </p>
+            </article>
+          </div>
+        </div>
+
+        <div class="group">
+          <h3>Classification documentaire</h3>
+          <div class="grid">
+            <article class="card">
+              <h4 class="card-title">
+                <a href="https://doi.org/10.1145/3573128.3609356"
+                  >Exploiting Label Dependencies for Multi-Label Document
+                  Classification Using Transformers</a
+                >
+              </h4>
+              <p class="card-authors">
+                H. Fallah, <strong>E. Bruno</strong>, P. Bellot, E. Murisasco
+              </p>
+              <p class="card-venue"><em>ACM DocEng 2023</em>, 2023</p>
+              <p class="card-desc">
+                Approche exploitant les dépendances entre labels afin
+                d'améliorer la classification documentaire multi-étiquette
+                basée sur les Transformers.
+              </p>
+              <p class="card-meta">
+                <a href="https://doi.org/10.1145/3573128.3609356">DOI</a>
+                <a href="https://hal.science/hal-04222602">HAL</a>
+              </p>
+            </article>
+          </div>
+        </div>
       </section>
 
       <section id="contact" class="page-section">

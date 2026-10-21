@@ -546,6 +546,19 @@ code {
   color: var(--accent-hover);
 }
 
+/* ---------- Publication cards (section Publications) ---------- */
+
+.card-authors {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.card-venue {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+}
+
 /* ---------- Placeholders, contact, footer ---------- */
 
 .placeholder {
