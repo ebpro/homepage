@@ -112,34 +112,104 @@ function lastUpdated(repo) {
     <main>
       <div class="notice-banner" role="note">
         <div class="notice-banner-inner">
-          <div lang="en">
+          <div class="notice-tabs" role="tablist" aria-label="Langue de l'annonce / Language">
+            <button
+              type="button"
+              class="notice-tab"
+              role="tab"
+              id="notice-tab-en"
+              aria-selected="true"
+              aria-controls="notice-panel-en"
+              lang="en"
+            >🇬🇧 English</button>
+            <button
+              type="button"
+              class="notice-tab"
+              role="tab"
+              id="notice-tab-vi"
+              aria-selected="false"
+              aria-controls="notice-panel-vi"
+              lang="vi"
+            >🇻🇳 Tiếng Việt</button>
+          </div>
+          <div
+            class="notice-panel"
+            lang="en"
+            id="notice-panel-en"
+            role="tabpanel"
+            aria-labelledby="notice-tab-en"
+          >
             <p class="notice-banner-title">⚠️ Important update regarding the course homepage</p>
             <p class="notice-banner-body">Due to a recent security advisory concerning PHP (CERT-EU Security Advisory 2026-018, CVE-2026-109618 and CVE-2026-109619 — remote code execution risk), the course homepage had to be moved away from its previous PHP-based setup. Course materials are not affected: slides, notes, exercises and other documents remain available at the usual location.</p>
             <p class="notice-banner-body">LP ECMN (WebLang) students — course materials:</p>
+            <h3 class="notice-materials-h">Introduction and AI</h3>
             <ul class="notice-links">
+              <li>Introduction — <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/_slides/webdev_00_L_00_Introduction.html">Slides</a> · <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/webdev_00_L_00_Introduction.html">Notes</a></li>
               <li><a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_00_G_CourseGuide.html">Course Guide</a></li>
-              <li>Introduction — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_00_L_00_Introduction.html">Slides</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_00_L_00_Introduction.html">Notes</a></li>
-              <li>AI Quick Start — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_00_L_02_AIQuickStart.html">Slides</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_00_L_02_AIQuickStart.html">Notes</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_00_P_AIQuickStart.html">Practice (S0)</a></li>
-              <li>HTML &amp; CSS Essentials — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_01_L_HTMLCSSEssentials.html">Slides</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_01_L_HTMLCSSEssentials.html">Notes</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_01_P_HTMLCSS.html">Practice (S1)</a></li>
-              <li>JavaScript for React — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_02_L_JavaScriptForReact.html">Slides</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_02_L_JavaScriptForReact.html">Notes</a> · <a href="https://github.com/ebpro/fullstack-minimal-app">Sample app (GitHub)</a></li>
-              <li>React Frontend Development — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_03_L_ReactFrontend.html">Slides</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_03_L_ReactFrontend.html">Notes</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_03_P_ReactReview.html">Practice</a></li>
-              <li>Node.js &amp; Express: The Backend — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_04_L_NodeExpress.html">Slides</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_04_L_NodeExpress.html">Notes</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_04_P_NodeExpress.html">Practice</a></li>
+              <li>AI Quick Start (Improved version) — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_00_L_02_AIQuickStart.html">Slides</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_00_L_02_AIQuickStart.html">Notes</a></li>
+            </ul>
+            <h3 class="notice-materials-h">Frontend</h3>
+            <ul class="notice-links">
+              <li>HTML &amp; CSS Essentials — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_01_L_HTMLCSSEssentials.html">Slides</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_01_L_HTMLCSSEssentials.html">Notes</a> · Practice: <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_01_P_HTMLCSS.html">Building the Static Review Card (S1 Practice)</a></li>
+              <li>JavaScript for React — <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/_slides/webdev_02_L_02_JavaScriptForReact.html">Slides</a> · <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/webdev_02_L_02_JavaScriptForReact.html">Notes</a> · For practice you will need the sample application: <a href="https://github.com/ebpro/fullstack-minimal-app">Fullstack Minimal App (GitHub)</a> — Follow the README.</li>
+              <li>React Frontend Development — <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/_slides/webdev_03_L_ReactFrontendDevelopment.html">Slides</a> · Practice: <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_03_P_ReactReview.html">React Review UI - Practice</a></li>
+            </ul>
+            <h3 class="notice-materials-h">Backend</h3>
+            <ul class="notice-links">
+              <li>Node.js &amp; Express Backend — <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/_slides/webdev_04_L_NodeExpressBackend.html">Slides</a> · Practice: <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_04_P_NodeExpress.html">Node.js &amp; Express Backend - Practice</a></li>
+            </ul>
+            <h3 class="notice-materials-h">Databases</h3>
+            <ul class="notice-links">
+              <li>Database Integration — Lecture — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_05_L_DatabaseIntegration.html">Slides</a></li>
             </ul>
           </div>
-          <div lang="vi">
+          <div
+            class="notice-panel"
+            lang="vi"
+            id="notice-panel-vi"
+            role="tabpanel"
+            aria-labelledby="notice-tab-vi"
+            hidden
+          >
             <p class="notice-banner-title">⚠️ Thông báo quan trọng về trang chủ môn học</p>
             <p class="notice-banner-body">Do một khuyến nghị bảo mật gần đây liên quan đến PHP (Khuyến nghị bảo mật CERT-EU 2026-018, CVE-2026-109618 và CVE-2026-109619 — có nguy cơ thực thi mã từ xa), trang chủ môn học đã phải chuyển khỏi môi trường cũ dựa trên PHP. Tài liệu môn học không bị ảnh hưởng: slide, ghi chú, bài tập và các tài liệu khác vẫn khả dụng tại địa chỉ quen thuộc.</p>
             <p class="notice-banner-body">Sinh viên LP ECMN (WebLang) — tài liệu môn học:</p>
+            <h3 class="notice-materials-h">Giới thiệu và AI</h3>
             <ul class="notice-links">
+              <li>Introduction — <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/_slides/webdev_00_L_00_Introduction.html">Slide</a> · <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/webdev_00_L_00_Introduction.html">Ghi chú</a></li>
               <li><a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_00_G_CourseGuide.html">Hướng dẫn môn học</a></li>
-              <li>Introduction — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_00_L_00_Introduction.html">Slide</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_00_L_00_Introduction.html">Ghi chú</a></li>
-              <li>AI Quick Start — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_00_L_02_AIQuickStart.html">Slide</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_00_L_02_AIQuickStart.html">Ghi chú</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_00_P_AIQuickStart.html">Thực hành (S0)</a></li>
-              <li>HTML &amp; CSS Essentials — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_01_L_HTMLCSSEssentials.html">Slide</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_01_L_HTMLCSSEssentials.html">Ghi chú</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_01_P_HTMLCSS.html">Thực hành (S1)</a></li>
-              <li>JavaScript for React — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_02_L_JavaScriptForReact.html">Slide</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_02_L_JavaScriptForReact.html">Ghi chú</a> · <a href="https://github.com/ebpro/fullstack-minimal-app">Ứng dụng mẫu (GitHub)</a></li>
-              <li>React Frontend Development — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_03_L_ReactFrontend.html">Slide</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_03_L_ReactFrontend.html">Ghi chú</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_03_P_ReactReview.html">Thực hành</a></li>
-              <li>Node.js &amp; Express: The Backend — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_04_L_NodeExpress.html">Slide</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_04_L_NodeExpress.html">Ghi chú</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_04_P_NodeExpress.html">Thực hành</a></li>
+              <li>AI Quick Start (phiên bản cải tiến) — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_00_L_02_AIQuickStart.html">Slide</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_00_L_02_AIQuickStart.html">Ghi chú</a></li>
+            </ul>
+            <h3 class="notice-materials-h">Frontend</h3>
+            <ul class="notice-links">
+              <li>HTML &amp; CSS Essentials — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_01_L_HTMLCSSEssentials.html">Slide</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_01_L_HTMLCSSEssentials.html">Ghi chú</a> · Thực hành: <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_01_P_HTMLCSS.html">Building the Static Review Card (S1 Practice)</a></li>
+              <li>JavaScript for React — <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/_slides/webdev_02_L_02_JavaScriptForReact.html">Slide</a> · <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/webdev_02_L_02_JavaScriptForReact.html">Ghi chú</a> · Để thực hành, cần có ứng dụng mẫu: <a href="https://github.com/ebpro/fullstack-minimal-app">Fullstack Minimal App (GitHub)</a> — Hãy đọc file README.</li>
+              <li>React Frontend Development — <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/_slides/webdev_03_L_ReactFrontendDevelopment.html">Slide</a> · Thực hành: <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_03_P_ReactReview.html">React Review UI - Practice</a></li>
+            </ul>
+            <h3 class="notice-materials-h">Backend</h3>
+            <ul class="notice-links">
+              <li>Node.js &amp; Express Backend — <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/_slides/webdev_04_L_NodeExpressBackend.html">Slide</a> · Thực hành: <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_04_P_NodeExpress.html">Node.js &amp; Express Backend - Practice</a></li>
+            </ul>
+            <h3 class="notice-materials-h">Cơ sở dữ liệu</h3>
+            <ul class="notice-links">
+              <li>Database Integration — Lecture — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_05_L_DatabaseIntegration.html">Slide</a></li>
             </ul>
           </div>
+          <script is:inline>
+            (() => {
+              const tabs = Array.from(document.querySelectorAll(".notice-tab"));
+              tabs.forEach((tab) => {
+                tab.addEventListener("click", () => {
+                  tabs.forEach((t) => {
+                    const selected = t === tab;
+                    t.setAttribute("aria-selected", selected ? "true" : "false");
+                    const panel = document.getElementById(t.getAttribute("aria-controls"));
+                    if (panel) panel.hidden = !selected;
+                  });
+                });
+              });
+            })();
+          </script>
         </div>
       </div>
 

@@ -350,6 +350,65 @@ code {
   font-weight: 600;
 }
 
+/* Language tab bar (EN/VI) at the top of the banner. Pill buttons;
+   the selected tab takes a surface background so it reads in both
+   themes without introducing new color tokens. */
+.notice-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.notice-tab {
+  appearance: none;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--fg-muted);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1;
+  padding: 0.45em 1em;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.notice-tab:hover {
+  border-color: var(--warn-ink);
+  color: var(--fg);
+}
+
+.notice-tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.notice-tab[aria-selected="true"] {
+  background: var(--surface);
+  border-color: var(--warn-ink);
+  color: var(--fg);
+  box-shadow: var(--shadow-1);
+}
+
+/* Inactive language panel: out of layout and tab order. */
+.notice-panel[hidden] {
+  display: none;
+}
+
+/* Materials section headings (the ## levels of the taught structure).
+   Compact uppercase labels — no heading-scale jump inside the note. */
+.notice-materials-h {
+  margin: var(--space-3) 0 var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
 /* Compact materials list (EN/VI link blocks inside the banner).
    Single column at every width — no columns/grid, mobile-safe. */
 .notice-links {
