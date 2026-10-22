@@ -312,6 +312,44 @@ code {
   display: block;
 }
 
+/* ---------- Notice banner (first block of <main>, above the hero) ----------
+   Calm alert: reuses the existing --warn-* status tokens (Partiel / Gelé)
+   so it stays readable in light and dark without introducing new colors. */
+
+.notice-banner {
+  background: var(--warn-bg);
+  border-left: 4px solid var(--warn-ink);
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.notice-banner-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-5) var(--space-5);
+}
+
+.notice-banner p {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: var(--leading);
+  color: var(--fg-muted);
+}
+
+.notice-banner p + p {
+  margin-top: var(--space-2);
+}
+
+.notice-banner-title {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.notice-banner a {
+  font-weight: 600;
+}
+
 /* ---------- Hero ---------- */
 
 .hero {
@@ -668,6 +706,11 @@ address a {
   }
 
   .page-section {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  .notice-banner-inner {
     padding-left: var(--space-4);
     padding-right: var(--space-4);
   }
