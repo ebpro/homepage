@@ -1,7 +1,7 @@
 ---
 // Full teaching catalogue: every ebpro repo that passes the deny-list,
-// grouped by category, with client-side search / category filter / sort
-// (vanilla JS, no dependencies).
+// grouped by category, with client-side search / category / topic /
+// formation / filière filters / sort (vanilla JS, no dependencies).
 //
 // Cards come from the shared derivation (src/data/cards.mjs) — the same
 // states (live / dead / no-develop) and ordering as the index page.
@@ -16,6 +16,10 @@ import {
   deriveCards,
   CATEGORY_LABELS,
   CATEGORY_RANK,
+  TOPIC_FREQUENT_MIN,
+  FORMATION_LABELS,
+  FILIERE_LABELS,
+  axisLabel,
 } from '../data/cards.mjs';
 import '../styles/global.css';
 
@@ -32,6 +36,51 @@ const groups = Array.from(byCategory.entries())
     (a, b) =>
       (CATEGORY_RANK[a.category] ?? 11) - (CATEGORY_RANK[b.category] ?? 11),
   );
+
+// --- Build-time filter-option derivation (parity with catalog.py v8.6) ----
+// Thèmes select: non-system topics counted over the cards; the "Fréquents"
+// optgroup carries the topics on >= TOPIC_FREQUENT_MIN cards, the rest go to
+// "Tous les thèmes" (both alphabetical).
+const topicCounts = new Map();
+for (const card of cards) {
+  for (const topic of card.topics) {
+    topicCounts.set(topic, (topicCounts.get(topic) ?? 0) + 1);
+  }
+}
+const frequentTopics = [...topicCounts.entries()]
+  .filter(([, n]) => n >= TOPIC_FREQUENT_MIN)
+  .map(([t]) => t)
+  .sort((a, b) => a.localeCompare(b, 'fr'));
+const otherTopics = [...topicCounts.entries()]
+  .filter(([, n]) => n < TOPIC_FREQUENT_MIN)
+  .map(([t]) => t)
+  .sort((a, b) => a.localeCompare(b, 'fr'));
+
+// Teaching axes: formations sorted; filières grouped under their formation
+// (orphan filières without a formation go to the "Autres" optgroup).
+const formations = [...new Set(cards.map((c) => c.formation).filter(Boolean))].sort(
+  (a, b) => a.localeCompare(b, 'fr'),
+);
+const filiereByFormation = new Map();
+for (const card of cards) {
+  if (!card.filiere) continue;
+  if (!filiereByFormation.has(card.formation)) {
+    filiereByFormation.set(card.formation, new Set());
+  }
+  filiereByFormation.get(card.formation).add(card.filiere);
+}
+const filiereGroups = formations
+  .map((formation) => ({
+    formation,
+    label: axisLabel(FORMATION_LABELS, formation),
+    filieres: [...(filiereByFormation.get(formation) ?? [])].sort(
+      (a, b) => a.localeCompare(b, 'fr'),
+    ),
+  }))
+  .filter((g) => g.filieres.length > 0);
+const orphanFilieres = filiereByFormation.has('')
+  ? [...filiereByFormation.get('')].sort((a, b) => a.localeCompare(b, 'fr'))
+  : [];
 
 // Config-driven links to the index page (base in astro.config.mjs is '/homepage').
 const base = import.meta.env.BASE_URL; // '/homepage' (trailingSlash: 'never')
@@ -55,6 +104,21 @@ const generatedDate = manifest.generated_at
       content="Catalogue complet des dépôts de l'organisation GitHub ebpro : cours, notebooks, exemples et outillage, classés par catégorie, avec recherche, filtre et tri."
     />
     <link rel="canonical" href="https://bruno.univ-tln.fr/homepage/catalog/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Emmanuel Bruno — Université de Toulon" />
+    <meta property="og:title" content="Catalogue des supports pédagogiques — Emmanuel Bruno" />
+    <meta
+      property="og:description"
+      content="Catalogue complet des dépôts de l'organisation GitHub ebpro : cours, notebooks, exemples et outillage, classés par catégorie, avec recherche, filtre et tri."
+    />
+    <meta property="og:url" content="https://bruno.univ-tln.fr/homepage/catalog/" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Catalogue des supports pédagogiques — Emmanuel Bruno" />
+    <meta
+      name="twitter:description"
+      content="Cours, notebooks, exemples et outillage — organisation GitHub ebpro, Université de Toulon."
+    />
     <!-- Pre-paint theme resolution: applies the pinned choice before first
          paint (no FOUC). Unpinned users follow prefers-color-scheme in CSS. -->
     <script is:inline>
@@ -131,12 +195,67 @@ const generatedDate = manifest.generated_at
             aria-label="Rechercher un dépôt"
           />
           <select id="catalog-category" aria-label="Filtrer par catégorie">
-            <option value="">Toutes les catégories</option>
+            <option value="">Toutes les catégories ({cards.length})</option>
             {groups.map((group) => (
-              <option value={group.category}>
-                {CATEGORY_LABELS[group.category] ?? group.category}
+              <option
+                value={group.category}
+                data-label={CATEGORY_LABELS[group.category] ?? group.category}>
+                {`${CATEGORY_LABELS[group.category] ?? group.category} (${group.cards.length})`}
               </option>
             ))}
+          </select>
+          <select id="catalog-topic" aria-label="Filtrer par thème">
+            <option value="">Thèmes…</option>
+            {frequentTopics.length > 0 && (
+              <optgroup label="Fréquents">
+                {frequentTopics.map((topic) => (
+                  <option value={topic} data-label={topic}>
+                    {topic}
+                  </option>
+                ))}
+              </optgroup>
+            )}
+            {otherTopics.length > 0 && (
+              <optgroup label="Tous les thèmes">
+                {otherTopics.map((topic) => (
+                  <option value={topic} data-label={topic}>
+                    {topic}
+                  </option>
+                ))}
+              </optgroup>
+            )}
+          </select>
+          <select id="catalog-formation" aria-label="Filtrer par formation">
+            <option value="">Formation…</option>
+            {formations.map((formation) => (
+              <option value={formation} data-label={axisLabel(FORMATION_LABELS, formation)}>
+                {axisLabel(FORMATION_LABELS, formation)}
+              </option>
+            ))}
+          </select>
+          <select id="catalog-filiere" aria-label="Filtrer par filière">
+            <option value="">Filière…</option>
+            {filiereGroups.map((group) => (
+              <optgroup label={group.label}>
+                {group.filieres.map((filiere) => (
+                  <option
+                    value={filiere}
+                    data-formation={group.formation}
+                    data-label={axisLabel(FILIERE_LABELS, filiere)}>
+                    {axisLabel(FILIERE_LABELS, filiere)}
+                  </option>
+                ))}
+              </optgroup>
+            ))}
+            {orphanFilieres.length > 0 && (
+              <optgroup label="Autres">
+                {orphanFilieres.map((filiere) => (
+                  <option value={filiere} data-formation="" data-label={axisLabel(FILIERE_LABELS, filiere)}>
+                    {axisLabel(FILIERE_LABELS, filiere)}
+                  </option>
+                ))}
+              </optgroup>
+            )}
           </select>
           <select id="catalog-sort" aria-label="Trier">
             <option value="defaut" selected>
@@ -147,6 +266,17 @@ const generatedDate = manifest.generated_at
             <option value="name">Titre (A→Z)</option>
             <option value="none">Aucun</option>
           </select>
+          <button id="catalog-reset" type="button" class="filter-reset">
+            Réinitialiser
+          </button>
+        </div>
+
+        <div id="catalog-active-filters" class="active-filters" hidden>
+          <span class="active-filters-label">Filtres actifs :</span>
+          <span id="catalog-active-chips" class="active-filters-chips"></span>
+          <button id="catalog-clear" type="button" class="filters-clear">
+            Tout effacer
+          </button>
         </div>
 
         <div id="catalog-cards">
@@ -164,6 +294,9 @@ const generatedDate = manifest.generated_at
             </div>
           ))}
         </div>
+        <p id="catalog-empty" class="catalog-empty" hidden>
+          Aucun support ne correspond à ces filtres.
+        </p>
       </section>
     </main>
 
@@ -172,6 +305,8 @@ const generatedDate = manifest.generated_at
         Emmanuel Bruno, Université de Toulon, LIS (UMR 7020).
         Catalogue : <time datetime={manifest.generated_at}>{manifest.generated_at.slice(0, 10)}</time>,
         {manifest.count} dépôts.
+        Source : <a href="https://github.com/ebpro/homepage">github.com/ebpro/homepage</a> ·
+        Contact : <a href="mailto:emmanuel.bruno@univ-tln.fr">emmanuel.bruno@univ-tln.fr</a>
       </p>
     </footer>
 
@@ -194,18 +329,34 @@ const generatedDate = manifest.generated_at
         });
       })();
 
-      // Catalogue controls: text search (name + description via data-search),
-      // category filter (section data-category), sort (data-date / data-name).
-      // "defaut" restores the build-time DOM order (snapshot per grid).
-      // The visible count updates only #catalog-count-n so the "manifeste
-      // généré le …" suffix stays visible.
+      // Catalogue controls (parity with teaching-catalog v8.6): text search
+      // (name + description via data-search), category filter (section
+      // data-category), AND-combined topic / formation / filière filters
+      // (data-topics / data-formation / data-filiere), sort (data-date /
+      // data-name). "defaut" restores the build-time DOM order (snapshot per
+      // grid). Topic state is ONE Set shared by the Thèmes select, the card
+      // pills and the "Filtres actifs" chip row (chips are built with DOM
+      // nodes, never innerHTML). The visible count updates only
+      // #catalog-count-n so the "manifeste généré le …" suffix stays
+      // visible. Content dates: the absolute FR date is baked (no-JS
+      // fallback + title tooltip); on load the visible text is rewritten to
+      // "il y a X" re-computed from the embedded ISO (data-commit) on every
+      // view — nothing relative is ever baked.
       (() => {
         const root = document.getElementById('catalog-cards');
         if (!root) return;
         const search = document.getElementById('catalog-search');
         const catSel = document.getElementById('catalog-category');
+        const topicSel = document.getElementById('catalog-topic');
+        const formationSel = document.getElementById('catalog-formation');
+        const filiereSel = document.getElementById('catalog-filiere');
         const sortSel = document.getElementById('catalog-sort');
         const countN = document.getElementById('catalog-count-n');
+        const emptyEl = document.getElementById('catalog-empty');
+        const afWrap = document.getElementById('catalog-active-filters');
+        const afChips = document.getElementById('catalog-active-chips');
+        const resetBtn = document.getElementById('catalog-reset');
+        const clearBtn = document.getElementById('catalog-clear');
         const sections = Array.from(
           root.querySelectorAll('.catalog-section'),
         );
@@ -214,6 +365,145 @@ const generatedDate = manifest.generated_at
           const grid = section.querySelector('.grid');
           defaultOrder.set(grid, Array.from(grid.children));
         }
+        const total = root.querySelectorAll('article[data-catalog-card]').length;
+        const activeTopics = new Set();
+        let formation = '';
+        let filiere = '';
+
+        function relFr(iso) {
+          const s = (Date.now() - new Date(iso).getTime()) / 1000;
+          if (s < 3600) return 'il y a ' + Math.max(1, Math.floor(s / 60)) + ' min';
+          const d = Math.floor(s / 86400);
+          if (d < 1) return 'il y a ' + Math.floor(s / 3600) + ' h';
+          if (d < 7) return 'il y a ' + d + (d > 1 ? ' jours' : ' jour');
+          if (d < 28) {
+            const w = Math.floor(d / 7);
+            return 'il y a ' + w + (w > 1 ? ' semaines' : ' semaine');
+          }
+          if (d < 365) return 'il y a ' + Math.max(1, Math.floor(d / 30)) + ' mois';
+          const a = Math.floor(d / 365);
+          return 'il y a ' + a + (a > 1 ? ' ans' : ' an');
+        }
+
+        document.querySelectorAll('[data-commit]').forEach((el) => {
+          el.textContent = relFr(el.dataset.commit);
+          el.setAttribute('aria-label', el.textContent);
+        });
+
+        function optionLabel(sel, value) {
+          const opt = Array.from(sel.options).find((o) => o.value === value);
+          return opt ? (opt.dataset.label || opt.textContent).trim() : value;
+        }
+
+        function narrowFiliere() {
+          const f = formationSel.value;
+          Array.from(filiereSel.options).forEach((o) => {
+            if (!o.value) return;
+            const ok = !f || o.dataset.formation === f;
+            o.hidden = !ok;
+            o.disabled = !ok;
+          });
+          if (
+            filiere &&
+            formation &&
+            !Array.from(filiereSel.options).some(
+              (o) => o.value === filiere && !o.disabled,
+            )
+          ) {
+            filiere = '';
+            filiereSel.value = '';
+          }
+        }
+
+        function syncPills() {
+          root.querySelectorAll('button[data-topic]').forEach((pill) => {
+            pill.setAttribute(
+              'aria-pressed',
+              String(activeTopics.has(pill.dataset.topic)),
+            );
+          });
+        }
+
+        // The Thèmes select is a single-selection UI over the multi-topic
+        // Set: it resets itself when its own topic leaves the Set.
+        function syncTopicSelect() {
+          if (topicSel.value && !activeTopics.has(topicSel.value)) {
+            topicSel.value = '';
+          }
+        }
+
+        function makeChip(labelText, ariaPrefix, onRemove) {
+          const chip = document.createElement('button');
+          chip.type = 'button';
+          chip.className = 'chip-x';
+          chip.setAttribute('aria-label', ariaPrefix + ' ' + labelText);
+          chip.textContent = labelText;
+          const mark = document.createElement('span');
+          mark.className = 'chip-x-mark';
+          mark.setAttribute('aria-hidden', 'true');
+          mark.textContent = '\u00d7';
+          chip.appendChild(mark);
+          chip.addEventListener('click', onRemove);
+          return chip;
+        }
+
+        function renderActiveFilters() {
+          afChips.textContent = '';
+          const q = (search.value || '').trim();
+          const cat = catSel.value;
+          if (cat) {
+            afChips.appendChild(
+              makeChip(optionLabel(catSel, cat), 'Retirer la catégorie', () => {
+                catSel.value = '';
+                update();
+              }),
+            );
+          }
+          if (q) {
+            afChips.appendChild(
+              makeChip(q, 'Retirer la recherche', () => {
+                search.value = '';
+                update();
+              }),
+            );
+          }
+          Array.from(activeTopics)
+            .sort((a, b) => a.localeCompare(b, 'fr'))
+            .forEach((topic) => {
+              afChips.appendChild(
+                makeChip(topic, 'Retirer le thème', () => {
+                  activeTopics.delete(topic);
+                  update();
+                }),
+              );
+            });
+          if (formation) {
+            afChips.appendChild(
+              makeChip(
+                optionLabel(formationSel, formation),
+                'Retirer la formation',
+                () => {
+                  formation = '';
+                  formationSel.value = '';
+                  narrowFiliere();
+                  update();
+                },
+              ),
+            );
+          }
+          if (filiere) {
+            afChips.appendChild(
+              makeChip(optionLabel(filiereSel, filiere), 'Retirer la filière', () => {
+                filiere = '';
+                filiereSel.value = '';
+                update();
+              }),
+            );
+          }
+          afWrap.hidden =
+            !cat && !q && activeTopics.size === 0 && !formation && !filiere;
+        }
+
         const apply = () => {
           const q = (search.value || '').trim().toLowerCase();
           const cat = catSel.value;
@@ -221,26 +511,36 @@ const generatedDate = manifest.generated_at
           let visible = 0;
           for (const section of sections) {
             const grid = section.querySelector('.grid');
-            const cards = Array.from(grid.children);
+            const cardsInGrid = Array.from(grid.children);
             if (sort === 'date-desc' || sort === 'date-asc') {
               const dir = sort === 'date-desc' ? -1 : 1;
-              cards.sort((a, b) =>
-                dir * (a.dataset.date || '').localeCompare(b.dataset.date || ''),
+              cardsInGrid.sort(
+                (a, b) =>
+                  dir *
+                  (a.dataset.date || '').localeCompare(b.dataset.date || ''),
               );
             } else if (sort === 'name') {
-              cards.sort((a, b) =>
-                (a.dataset.name || '').localeCompare(b.dataset.name || '', 'fr'),
+              cardsInGrid.sort(
+                (a, b) =>
+                  (a.dataset.name || '').localeCompare(b.dataset.name || '', 'fr'),
               );
             } else if (sort === 'defaut') {
               const orig = defaultOrder.get(grid);
-              cards.sort((a, b) => orig.indexOf(a) - orig.indexOf(b));
+              cardsInGrid.sort((a, b) => orig.indexOf(a) - orig.indexOf(b));
             }
             // sort === 'none' ("Aucun"): keep the current DOM order.
-            for (const card of cards) grid.appendChild(card);
+            for (const card of cardsInGrid) grid.appendChild(card);
 
             let sectionVisible = 0;
             for (const card of grid.children) {
-              const ok = !q || (card.dataset.search || '').includes(q);
+              const topics = (card.dataset.topics || '')
+                .split(' ')
+                .filter(Boolean);
+              const ok =
+                (!q || (card.dataset.search || '').includes(q)) &&
+                activeTopics.every((t) => topics.includes(t)) &&
+                (!formation || (card.dataset.formation || '') === formation) &&
+                (!filiere || (card.dataset.filiere || '') === filiere);
               card.hidden = !ok;
               if (ok) sectionVisible += 1;
             }
@@ -249,12 +549,62 @@ const generatedDate = manifest.generated_at
             if (catOk) visible += sectionVisible;
           }
           if (countN) {
-            countN.textContent = visible + (visible > 1 ? ' dépôts' : ' dépôt');
+            countN.textContent =
+              visible + (visible > 1 ? ' dépôts' : ' dépôt');
           }
+          if (emptyEl) emptyEl.hidden = visible !== 0;
         };
-        search.addEventListener('input', apply);
-        catSel.addEventListener('change', apply);
+
+        function update() {
+          syncPills();
+          syncTopicSelect();
+          renderActiveFilters();
+          apply();
+        }
+
+        function clearFilters() {
+          search.value = '';
+          activeTopics.clear();
+          formation = '';
+          filiere = '';
+          catSel.value = '';
+          topicSel.value = '';
+          formationSel.value = '';
+          filiereSel.value = '';
+          narrowFiliere();
+          update();
+        }
+
+        search.addEventListener('input', update);
+        catSel.addEventListener('change', update);
         sortSel.addEventListener('change', apply);
+        topicSel.addEventListener('change', () => {
+          const t = topicSel.value;
+          if (!t) return;
+          if (activeTopics.has(t)) activeTopics.delete(t);
+          else activeTopics.add(t);
+          update();
+        });
+        root.addEventListener('click', (e) => {
+          const pill = e.target.closest('button[data-topic]');
+          if (!pill) return;
+          const t = pill.dataset.topic;
+          if (activeTopics.has(t)) activeTopics.delete(t);
+          else activeTopics.add(t);
+          update();
+        });
+        formationSel.addEventListener('change', () => {
+          formation = formationSel.value;
+          narrowFiliere();
+          update();
+        });
+        filiereSel.addEventListener('change', () => {
+          filiere = filiereSel.value;
+          update();
+        });
+        resetBtn.addEventListener('click', clearFilters);
+        clearBtn.addEventListener('click', clearFilters);
+        update();
       })();
     </script>
   </body>

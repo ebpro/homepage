@@ -13,12 +13,25 @@
 //   no-develop — no develop branch: GitHub links only.
 //
 // The `data-*` attributes power the client-side catalogue controls
-// (search / category filter / sort) on /catalog/:
+// (search / category / topic / formation / filière filters / sort) on
+// /catalog/:
 //   data-catalog-card  — gate marker for page-level HTML audits
 //   data-state         — live | dead | no-develop
 //   data-name          — repo name (sort)
 //   data-date          — full ISO date (date sorts; empty = undated)
 //   data-search        — "name description" lowercased (text search)
+//   data-topics        — space-joined non-system topics (AND filter)
+//   data-formation     — formation axis slug ("" = none)
+//   data-filiere       — filière axis slug ("" = none)
+//
+// Topic pills are filter TOGGLE buttons (progressive enhancement — inert
+// without JS), sharing one active-topic Set with the Thèmes select and the
+// "Filtres actifs" chip row (parity with teaching-catalog v8.6).
+//
+// The content date is the ABSOLUTE FR date (build-time, `dd/MM/yyyy`,
+// `title` tooltip + no-JS fallback); the raw ISO travels in `datetime` and
+// `data-commit` — the load-time JS rewrites the visible text to "il y a X"
+// re-computed from that ISO on every view (nothing relative is ever baked).
 
 import { STATUS_LABELS } from '../data/cards.mjs';
 
@@ -30,19 +43,29 @@ interface Props {
     category: string;
     formation: string;
     filiere: string;
+    topics: string[];
     githubUrl: string;
     state: 'live' | 'dead' | 'no-develop';
     branch: string;
     landing: string;
     primary: string;
+    releasesLive: boolean;
+    latestVtag: string;
+    stableUrl: string;
     date: string | null;
     dateFull: string | null;
+    dateAbs: string | null;
+    stableDateAbs: string | null;
   };
 }
 
 const { card } = Astro.props;
 const { name, description, githubUrl, primary, state } = card;
 const badge = STATUS_LABELS[card.status] ?? null;
+const dateShown = card.dateAbs ?? card.date;
+const stableTitle = card.stableUrl
+  ? `Stable · ${card.latestVtag} · contenu du ${card.stableDateAbs ?? 'date inconnue'}`
+  : 'version stable pas encore publiée';
 ---
 
 <article
@@ -53,6 +76,9 @@ const badge = STATUS_LABELS[card.status] ?? null;
   data-name={name}
   data-date={card.dateFull ?? ''}
   data-search={`${name} ${description}`.toLowerCase()}
+  data-topics={card.topics.join(' ')}
+  data-formation={card.formation}
+  data-filiere={card.filiere}
 >
   <h4 class="card-title">
     {state === 'live'
@@ -66,24 +92,56 @@ const badge = STATUS_LABELS[card.status] ?? null;
       ? <a href={primary}>{description}</a>
       : description}
   </p>
-  {state === 'live'
-    ? (
-        <a class="card-latest" href={primary}>Latest</a>
-      )
-    : state === 'dead'
-      ? (
-          <button
-            type="button"
-            class="card-latest"
-            disabled
-            title="non publie">Latest</button>
-        )
-      : null}
+  {card.topics.length > 0 && (
+    <div class="card-pills">
+      {card.topics.map((topic) => (
+        <button
+          type="button"
+          class="chip-pill"
+          data-topic={topic}
+          aria-pressed="false"
+          title={`Filtrer sur le thème : ${topic}`}>
+          {topic}
+        </button>
+      ))}
+    </div>
+  )}
+  <div class="card-actions">
+    {card.latestVtag &&
+      (card.releasesLive ? (
+        <a class="card-latest card-stable" href={card.stableUrl} title={stableTitle}>
+          Stable
+        </a>
+      ) : state !== 'no-develop' ? (
+        <button
+          type="button"
+          class="card-latest card-stable"
+          disabled
+          title={stableTitle}>
+          Stable
+        </button>
+      ) : null)}
+    {state === 'live' ? (
+      <a class="card-latest" href={primary}>Latest</a>
+    ) : state === 'dead' ? (
+      <button type="button" class="card-latest" disabled title="non publie">
+        Latest
+      </button>
+    ) : null}
+  </div>
   <p class="card-meta">
     {badge && <span class="badge">{badge}</span>}
     {card.filiere && <span class="tag">{card.filiere}</span>}
     {state === 'dead' && <span class="chip-off">Non publié</span>}
-    {card.date && <time datetime={card.date}>{card.date}</time>}
+    {card.date && (
+      <time
+        class="card-date"
+        datetime={card.dateFull}
+        data-commit={card.dateFull}
+        title={`Contenu du ${dateShown}`}>
+        {dateShown}
+      </time>
+    )}
     <a class="card-src" href={githubUrl}>Source</a>
   </p>
 </article>

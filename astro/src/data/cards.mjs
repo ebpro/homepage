@@ -70,6 +70,55 @@ export const STATUS_LABELS = {
   frozen: 'Gelé',
 };
 
+// Topic hygiene (parity with legacy _display_topics): the org's labelling
+// machinery is not a teaching subject — excluded from the card pills, the
+// data-topics haystack and the Thèmes select.
+const SYSTEM_TOPIC_PREFIXES = ['area-', 'status-', 'formation-', 'filiere-'];
+const SYSTEM_TOPICS = new Set(['fmt-ipynb', 'review', 'github-actions', 'self-hosted']);
+
+// Topics carried by at least this many cards land in the "Fréquents"
+// optgroup of the Thèmes select (legacy TOPIC_FREQUENT_MIN).
+export const TOPIC_FREQUENT_MIN = 5;
+
+// FR labels for the two teaching axes (parity with legacy).
+export const FORMATION_LABELS = { cnam: 'CNAM', utln: 'UTLN' };
+export const FILIERE_LABELS = {
+  'mi-a2': 'MI A2',
+  'm1-info-math': 'M1 Info Math',
+  'm2-info-math': 'M2 Info Math',
+  'lp-ecmn': 'LP ECMN',
+};
+
+/** Sorted non-system topics of a repo (single source of truth for the card
+    pills, the data-topics haystack and the Thèmes select). */
+export function displayTopics(topics) {
+  return (topics || [])
+    .filter(
+      (t) =>
+        !SYSTEM_TOPIC_PREFIXES.some((p) => t.startsWith(p)) &&
+        !SYSTEM_TOPICS.has(t)
+    )
+    .sort((a, b) => a.localeCompare(b, 'fr'));
+}
+
+/** Human label for an axis slug ("" stays ""). */
+export function axisLabel(labels, slug) {
+  return slug ? labels[slug] ?? slug : '';
+}
+
+const frDateFmt = new Intl.DateTimeFormat('fr-FR', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+});
+
+/** `2026-10-17T12:32:00Z` -> `17/10/2026` (build-time, date only). */
+export function frDateAbs(iso) {
+  if (!iso) return null;
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? null : frDateFmt.format(d);
+}
+
 const rankOf = (category) => CATEGORY_RANK[category] ?? 11;
 
 // Legacy-compatible sort key (catalog.py `_default_sortkey`).
@@ -105,6 +154,12 @@ export function deriveCards(manifest) {
           ? landing
           : r.github_url;
     const dateFull = r.dates?.latest || r.pushed_at || null;
+    const releasesLive = r.releases_live === true;
+    const latestVtag = r.latest_vtag || '';
+    const stableUrl =
+      releasesLive && latestVtag
+        ? `${SITE_BASE}/${r.name}/releases/${latestVtag}/`
+        : '';
 
     return {
       name: r.name,
@@ -113,13 +168,19 @@ export function deriveCards(manifest) {
       category: r.category || 'none',
       formation: r.formation || '',
       filiere: r.filiere || '',
+      topics: displayTopics(r.topics),
       githubUrl: r.github_url,
       state,
       branch,
       landing,
       primary,
+      releasesLive,
+      latestVtag,
+      stableUrl,
       dateFull,
       date: dateFull ? dateFull.slice(0, 10) : null,
+      dateAbs: frDateAbs(dateFull),
+      stableDateAbs: frDateAbs(r.dates?.stable || r.pushed_at || null),
     };
   });
 
