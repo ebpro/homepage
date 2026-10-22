@@ -744,6 +744,68 @@ address a {
   transform: translateY(-1px);
 }
 
+/* ---------- Course table (section Enseignement, "Cours universitaires") ----------
+    Compact table ported from the legacy DokuWiki sidebar. Auto table
+    layout, no fixed column widths (mobile-safe at 375px); the term
+    badges reuse the accent-chip token pair so they adapt to light/dark
+    exactly like .tag (no text-transform: term labels are case-sensitive). */
+
+.course-group {
+  margin: 0 0 var(--space-5);
+}
+
+.course-group:last-child {
+  margin-bottom: 0;
+}
+
+.course-group-title {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-base);
+  font-weight: 650;
+  color: var(--fg);
+}
+
+.course-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.course-table td {
+  padding: var(--space-2);
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.course-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.course-table a {
+  word-break: break-word;
+}
+
+/* Term badge (M1 S1 / PO43 …): pill geometry mirrors .tag/.badge. */
+
+.course-badge {
+  display: inline-block;
+  background: var(--accent-chip-bg);
+  color: var(--accent-chip);
+  border-radius: var(--radius-full);
+  padding: 0.1rem 0.6rem;
+  font-size: var(--text-xs);
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* Retired row: the course cell is struck through and muted (the <del>
+   wraps plain text only — no link). */
+
+.course-table del {
+  color: var(--fg-muted);
+}
+
 .site-footer {
   border-top: 1px solid var(--border);
   margin-top: var(--space-7);
