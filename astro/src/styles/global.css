@@ -277,6 +277,60 @@ code {
   display: block;
 }
 
+/* Language switch (index header): pill group + theme toggle share the
+   right-aligned slot. `.header-controls` only exists on the index page;
+   catalog keeps the bare `.theme-toggle` with its own margin-left:auto. */
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-left: auto;
+}
+
+.header-controls .theme-toggle {
+  margin-left: 0;
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.lang-tab {
+  appearance: none;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--fg-muted);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1;
+  padding: 0.45em 1em;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.lang-tab:hover {
+  border-color: var(--accent);
+  color: var(--fg);
+}
+
+.lang-tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.lang-tab[aria-pressed="true"] {
+  background: var(--surface);
+  border-color: var(--accent);
+  color: var(--fg);
+  box-shadow: var(--shadow-1);
+}
+
 /* Icon state: moon in light, sun in dark (system or pinned) */
 
 .icon-sun {
@@ -744,6 +798,13 @@ address a {
   transform: translateY(-1px);
 }
 
+/* Secondary "legacy catalogue" line under the CTA button */
+
+.cta-legacy {
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+}
+
 /* ---------- Course table (section Enseignement, "Cours universitaires") ----------
     Compact table ported from the legacy DokuWiki sidebar. Auto table
     layout, no fixed column widths (mobile-safe at 375px); the term
@@ -975,6 +1036,26 @@ a.card-latest:hover {
 
 [hidden] {
   display: none !important;
+}
+
+/* FR/EN panel switching (index): the pre-paint head script sets
+   html[data-lang="en"] from the pinned choice (hp-lang), so the EN panels
+   are revealed BEFORE first paint (no FOUC). `display: revert` restores the
+   element's own display (block/flex/inline-block); group h3s are display:
+   flex via `.group h3`, so their EN variant needs an explicit restore.
+   The end-of-body controller keeps the `hidden` attributes in sync, so the
+   generic [hidden] rule above covers the FR side and JS-driven switches. */
+
+html[data-lang="en"] [data-lang="fr"] {
+  display: none !important;
+}
+
+html[data-lang="en"] [data-lang="en"] {
+  display: revert !important;
+}
+
+html[data-lang="en"] .group > h3[data-lang="en"] {
+  display: flex !important;
 }
 
 /* ---------- Catalog parity: topic pills, Stable actions, active-filter

@@ -15,6 +15,18 @@ import '../styles/global.css';
 
 const cards = deriveCards(manifest);
 
+const base = import.meta.env.BASE_URL;
+
+// The five university courses are presented in the "Cours universitaires"
+// table on this page; they must not appear twice as catalogue cards.
+const tableCourses = [
+  'lecture-UTLN-M1_Info_Math-DEV-OOCOL',
+  'lecture-UTLN-M1_Info_Math-DEV-ADV',
+  'lecture-UTLN-M2_Info_Math-DEV-EXP',
+  'lecture-CNAM-MI_A2-PO43',
+  'lecture-CNAM-MI_A2-PM44',
+];
+
 const shown = cards.filter(
   (c) =>
     (c.category === 'lecture' ||
@@ -23,7 +35,9 @@ const shown = cards.filter(
     c.status !== 'stub',
 );
 
-const lectures = shown.filter((c) => c.category === 'lecture');
+const lectures = shown.filter(
+  (c) => c.category === 'lecture' && !tableCourses.includes(c.name),
+);
 const notebooks = shown.filter((c) => c.category === 'notebook');
 const samples = shown.filter((c) => c.category === 'sample');
 
@@ -61,19 +75,62 @@ const lectureGroups = [
         } catch {}
       })();
     </script>
+    <!-- Pre-paint language resolution: applies the pinned choice (hp-lang)
+          before first paint (no FOUC). FR is the server default when unpinned;
+          the end-of-body controller then keeps the `hidden` attributes in sync. -->
+    <script is:inline>
+      (() => {
+        try {
+          const l = localStorage.getItem("hp-lang");
+          if (l === "fr" || l === "en")
+            document.documentElement.dataset.lang = l;
+        } catch {}
+      })();
+    </script>
   </head>
   <body>
     <header class="site-header">
       <nav aria-label="Navigation principale">
         <a class="brand" href="#accueil">Emmanuel Bruno</a>
         <ul>
-          <li><a href="#enseignement">Enseignement</a></li>
-          <li><a href="#recherche">Recherche</a></li>
-          <li><a href="#publications">Publications</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li>
+            <a href="#enseignement" data-lang="fr">Enseignement</a>
+            <a href="#enseignement" data-lang="en" hidden>Teaching</a>
+          </li>
+          <li>
+            <a href="#recherche" data-lang="fr">Recherche</a>
+            <a href="#recherche" data-lang="en" hidden>Research</a>
+          </li>
+          <li>
+            <a href="#publications" data-lang="fr">Publications</a>
+            <a href="#publications" data-lang="en" hidden>Publications</a>
+          </li>
+          <li>
+            <a href="#contact" data-lang="fr">Contact</a>
+            <a href="#contact" data-lang="en" hidden>Contact</a>
+          </li>
+          <li>
+            <a href={`${base}/catalog/`} data-lang="fr">Catalogue</a>
+            <a href={`${base}/catalog/`} data-lang="en" hidden>Catalog</a>
+          </li>
         </ul>
-        <button
-          id="theme-toggle"
+        <div class="header-controls">
+          <div class="lang-switch" role="group" aria-label="Langue / Language">
+            <button
+              type="button"
+              class="lang-tab"
+              data-lang-btn="fr"
+              aria-pressed="true"
+              lang="fr">Français</button>
+            <button
+              type="button"
+              class="lang-tab"
+              data-lang-btn="en"
+              aria-pressed="false"
+              lang="en">English</button>
+          </div>
+          <button
+            id="theme-toggle"
           class="theme-toggle"
           type="button"
           aria-label="Basculer le thème clair/sombre"
@@ -89,7 +146,8 @@ const lectureGroups = [
             <circle cx="12" cy="12" r="4" />
             <path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4 1.4-1.4" />
           </svg>
-        </button>
+          </button>
+        </div>
       </nav>
     </header>
 
@@ -199,10 +257,15 @@ const lectureGroups = [
 
       <section id="accueil" class="hero">
         <h1>Emmanuel Bruno</h1>
-        <p class="hero-role">Maître de conférences</p>
-        <p class="hero-affiliation">
+        <p class="hero-role" data-lang="fr">Maître de conférences</p>
+        <p class="hero-role" data-lang="en" hidden>Associate Professor</p>
+        <p class="hero-affiliation" data-lang="fr">
           Université de Toulon · UFR Sciences et Techniques<br />
           Chercheur au LIS (UMR 7020), équipe R2I, site de Toulon
+        </p>
+        <p class="hero-affiliation" data-lang="en" hidden>
+          University of Toulon · Faculty of Science and Technology<br />
+          Researcher at LIS (UMR 7020), R2I team, Toulon site
         </p>
         <p class="hero-domains">
           Data Management · Information Retrieval · Large Language Models ·
@@ -218,8 +281,9 @@ const lectureGroups = [
       </section>
 
       <section id="enseignement" class="page-section">
-        <h2>Enseignement</h2>
-        <p>
+        <h2 data-lang="fr">Enseignement</h2>
+        <h2 data-lang="en" hidden>Teaching</h2>
+        <p data-lang="fr">
           Mes enseignements portent sur le développement logiciel et les
           architectures distribuées, avec un accent sur les pratiques modernes
           d'ingénierie. Les supports ci-dessous proviennent du catalogue
@@ -228,21 +292,37 @@ const lectureGroups = [
           (<time datetime={manifest.generated_at}>données du
           {manifest.generated_at.slice(0, 10)}</time>).
         </p>
+        <p data-lang="en" hidden>
+          My teaching covers software development and distributed
+          architectures, with an emphasis on modern engineering practices.
+          The materials below come from the teaching catalogue generated from
+          the GitHub <a href="https://github.com/ebpro">ebpro</a> organisation
+          (<time datetime={manifest.generated_at}>data of
+          {manifest.generated_at.slice(0, 10)}</time>).
+        </p>
 
         <div class="group">
-          <h3>Domaines d'enseignement</h3>
-          <p>
+          <h3 data-lang="fr">Domaines d'enseignement</h3>
+          <h3 data-lang="en" hidden>Teaching areas</h3>
+          <p data-lang="fr">
             Java et programmation objet · Git · méthodes agiles · CI/CD ·
             services REST · JPA · microservices · conteneurs · développement
             web et mobile.
           </p>
+          <p data-lang="en" hidden>
+            Java and object-oriented programming · Git · agile methods ·
+            CI/CD · REST services · JPA · microservices · containers · web
+            and mobile development.
+          </p>
         </div>
 
         <div class="group">
-          <h3>Cours universitaires</h3>
+          <h3 data-lang="fr">Cours universitaires</h3>
+          <h3 data-lang="en" hidden>University courses</h3>
 
           <div class="course-group">
-            <h4 class="course-group-title">Master Informatique (UTLN)</h4>
+            <h4 class="course-group-title" data-lang="fr">Master Informatique (UTLN)</h4>
+            <h4 class="course-group-title" data-lang="en" hidden>Computer Science Master (UTLN)</h4>
             <table class="course-table">
               <tbody>
                 <tr>
@@ -250,7 +330,14 @@ const lectureGroups = [
                   <td>
                     <a
                       href="https://bruno.univ-tln.fr/teaching-material/lecture-UTLN-M1_Info_Math-DEV-OOCOL/develop/"
+                      data-lang="fr"
                       >DEV-OOCOL (POO, Java, Git)</a
+                    >
+                    <a
+                      href="https://bruno.univ-tln.fr/teaching-material/lecture-UTLN-M1_Info_Math-DEV-OOCOL/develop/"
+                      data-lang="en"
+                      hidden
+                      >DEV-OOCOL (OOP, Java, Git)</a
                     >
                   </td>
                 </tr>
@@ -259,20 +346,35 @@ const lectureGroups = [
                   <td>
                     <a
                       href="https://bruno.univ-tln.fr/teaching-material/lecture-UTLN-M1_Info_Math-DEV-ADV/develop/"
+                      data-lang="fr"
                       >DEV-ADV (Conteneurs, JPA, REST)</a
+                    >
+                    <a
+                      href="https://bruno.univ-tln.fr/teaching-material/lecture-UTLN-M1_Info_Math-DEV-ADV/develop/"
+                      data-lang="en"
+                      hidden
+                      >DEV-ADV (Containers, JPA, REST)</a
                     >
                   </td>
                 </tr>
                 <tr>
                   <td><span class="course-badge">M1 S2</span></td>
-                  <td><del>DEV-ADV (legacy 2024-25) → voir DEV-ADV</del></td>
+                  <td data-lang="fr"><del>DEV-ADV (legacy 2024-25) → voir DEV-ADV</del></td>
+                  <td data-lang="en" hidden><del>DEV-ADV (legacy 2024-25) → see DEV-ADV</del></td>
                 </tr>
                 <tr>
                   <td><span class="course-badge">M2 S1</span></td>
                   <td>
                     <a
                       href="https://bruno.univ-tln.fr/teaching-material/lecture-UTLN-M2_Info_Math-DEV-EXP/develop/"
+                      data-lang="fr"
                       >DEV-EXP (Serveurs d'applications)</a
+                    >
+                    <a
+                      href="https://bruno.univ-tln.fr/teaching-material/lecture-UTLN-M2_Info_Math-DEV-EXP/develop/"
+                      data-lang="en"
+                      hidden
+                      >DEV-EXP (Application servers)</a
                     >
                   </td>
                 </tr>
@@ -281,7 +383,8 @@ const lectureGroups = [
           </div>
 
           <div class="course-group">
-            <h4 class="course-group-title">Ingénieur CNAM</h4>
+            <h4 class="course-group-title" data-lang="fr">Ingénieur CNAM</h4>
+            <h4 class="course-group-title" data-lang="en" hidden>CNAM Engineering</h4>
             <table class="course-table">
               <tbody>
                 <tr>
@@ -289,7 +392,14 @@ const lectureGroups = [
                   <td>
                     <a
                       href="https://bruno.univ-tln.fr/teaching-material/lecture-CNAM-MI_A2-PO43/develop/"
+                      data-lang="fr"
                       >PO43 (POO, Git, Conteneurs)</a
+                    >
+                    <a
+                      href="https://bruno.univ-tln.fr/teaching-material/lecture-CNAM-MI_A2-PO43/develop/"
+                      data-lang="en"
+                      hidden
+                      >PO43 (OOP, Git, Containers)</a
                     >
                   </td>
                 </tr>
@@ -298,7 +408,14 @@ const lectureGroups = [
                   <td>
                     <a
                       href="https://bruno.univ-tln.fr/teaching-material/lecture-CNAM-MI_A2-PM44/develop/"
+                      data-lang="fr"
                       >PM44 (Dev. Mobile)</a
+                    >
+                    <a
+                      href="https://bruno.univ-tln.fr/teaching-material/lecture-CNAM-MI_A2-PM44/develop/"
+                      data-lang="en"
+                      hidden
+                      >PM44 (Mobile development)</a
                     >
                   </td>
                 </tr>
@@ -307,12 +424,56 @@ const lectureGroups = [
           </div>
         </div>
 
+        <div class="group">
+          <h3 data-lang="fr">Catalogue des supports pédagogiques</h3>
+          <h3 data-lang="en" hidden>Teaching materials catalogue</h3>
+          <p data-lang="fr">
+            Mes supports de cours, notebooks, présentations, documents
+            HTML/PDF et exemples fonctionnels sont regroupés dans un catalogue
+            dédié, organisé par enseignement et produit selon des pratiques
+            d'intégration continue (CI/CD).
+          </p>
+          <p data-lang="en" hidden>
+            My course materials, notebooks, presentations, HTML/PDF documents
+            and working examples are gathered in a dedicated catalogue,
+            organised by course and produced using continuous integration
+            (CI/CD) practices.
+          </p>
+          <p data-lang="fr">
+            <a
+              class="catalogue-btn"
+              href={`${base}/catalog/`}>Accéder au catalogue pédagogique</a
+            >
+          </p>
+          <p data-lang="en" hidden>
+            <a
+              class="catalogue-btn"
+              href={`${base}/catalog/`}>Browse the teaching catalogue</a
+            >
+          </p>
+          <p class="cta-legacy" data-lang="fr">
+            Ancien catalogue :
+            <a href="https://bruno.univ-tln.fr/teaching-material/catalog/">bruno.univ-tln.fr/teaching-material/catalog/</a>
+          </p>
+          <p class="cta-legacy" data-lang="en" hidden>
+            Legacy catalogue:
+            <a href="https://bruno.univ-tln.fr/teaching-material/catalog/">bruno.univ-tln.fr/teaching-material/catalog/</a>
+          </p>
+        </div>
+
         {lectureGroups.map((group) => (
           <div class="group">
-            <h3>
+            <h3 data-lang="fr">
               {group.formation
                 ? `Cours, formation ${formationLabel(group.formation)}`
                 : 'Autres cours'}
+            </h3>
+            <h3 data-lang="en" hidden>
+              {group.formation
+                ? group.formation === 'utln'
+                  ? 'Courses, University of Toulon'
+                  : 'Courses, CNAM'
+                : 'Other courses'}
             </h3>
             <div class="grid">
               {group.cards.map((card) => (
@@ -323,7 +484,8 @@ const lectureGroups = [
         ))}
 
         <div class="group">
-          <h3>Notebooks pédagogiques</h3>
+          <h3 data-lang="fr">Notebooks pédagogiques</h3>
+          <h3 data-lang="en" hidden>Teaching notebooks</h3>
           <div class="grid">
             {notebooks.map((card) => (
               <Card card={card} />
@@ -332,7 +494,8 @@ const lectureGroups = [
         </div>
 
         <div class="group">
-          <h3>Exemples et applications de démonstration</h3>
+          <h3 data-lang="fr">Exemples et applications de démonstration</h3>
+          <h3 data-lang="en" hidden>Examples and demonstration applications</h3>
           <div class="grid">
             {samples.map((card) => (
               <Card card={card} />
@@ -340,27 +503,12 @@ const lectureGroups = [
           </div>
         </div>
 
-        <div class="group">
-          <h3>Catalogue des supports pédagogiques</h3>
-          <p>
-            Mes supports de cours, notebooks, présentations, documents
-            HTML/PDF et exemples fonctionnels sont regroupés dans un catalogue
-            dédié, organisé par enseignement et produit selon des pratiques
-            d'intégration continue (CI/CD).
-          </p>
-          <p>
-            <a
-              class="catalogue-btn"
-              href="https://bruno.univ-tln.fr/teaching-material/catalog/"
-              >Accéder au catalogue pédagogique</a
-            >
-          </p>
-        </div>
       </section>
 
       <section id="recherche" class="page-section">
-        <h2>Recherche</h2>
-        <p>
+        <h2 data-lang="fr">Recherche</h2>
+        <h2 data-lang="en" hidden>Research</h2>
+        <p data-lang="fr">
           Mes travaux portent sur la <strong>gestion des données</strong>, la
           <strong>recherche d'information</strong> et les <strong>interactions
           entre intelligence artificielle et humains</strong>. Mes recherches
@@ -368,10 +516,18 @@ const lectureGroups = [
           en collaboration avec <strong>Elisabeth Murisasco</strong> et
           <strong>Patrice Bellot</strong>.
         </p>
+        <p data-lang="en" hidden>
+          My work covers <strong>data management</strong>, <strong>information
+          retrieval</strong> and <strong>interactions between artificial
+          intelligence and humans</strong>. My current research is organised
+          around two main axes, both conducted in collaboration with
+          <strong>Elisabeth Murisasco</strong> and <strong>Patrice Bellot</strong>.
+        </p>
 
         <div class="group">
-          <h3>Interaction humains–grands modèles de langage</h3>
-          <p>
+          <h3 data-lang="fr">Interaction humains–grands modèles de langage</h3>
+          <h3 data-lang="en" hidden>Human–large language model interaction</h3>
+          <p data-lang="fr">
             Ces travaux prolongent la thèse de <strong>Xavier Daull</strong>,
             co-encadrée avec Elisabeth Murisasco et Patrice Bellot. Je conçois
             des architectures combinant <strong>grands modèles de langage
@@ -379,7 +535,14 @@ const lectureGroups = [
             complexes, notamment dans des contextes impliquant des données
             sensibles.
           </p>
-          <p>
+          <p data-lang="en" hidden>
+            This work extends <strong>Xavier Daull</strong>'s thesis,
+            co-supervised with Elisabeth Murisasco and Patrice Bellot. I design
+            architectures combining <strong>large language models (LLMs)</strong>
+            and human expertise to solve complex problems, notably in contexts
+            involving sensitive data.
+          </p>
+          <p data-lang="fr">
             Ces architectures sont <strong>multi-agents avec expert dans la
             boucle</strong> : plusieurs agents LLM collaborent afin de concevoir,
             vérifier et capitaliser des outils réutilisables. Les applications
@@ -387,11 +550,19 @@ const lectureGroups = [
             (articles, brevets) à partir d'informations initiales limitées
             telles qu'un titre et un résumé.
           </p>
+          <p data-lang="en" hidden>
+            These architectures are <strong>multi-agent with an expert in the
+            loop</strong>: several LLM agents collaborate to design, verify and
+            capitalise on reusable tools. Applications notably include the
+            generation of scientific documents (papers, patents) from limited
+            initial information such as a title and an abstract.
+          </p>
         </div>
 
         <div class="group">
-          <h3>Analyse des émotions et des sentiments</h3>
-          <p>
+          <h3 data-lang="fr">Analyse des émotions et des sentiments</h3>
+          <h3 data-lang="en" hidden>Emotion and sentiment analysis</h3>
+          <p data-lang="fr">
             Ces travaux s'inscrivent dans la continuité de la thèse de
             <strong>Soelie Lerch</strong>, co-encadrée avec Elisabeth Murisasco
             et Patrice Bellot. Je développe des approches
@@ -402,12 +573,22 @@ const lectureGroups = [
             émotionnelle, aux jeux de données multimodaux et à la recommandation
             de contenus adaptés.
           </p>
+          <p data-lang="en" hidden>
+            This work continues <strong>Soelie Lerch</strong>'s thesis,
+            co-supervised with Elisabeth Murisasco and Patrice Bellot. I develop
+            <strong>multimodal</strong> approaches combining text, audio, video
+            and physiological signals to model the emotion experienced and to
+            study the emotional proximity between contents. This thesis led to
+            the <strong>EMOLIS</strong> project, devoted to emotion analysis,
+            multimodal datasets and the recommendation of adapted contents.
+          </p>
         </div>
       </section>
 
       <section id="publications" class="page-section">
         <h2>Publications</h2>
-        <p>Toutes les publications :</p>
+        <p data-lang="fr">Toutes les publications :</p>
+        <p data-lang="en" hidden>All publications:</p>
         <ul class="hero-links" aria-label="Index de publications">
           <li>
             <a
@@ -425,7 +606,8 @@ const lectureGroups = [
         </ul>
 
         <div class="group">
-          <h3>Interaction LLM–humain</h3>
+          <h3 data-lang="fr">Interaction LLM–humain</h3>
+          <h3 data-lang="en" hidden>LLM–human interaction</h3>
           <div class="grid">
             <article class="card">
               <h4 class="card-title">
@@ -439,10 +621,15 @@ const lectureGroups = [
                 E. Murisasco
               </p>
               <p class="card-venue"><em>IEEE/WIC WI-IAT 2025</em>, 2025</p>
-              <p class="card-desc">
+              <p class="card-desc" data-lang="fr">
                 CollabToolBuilder : cadre multi-agents (Coach, Coder, Critic,
                 Capitalizer) avec expert dans la boucle pour générer, valider et
                 capitaliser des outils réutilisables.
+              </p>
+              <p class="card-desc" data-lang="en" hidden>
+                CollabToolBuilder: a multi-agent framework (Coach, Coder,
+                Critic, Capitalizer) with an expert in the loop to generate,
+                validate, and capitalise on reusable tools.
               </p>
               <p class="card-meta">
                 <a href="https://doi.org/10.1109/wi-iat67162.2025.00058">DOI</a>
@@ -462,10 +649,15 @@ const lectureGroups = [
                 V. Martin
               </p>
               <p class="card-venue"><em>ACM DocEng 2025</em>, 2025</p>
-              <p class="card-desc">
+              <p class="card-desc" data-lang="fr">
                 Architecture agentique générique exploitant plusieurs agents LLM
                 et la supervision d'un expert humain pour rechercher
                 l'information et générer des documents.
+              </p>
+              <p class="card-desc" data-lang="en" hidden>
+                A generic agentic architecture leveraging several LLM agents and
+                the supervision of a human expert to retrieve information and
+                generate documents.
               </p>
               <p class="card-meta">
                 <a href="https://doi.org/10.1145/3704268.3748670">DOI</a>
@@ -484,10 +676,15 @@ const lectureGroups = [
                 V. Martin
               </p>
               <p class="card-venue"><em>EGC 2025 / RNTI-E-41</em>, 2025</p>
-              <p class="card-desc">
+              <p class="card-desc" data-lang="fr">
                 Approche collaborative LLM–humain permettant de générer et
                 valider des fonctions neuro-symboliques Python et de construire
                 progressivement des outils réutilisables.
+              </p>
+              <p class="card-desc" data-lang="en" hidden>
+                A collaborative LLM–human approach that generates and validates
+                neuro-symbolic Python functions and progressively builds
+                reusable tools.
               </p>
               <p class="card-meta">
                 <a href="https://hal.science/hal-05173669">HAL</a>
@@ -505,10 +702,15 @@ const lectureGroups = [
                 E. Murisasco
               </p>
               <p class="card-venue"><em>Prépublication</em>, 2023 (v. 2025)</p>
-              <p class="card-desc">
+              <p class="card-desc" data-lang="fr">
                 État de l'art sur les limites des grands modèles de langage et
                 les architectures hybrides combinant raisonnement, outils
                 externes et supervision humaine.
+              </p>
+              <p class="card-desc" data-lang="en" hidden>
+                A state of the art on the limits of large language models and on
+                hybrid architectures combining reasoning, external tools, and
+                human supervision.
               </p>
               <p class="card-meta">
                 <a href="https://doi.org/10.48550/arXiv.2302.09051">DOI</a>
@@ -520,7 +722,8 @@ const lectureGroups = [
         </div>
 
         <div class="group">
-          <h3>Analyse émotionnelle</h3>
+          <h3 data-lang="fr">Analyse émotionnelle</h3>
+          <h3 data-lang="en" hidden>Emotion analysis</h3>
           <div class="grid">
             <article class="card">
               <h4 class="card-title">
@@ -533,10 +736,15 @@ const lectureGroups = [
                 S. Lerch, P. Bellot, <strong>E. Bruno</strong>, E. Murisasco
               </p>
               <p class="card-venue"><em>LREC-COLING 2024</em>, 2024</p>
-              <p class="card-desc">
+              <p class="card-desc" data-lang="fr">
                 Jeu de données multimodal associant transcriptions émotionnelles
                 et signaux physiologiques, accompagné d'une application de
                 recommandation de contenus émotionnellement proches.
+              </p>
+              <p class="card-desc" data-lang="en" hidden>
+                A multimodal dataset pairing emotional transcriptions with
+                physiological signals, accompanied by an application
+                recommending emotionally close contents.
               </p>
               <p class="card-meta">
                 <a href="https://doi.org/10.63317/456gz9oyxe8w">DOI</a>
@@ -548,7 +756,8 @@ const lectureGroups = [
         </div>
 
         <div class="group">
-          <h3>Classification documentaire</h3>
+          <h3 data-lang="fr">Classification documentaire</h3>
+          <h3 data-lang="en" hidden>Document classification</h3>
           <div class="grid">
             <article class="card">
               <h4 class="card-title">
@@ -561,10 +770,14 @@ const lectureGroups = [
                 H. Fallah, <strong>E. Bruno</strong>, P. Bellot, E. Murisasco
               </p>
               <p class="card-venue"><em>ACM DocEng 2023</em>, 2023</p>
-              <p class="card-desc">
+              <p class="card-desc" data-lang="fr">
                 Approche exploitant les dépendances entre labels afin
                 d'améliorer la classification documentaire multi-étiquette
                 basée sur les Transformers.
+              </p>
+              <p class="card-desc" data-lang="en" hidden>
+                An approach exploiting label dependencies to improve
+                Transformer-based multi-label document classification.
               </p>
               <p class="card-meta">
                 <a href="https://doi.org/10.1145/3573128.3609356">DOI</a>
@@ -579,7 +792,8 @@ const lectureGroups = [
         <h2>Contact</h2>
         <div class="contact-grid">
           <div>
-            <h3>Coordonnées</h3>
+            <h3 data-lang="fr">Coordonnées</h3>
+            <h3 data-lang="en" hidden>Contact details</h3>
             <address>
               Emmanuel Bruno<br />
               Université de Toulon<br />
@@ -591,11 +805,17 @@ const lectureGroups = [
             </address>
           </div>
           <div>
-            <h3>Clé PGP</h3>
-            <p>Empreinte de la clé publique :</p>
+            <h3 data-lang="fr">Clé PGP</h3>
+            <h3 data-lang="en" hidden>PGP key</h3>
+            <p data-lang="fr">Empreinte de la clé publique :</p>
+            <p data-lang="en" hidden>Public key fingerprint:</p>
             <pre class="pgp-fingerprint"><code>116C CE5F BA2C 0D37 D355 940E 400F 583C 1F81 2EDB</code></pre>
-            <p>
+            <p data-lang="fr">
               Clé publique sur demande :
+              <a href="mailto:emmanuel.bruno@univ-tln.fr">emmanuel.bruno@univ-tln.fr</a>
+            </p>
+            <p data-lang="en" hidden>
+              Public key on request:
               <a href="mailto:emmanuel.bruno@univ-tln.fr">emmanuel.bruno@univ-tln.fr</a>
             </p>
           </div>
@@ -604,10 +824,15 @@ const lectureGroups = [
     </main>
 
     <footer class="site-footer">
-      <p>
+      <p data-lang="fr">
         Emmanuel Bruno, Université de Toulon, LIS (UMR 7020).
         Catalogue : <time datetime={manifest.generated_at}>{manifest.generated_at.slice(0, 10)}</time>,
         {manifest.count} dépôts.
+      </p>
+      <p data-lang="en" hidden>
+        Emmanuel Bruno, University of Toulon, LIS (UMR 7020).
+        Catalogue: <time datetime={manifest.generated_at}>{manifest.generated_at.slice(0, 10)}</time>,
+        {manifest.count} repositories.
       </p>
     </footer>
 
@@ -628,6 +853,32 @@ const lectureGroups = [
             localStorage.setItem("theme", next);
           } catch {}
         });
+      })();
+    </script>
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const tabs = Array.from(
+          document.querySelectorAll(".lang-tab[data-lang-btn]")
+        );
+        if (!tabs.length) return;
+        const apply = (lang) => {
+          root.dataset.lang = lang;
+          document.querySelectorAll("[data-lang]").forEach((el) => {
+            if (el === root) return;
+            el.hidden = el.dataset.lang !== lang;
+          });
+          tabs.forEach((t) =>
+            t.setAttribute("aria-pressed", String(t.dataset.langBtn === lang))
+          );
+          try {
+            localStorage.setItem("hp-lang", lang);
+          } catch {}
+        };
+        tabs.forEach((t) =>
+          t.addEventListener("click", () => apply(t.dataset.langBtn))
+        );
+        apply(root.dataset.lang === "en" ? "en" : "fr");
       })();
     </script>
   </body>
