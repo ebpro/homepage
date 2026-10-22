@@ -1,41 +1,31 @@
 ---
 import manifest from '../data/manifest.json';
 import Card from '../components/Card.astro';
+import { deriveCards } from '../data/cards.mjs';
 import '../styles/global.css';
 
 // Catalogue data is read at build time from the vendored manifest
 // (src/data/manifest.json). Refresh with `npm run data`.
 //
-// Liveness: the fetched manifest (v8.x) carries only `releases_live`
-// (booleans over release tags, all false here), not per-site liveness.
-// Graceful degradation: every card links to the canonical published-site URL
-// pattern https://bruno.univ-tln.fr/teaching-material/<repo>/<branch>/ plus a
-// GitHub fallback. When the catalog ships liveness fields, gate the primary
-// link on them here.
+// Cards are derived by the shared module src/data/cards.mjs (states
+// live / dead / no-develop from the v8.6 manifest `site_live`, deny-list
+// applied, ordering = teaching-catalog default sort). The homepage shows the
+// teaching-material subset: lectures, notebooks and samples — stub repos are
+// scaffolds, not teaching material.
 
-const SITE_BASE = 'https://bruno.univ-tln.fr/teaching-material/';
+const cards = deriveCards(manifest);
 
-function siteUrl(repo) {
-  const branch = repo.dates?.latest_ref || repo.default_branch || 'develop';
-  return `${SITE_BASE}${repo.name}/${branch}/`;
-}
+const shown = cards.filter(
+  (c) =>
+    (c.category === 'lecture' ||
+      c.category === 'notebook' ||
+      c.category === 'sample') &&
+    c.status !== 'stub',
+);
 
-// stub repos are scaffolds, not teaching material: excluded.
-const repos = manifest.repos.filter((r) => r.status !== 'stub');
-
-const lectures = repos.filter((r) => r.category === 'lecture');
-const notebooks = repos
-  .filter((r) => r.category === 'notebook')
-  .sort((a, b) => a.name.localeCompare(b.name));
-const samples = repos
-  .filter((r) => r.category === 'sample')
-  .sort((a, b) => a.name.localeCompare(b.name));
-
-const STATUS_LABELS = {
-  active: 'Actif',
-  partial: 'Partiel',
-  frozen: 'Gelé',
-};
+const lectures = shown.filter((c) => c.category === 'lecture');
+const notebooks = shown.filter((c) => c.category === 'notebook');
+const samples = shown.filter((c) => c.category === 'sample');
 
 function formationLabel(formation) {
   if (formation === 'cnam') return 'CNAM';
@@ -44,16 +34,10 @@ function formationLabel(formation) {
 }
 
 const lectureGroups = [
-  { formation: 'cnam', repos: lectures.filter((r) => r.formation === 'cnam') },
-  { formation: 'utln', repos: lectures.filter((r) => r.formation === 'utln') },
-  { formation: '', repos: lectures.filter((r) => !r.formation) },
-].filter((g) => g.repos.length > 0);
-
-function lastUpdated(repo) {
-  const iso = repo.dates?.latest || repo.pushed_at;
-  if (!iso) return null;
-  return iso.slice(0, 10);
-}
+  { formation: 'cnam', cards: lectures.filter((c) => c.formation === 'cnam') },
+  { formation: 'utln', cards: lectures.filter((c) => c.formation === 'utln') },
+  { formation: '', cards: lectures.filter((c) => !c.formation) },
+].filter((g) => g.cards.length > 0);
 ---
 
 <!doctype html>
@@ -262,13 +246,8 @@ function lastUpdated(repo) {
                 : 'Autres cours'}
             </h3>
             <div class="grid">
-              {group.repos.map((repo) => (
-                <Card
-                  repo={repo}
-                  siteUrl={siteUrl(repo)}
-                  statusLabel={STATUS_LABELS[repo.status]}
-                  updated={lastUpdated(repo)}
-                />
+              {group.cards.map((card) => (
+                <Card card={card} />
               ))}
             </div>
           </div>
@@ -277,13 +256,8 @@ function lastUpdated(repo) {
         <div class="group">
           <h3>Notebooks pédagogiques</h3>
           <div class="grid">
-            {notebooks.map((repo) => (
-              <Card
-                repo={repo}
-                siteUrl={siteUrl(repo)}
-                statusLabel={STATUS_LABELS[repo.status]}
-                updated={lastUpdated(repo)}
-              />
+            {notebooks.map((card) => (
+              <Card card={card} />
             ))}
           </div>
         </div>
@@ -291,13 +265,8 @@ function lastUpdated(repo) {
         <div class="group">
           <h3>Exemples et applications de démonstration</h3>
           <div class="grid">
-            {samples.map((repo) => (
-              <Card
-                repo={repo}
-                siteUrl={siteUrl(repo)}
-                statusLabel={STATUS_LABELS[repo.status]}
-                updated={lastUpdated(repo)}
-              />
+            {samples.map((card) => (
+              <Card card={card} />
             ))}
           </div>
         </div>

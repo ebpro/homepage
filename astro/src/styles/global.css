@@ -805,3 +805,112 @@ address a {
     transform: none;
   }
 }
+
+/* ---------- Catalog page (/catalog/) ---------- */
+
+/* Intro paragraphs: readable measure inside .page-section */
+
+.catalog-lead {
+  max-width: 75ch;
+}
+
+/* Live-updating count line (only #catalog-count-n changes via JS) */
+
+.catalog-count {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+}
+
+/* Filter controls: search / category / sort */
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-5);
+}
+
+.filter-bar input[type="search"],
+.filter-bar select {
+  font: inherit;
+  font-size: var(--text-sm);
+  color: var(--fg);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+}
+
+.filter-bar input[type="search"] {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+
+.filter-bar input[type="search"]::placeholder {
+  color: var(--fg-muted);
+}
+
+/* Per-section card count inside the .group h3 flex row */
+
+.section-count {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--fg-muted);
+}
+
+/* "Latest" affordance on catalogue cards (live cards) */
+
+.card-latest {
+  align-self: flex-start;
+  display: inline-block;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-2);
+  border-radius: var(--radius-full);
+  padding: 0.15rem 0.7rem;
+  font-size: var(--text-xs);
+  font-weight: 650;
+  color: var(--fg);
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+a.card-latest:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  text-decoration: none;
+}
+
+/* Disabled "Latest" (dead cards): affordance stays visible, muted */
+
+.card-latest:disabled {
+  cursor: not-allowed;
+  color: var(--fg-muted);
+  opacity: 0.7;
+}
+
+/* Description doubles as the site link on live cards */
+
+.card-desc a {
+  color: inherit;
+}
+
+.card-desc a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* Dead cards: muted title (the title is plain text, no link) */
+
+.card--dead .card-title {
+  color: var(--fg-muted);
+}
+
+/* Generic [hidden] support: .card is display:flex, so a bare hidden
+   attribute would not remove it from layout. */
+
+[hidden] {
+  display: none !important;
+}

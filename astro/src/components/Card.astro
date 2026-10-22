@@ -1,42 +1,89 @@
 ---
-// One catalogue card. Data comes from the vendored manifest (see
-// src/pages/index.astro for the liveness degradation note).
+// One catalogue card, rendered from the shared derivation in
+// src/data/cards.mjs (states: live / dead / no-develop).
+//
+//   live       — published develop (or tagged release): title, description
+//                and the "Latest" pill all link to `primary`.
+//   dead       — develop ref exists but the public site is not (or no
+//                longer) reachable: NO site links at all (the host is a
+//                DokuWiki catch-all, a 200 is not proof of publication);
+//                muted title, disabled "Latest" button + "Non publié" chip —
+//                parity with teaching-catalog v8.6 (`btn-disabled
+//                title="non publie"`).
+//   no-develop — no develop branch: GitHub links only.
+//
+// The `data-*` attributes power the client-side catalogue controls
+// (search / category filter / sort) on /catalog/:
+//   data-catalog-card  — gate marker for page-level HTML audits
+//   data-state         — live | dead | no-develop
+//   data-name          — repo name (sort)
+//   data-date          — full ISO date (date sorts; empty = undated)
+//   data-search        — "name description" lowercased (text search)
+
+import { STATUS_LABELS } from '../data/cards.mjs';
+
 interface Props {
-  repo: {
+  card: {
     name: string;
     description: string;
     status: string;
-    formation?: string;
-    filiere?: string;
-    github_url: string;
-    dates?: { latest_ref?: string; latest?: string };
-    default_branch?: string;
-    pushed_at?: string;
-    site_live?: boolean;
+    category: string;
+    formation: string;
+    filiere: string;
+    githubUrl: string;
+    state: 'live' | 'dead' | 'no-develop';
+    branch: string;
+    landing: string;
+    primary: string;
+    date: string | null;
+    dateFull: string | null;
   };
-  siteUrl: string;
-  statusLabel?: string;
-  updated?: string;
 }
-const { repo, siteUrl, statusLabel, updated } = Astro.props;
-const badge = statusLabel && repo.status !== 'active' ? statusLabel : null;
-// Defensive dead-link state: only when the manifest explicitly ships
-// site_live === false (catalog v8.6+). Absent field = current behaviour.
-const dead = repo.site_live === false;
+
+const { card } = Astro.props;
+const { name, description, githubUrl, primary, state } = card;
+const badge = STATUS_LABELS[card.status] ?? null;
 ---
 
-<article class="card" class:list={[{ 'card--dead': dead }]}>
+<article
+  class="card"
+  class:list={[{ 'card--dead': state === 'dead' }]}
+  data-catalog-card
+  data-state={state}
+  data-name={name}
+  data-date={card.dateFull ?? ''}
+  data-search={`${name} ${description}`.toLowerCase()}
+>
   <h4 class="card-title">
-    {dead
-      ? <span>{repo.name}</span>
-      : <a href={siteUrl}>{repo.name}</a>}
+    {state === 'live'
+      ? <a href={primary}>{name}</a>
+      : state === 'no-develop'
+        ? <a href={githubUrl}>{name}</a>
+        : <span>{name}</span>}
   </h4>
-  <p class="card-desc">{repo.description}</p>
+  <p class="card-desc">
+    {state === 'live'
+      ? <a href={primary}>{description}</a>
+      : description}
+  </p>
+  {state === 'live'
+    ? (
+        <a class="card-latest" href={primary}>Latest</a>
+      )
+    : state === 'dead'
+      ? (
+          <button
+            type="button"
+            class="card-latest"
+            disabled
+            title="non publie">Latest</button>
+        )
+      : null}
   <p class="card-meta">
     {badge && <span class="badge">{badge}</span>}
-    {repo.filiere && <span class="tag">{repo.filiere}</span>}
-    {dead && <span class="chip-off">Non publié</span>}
-    {updated && <time datetime={updated}>{updated}</time>}
-    <a class="card-src" href={repo.github_url}>Source</a>
+    {card.filiere && <span class="tag">{card.filiere}</span>}
+    {state === 'dead' && <span class="chip-off">Non publié</span>}
+    {card.date && <time datetime={card.date}>{card.date}</time>}
+    <a class="card-src" href={githubUrl}>Source</a>
   </p>
 </article>
