@@ -404,49 +404,6 @@ code {
   font-weight: 600;
 }
 
-/* Language tab bar (EN/VI) at the top of the banner. Pill buttons;
-   the selected tab takes a surface background so it reads in both
-   themes without introducing new color tokens. */
-.notice-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-bottom: var(--space-3);
-}
-
-.notice-tab {
-  appearance: none;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-full);
-  background: transparent;
-  color: var(--fg-muted);
-  font: inherit;
-  font-size: var(--text-sm);
-  font-weight: 600;
-  line-height: 1;
-  padding: 0.45em 1em;
-  cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease,
-    color 0.2s ease;
-}
-
-.notice-tab:hover {
-  border-color: var(--warn-ink);
-  color: var(--fg);
-}
-
-.notice-tab:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-.notice-tab[aria-selected="true"] {
-  background: var(--surface);
-  border-color: var(--warn-ink);
-  color: var(--fg);
-  box-shadow: var(--shadow-1);
-}
-
 /* Inactive language panel: out of layout and tab order. */
 .notice-panel[hidden] {
   display: none;
@@ -1038,24 +995,62 @@ a.card-latest:hover {
   display: none !important;
 }
 
-/* FR/EN panel switching (index): the pre-paint head script sets
-   html[data-lang="en"] from the pinned choice (hp-lang), so the EN panels
-   are revealed BEFORE first paint (no FOUC). `display: revert` restores the
-   element's own display (block/flex/inline-block); group h3s are display:
-   flex via `.group h3`, so their EN variant needs an explicit restore.
+/* FR/EN/VI panel switching (index): the pre-paint head script sets
+   html[data-lang="en"|"vi"] from the pinned choice (hp-lang), so the target
+   panels are revealed BEFORE first paint (no FOUC). `display: revert` restores
+   the element's own display (block/flex/inline-block); group h3s are display:
+   flex via `.group h3`, so their non-FR variant needs an explicit restore.
    The end-of-body controller keeps the `hidden` attributes in sync, so the
    generic [hidden] rule above covers the FR side and JS-driven switches. */
 
-html[data-lang="en"] [data-lang="fr"] {
+html[data-lang="en"] [data-lang="fr"],
+html[data-lang="vi"] [data-lang="fr"] {
   display: none !important;
 }
 
-html[data-lang="en"] [data-lang="en"] {
+html[data-lang="en"] [data-lang="en"],
+html[data-lang="vi"] [data-lang="vi"] {
   display: revert !important;
 }
 
-html[data-lang="en"] .group > h3[data-lang="en"] {
+html[data-lang="en"] .group > h3[data-lang="en"],
+html[data-lang="vi"] .group > h3[data-lang="vi"] {
   display: flex !important;
+}
+
+/* Non-active language panels inside the banner are hidden by the controller;
+   mirror that in CSS so a vi/en pin never shows the FR banner pre-paint. */
+html[data-lang="en"] .notice-panel[data-lang="vi"],
+html[data-lang="vi"] .notice-panel[data-lang="en"] {
+  display: none !important;
+}
+
+/* Folded taught-materials list: closed by default (the LP ECMN/WebLang
+   lecture has ended — the links stay reachable but out of the way). The
+   summary reads as the former intro line; the CERT warning stays visible. */
+.notice-materials {
+  margin-top: var(--space-3);
+}
+
+.notice-materials > summary {
+  cursor: pointer;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--fg);
+  list-style: none;
+}
+
+.notice-materials > summary::-webkit-details-marker {
+  display: none;
+}
+
+.notice-materials > summary::before {
+  content: "▸ ";
+  color: var(--fg-muted);
+}
+
+.notice-materials[open] > summary::before {
+  content: "▾ ";
 }
 
 /* ---------- Catalog parity: topic pills, Stable actions, active-filter

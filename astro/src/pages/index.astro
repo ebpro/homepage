@@ -1,6 +1,7 @@
 ---
 import manifest from '../data/manifest.json';
 import Card from '../components/Card.astro';
+import CertBanner from '../components/CertBanner.astro';
 import { deriveCards } from '../data/cards.mjs';
 import '../styles/global.css';
 
@@ -82,7 +83,7 @@ const lectureGroups = [
       (() => {
         try {
           const l = localStorage.getItem("hp-lang");
-          if (l === "fr" || l === "en")
+          if (l === "fr" || l === "en" || l === "vi")
             document.documentElement.dataset.lang = l;
         } catch {}
       })();
@@ -96,22 +97,27 @@ const lectureGroups = [
           <li>
             <a href="#enseignement" data-lang="fr">Enseignement</a>
             <a href="#enseignement" data-lang="en" hidden>Teaching</a>
+            <a href="#enseignement" data-lang="vi" hidden>Dạy học</a>
           </li>
           <li>
             <a href="#recherche" data-lang="fr">Recherche</a>
             <a href="#recherche" data-lang="en" hidden>Research</a>
+            <a href="#recherche" data-lang="vi" hidden>Nghiên cứu</a>
           </li>
           <li>
             <a href="#publications" data-lang="fr">Publications</a>
             <a href="#publications" data-lang="en" hidden>Publications</a>
+            <a href="#publications" data-lang="vi" hidden>Công bố</a>
           </li>
           <li>
             <a href="#contact" data-lang="fr">Contact</a>
             <a href="#contact" data-lang="en" hidden>Contact</a>
+            <a href="#contact" data-lang="vi" hidden>Liên hệ</a>
           </li>
           <li>
             <a href={`${base}/catalog/`} data-lang="fr">Catalogue</a>
             <a href={`${base}/catalog/`} data-lang="en" hidden>Catalog</a>
+            <a href={`${base}/catalog/`} data-lang="vi" hidden>Danh mục</a>
           </li>
         </ul>
         <div class="header-controls">
@@ -128,6 +134,12 @@ const lectureGroups = [
               data-lang-btn="en"
               aria-pressed="false"
               lang="en">English</button>
+            <button
+              type="button"
+              class="lang-tab"
+              data-lang-btn="vi"
+              aria-pressed="false"
+              lang="vi">Tiếng Việt</button>
           </div>
           <button
             id="theme-toggle"
@@ -152,113 +164,13 @@ const lectureGroups = [
     </header>
 
     <main>
-      <div class="notice-banner" role="note">
-        <div class="notice-banner-inner">
-          <div class="notice-tabs" role="tablist" aria-label="Langue de l'annonce / Language">
-            <button
-              type="button"
-              class="notice-tab"
-              role="tab"
-              id="notice-tab-en"
-              aria-selected="true"
-              aria-controls="notice-panel-en"
-              lang="en"
-            >🇬🇧 English</button>
-            <button
-              type="button"
-              class="notice-tab"
-              role="tab"
-              id="notice-tab-vi"
-              aria-selected="false"
-              aria-controls="notice-panel-vi"
-              lang="vi"
-            >🇻🇳 Tiếng Việt</button>
-          </div>
-          <div
-            class="notice-panel"
-            lang="en"
-            id="notice-panel-en"
-            role="tabpanel"
-            aria-labelledby="notice-tab-en"
-          >
-            <p class="notice-banner-title">⚠️ Important update regarding the course homepage</p>
-            <p class="notice-banner-body">Due to a recent security advisory concerning PHP (CERT-EU Security Advisory 2026-018, CVE-2026-109618 and CVE-2026-109619 — remote code execution risk), the course homepage had to be moved away from its previous PHP-based setup. Course materials are not affected: slides, notes, exercises and other documents remain available at the usual location.</p>
-            <p class="notice-banner-body">LP ECMN (WebLang) students — course materials:</p>
-            <h3 class="notice-materials-h">Introduction and AI</h3>
-            <ul class="notice-links">
-              <li>Introduction — <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/_slides/webdev_00_L_00_Introduction.html">Slides</a> · <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/webdev_00_L_00_Introduction.html">Notes</a></li>
-              <li><a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_00_G_CourseGuide.html">Course Guide</a></li>
-              <li>AI Quick Start (Improved version) — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_00_L_02_AIQuickStart.html">Slides</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_00_L_02_AIQuickStart.html">Notes</a></li>
-            </ul>
-            <h3 class="notice-materials-h">Frontend</h3>
-            <ul class="notice-links">
-              <li>HTML &amp; CSS Essentials — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_01_L_HTMLCSSEssentials.html">Slides</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_01_L_HTMLCSSEssentials.html">Notes</a> · Practice: <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_01_P_HTMLCSS.html">Building the Static Review Card (S1 Practice)</a></li>
-              <li>JavaScript for React — <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/_slides/webdev_02_L_02_JavaScriptForReact.html">Slides</a> · <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/webdev_02_L_02_JavaScriptForReact.html">Notes</a> · For practice you will need the sample application: <a href="https://github.com/ebpro/fullstack-minimal-app">Fullstack Minimal App (GitHub)</a> — Follow the README.</li>
-              <li>React Frontend Development — <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/_slides/webdev_03_L_ReactFrontendDevelopment.html">Slides</a> · Practice: <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_03_P_ReactReview.html">React Review UI - Practice</a></li>
-            </ul>
-            <h3 class="notice-materials-h">Backend</h3>
-            <ul class="notice-links">
-              <li>Node.js &amp; Express Backend — <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/_slides/webdev_04_L_NodeExpressBackend.html">Slides</a> · Practice: <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_04_P_NodeExpress.html">Node.js &amp; Express Backend - Practice</a></li>
-            </ul>
-            <h3 class="notice-materials-h">Databases</h3>
-            <ul class="notice-links">
-              <li>Database Integration — Lecture — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_05_L_DatabaseIntegration.html">Slides</a></li>
-            </ul>
-          </div>
-          <div
-            class="notice-panel"
-            lang="vi"
-            id="notice-panel-vi"
-            role="tabpanel"
-            aria-labelledby="notice-tab-vi"
-            hidden
-          >
-            <p class="notice-banner-title">⚠️ Thông báo quan trọng về trang chủ môn học</p>
-            <p class="notice-banner-body">Do một khuyến nghị bảo mật gần đây liên quan đến PHP (Khuyến nghị bảo mật CERT-EU 2026-018, CVE-2026-109618 và CVE-2026-109619 — có nguy cơ thực thi mã từ xa), trang chủ môn học đã phải chuyển khỏi môi trường cũ dựa trên PHP. Tài liệu môn học không bị ảnh hưởng: slide, ghi chú, bài tập và các tài liệu khác vẫn khả dụng tại địa chỉ quen thuộc.</p>
-            <p class="notice-banner-body">Sinh viên LP ECMN (WebLang) — tài liệu môn học:</p>
-            <h3 class="notice-materials-h">Giới thiệu và AI</h3>
-            <ul class="notice-links">
-              <li>Introduction — <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/_slides/webdev_00_L_00_Introduction.html">Slide</a> · <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/webdev_00_L_00_Introduction.html">Ghi chú</a></li>
-              <li><a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_00_G_CourseGuide.html">Hướng dẫn môn học</a></li>
-              <li>AI Quick Start (phiên bản cải tiến) — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_00_L_02_AIQuickStart.html">Slide</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_00_L_02_AIQuickStart.html">Ghi chú</a></li>
-            </ul>
-            <h3 class="notice-materials-h">Frontend</h3>
-            <ul class="notice-links">
-              <li>HTML &amp; CSS Essentials — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/_slides/webdev_01_L_HTMLCSSEssentials.html">Slide</a> · <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_01_L_HTMLCSSEssentials.html">Ghi chú</a> · Thực hành: <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_01_P_HTMLCSS.html">Building the Static Review Card (S1 Practice)</a></li>
-              <li>JavaScript for React — <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/_slides/webdev_02_L_02_JavaScriptForReact.html">Slide</a> · <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/webdev_02_L_02_JavaScriptForReact.html">Ghi chú</a> · Để thực hành, cần có ứng dụng mẫu: <a href="https://github.com/ebpro/fullstack-minimal-app">Fullstack Minimal App (GitHub)</a> — Hãy đọc file README.</li>
-              <li>React Frontend Development — <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/_slides/webdev_03_L_ReactFrontendDevelopment.html">Slide</a> · Thực hành: <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_03_P_ReactReview.html">React Review UI - Practice</a></li>
-            </ul>
-            <h3 class="notice-materials-h">Backend</h3>
-            <ul class="notice-links">
-              <li>Node.js &amp; Express Backend — <a href="https://bruno.univ-tln.fr/notebooks/notebook-dev-web/_slides/webdev_04_L_NodeExpressBackend.html">Slide</a> · Thực hành: <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_04_P_NodeExpress.html">Node.js &amp; Express Backend - Practice</a></li>
-            </ul>
-            <h3 class="notice-materials-h">Cơ sở dữ liệu</h3>
-            <ul class="notice-links">
-              <li>Database Integration — Lecture — <a href="https://bruno.univ-tln.fr/teaching-material/notebook-dev-web/develop/webdev_05_L_DatabaseIntegration.html">Slide</a></li>
-            </ul>
-          </div>
-          <script is:inline>
-            (() => {
-              const tabs = Array.from(document.querySelectorAll(".notice-tab"));
-              tabs.forEach((tab) => {
-                tab.addEventListener("click", () => {
-                  tabs.forEach((t) => {
-                    const selected = t === tab;
-                    t.setAttribute("aria-selected", selected ? "true" : "false");
-                    const panel = document.getElementById(t.getAttribute("aria-controls"));
-                    if (panel) panel.hidden = !selected;
-                  });
-                });
-              });
-            })();
-          </script>
-        </div>
-      </div>
+      <CertBanner />
 
       <section id="accueil" class="hero">
         <h1>Emmanuel Bruno</h1>
         <p class="hero-role" data-lang="fr">Maître de conférences</p>
         <p class="hero-role" data-lang="en" hidden>Associate Professor</p>
+        <p class="hero-role" data-lang="vi" hidden>Giảng viên chính</p>
         <p class="hero-affiliation" data-lang="fr">
           Université de Toulon · UFR Sciences et Techniques<br />
           Chercheur au LIS (UMR 7020), équipe R2I, site de Toulon
@@ -266,6 +178,10 @@ const lectureGroups = [
         <p class="hero-affiliation" data-lang="en" hidden>
           University of Toulon · Faculty of Science and Technology<br />
           Researcher at LIS (UMR 7020), R2I team, Toulon site
+        </p>
+        <p class="hero-affiliation" data-lang="vi" hidden>
+          Đại học Toulon · Khoa Khoa học và Công nghệ<br />
+          Nhà nghiên cứu tại LIS (UMR 7020), nhóm R2I, cơ sở Toulon
         </p>
         <p class="hero-domains">
           Data Management · Information Retrieval · Large Language Models ·
@@ -283,6 +199,7 @@ const lectureGroups = [
       <section id="enseignement" class="page-section">
         <h2 data-lang="fr">Enseignement</h2>
         <h2 data-lang="en" hidden>Teaching</h2>
+        <h2 data-lang="vi" hidden>Dạy học</h2>
         <p data-lang="fr">
           Mes enseignements portent sur le développement logiciel et les
           architectures distribuées, avec un accent sur les pratiques modernes
@@ -300,10 +217,19 @@ const lectureGroups = [
           (<time datetime={manifest.generated_at}>data of
           {manifest.generated_at.slice(0, 10)}</time>).
         </p>
+        <p data-lang="vi" hidden>
+          Các môn tôi đảm nhiệm tập trung vào phát triển phần mềm và
+          kiến trúc phân tán, với trọng tâm là các thực hành kỹ thuật hiện
+          đại. Các tài liệu bên dưới đến từ danh mục giảng dạy được tạo từ
+          tổ chức GitHub <a href="https://github.com/ebpro">ebpro</a>
+          (<time datetime={manifest.generated_at}>dữ liệu ngày
+          {manifest.generated_at.slice(0, 10)}</time>).
+        </p>
 
         <div class="group">
           <h3 data-lang="fr">Domaines d'enseignement</h3>
           <h3 data-lang="en" hidden>Teaching areas</h3>
+          <h3 data-lang="vi" hidden>Lĩnh vực giảng dạy</h3>
           <p data-lang="fr">
             Java et programmation objet · Git · méthodes agiles · CI/CD ·
             services REST · JPA · microservices · conteneurs · développement
@@ -314,15 +240,22 @@ const lectureGroups = [
             CI/CD · REST services · JPA · microservices · containers · web
             and mobile development.
           </p>
+          <p data-lang="vi" hidden>
+            Java và lập trình hướng đối tượng · Git · phương pháp linh hoạt ·
+            CI/CD · dịch vụ REST · JPA · microservices · container · phát
+            triển web và di động.
+          </p>
         </div>
 
         <div class="group">
           <h3 data-lang="fr">Cours universitaires</h3>
           <h3 data-lang="en" hidden>University courses</h3>
+          <h3 data-lang="vi" hidden>Môn học đại học</h3>
 
           <div class="course-group">
             <h4 class="course-group-title" data-lang="fr">Master Informatique (UTLN)</h4>
             <h4 class="course-group-title" data-lang="en" hidden>Computer Science Master (UTLN)</h4>
+            <h4 class="course-group-title" data-lang="vi" hidden>Thạc sĩ Khoa học Máy tính (UTLN)</h4>
             <table class="course-table">
               <tbody>
                 <tr>
@@ -338,6 +271,12 @@ const lectureGroups = [
                       data-lang="en"
                       hidden
                       >DEV-OOCOL (OOP, Java, Git)</a
+                    >
+                    <a
+                      href="https://bruno.univ-tln.fr/teaching-material/lecture-UTLN-M1_Info_Math-DEV-OOCOL/develop/"
+                      data-lang="vi"
+                      hidden
+                      >DEV-OOCOL (Lập trình hướng đối tượng, Java, Git)</a
                     >
                   </td>
                 </tr>
@@ -355,12 +294,19 @@ const lectureGroups = [
                       hidden
                       >DEV-ADV (Containers, JPA, REST)</a
                     >
+                    <a
+                      href="https://bruno.univ-tln.fr/teaching-material/lecture-UTLN-M1_Info_Math-DEV-ADV/develop/"
+                      data-lang="vi"
+                      hidden
+                      >DEV-ADV (Container, JPA, REST)</a
+                    >
                   </td>
                 </tr>
                 <tr>
                   <td><span class="course-badge">M1 S2</span></td>
                   <td data-lang="fr"><del>DEV-ADV (legacy 2024-25) → voir DEV-ADV</del></td>
                   <td data-lang="en" hidden><del>DEV-ADV (legacy 2024-25) → see DEV-ADV</del></td>
+                  <td data-lang="vi" hidden><del>DEV-ADV (cũ 2024-25) → xem DEV-ADV</del></td>
                 </tr>
                 <tr>
                   <td><span class="course-badge">M2 S1</span></td>
@@ -376,6 +322,12 @@ const lectureGroups = [
                       hidden
                       >DEV-EXP (Application servers)</a
                     >
+                    <a
+                      href="https://bruno.univ-tln.fr/teaching-material/lecture-UTLN-M2_Info_Math-DEV-EXP/develop/"
+                      data-lang="vi"
+                      hidden
+                      >DEV-EXP (Máy chủ ứng dụng)</a
+                    >
                   </td>
                 </tr>
               </tbody>
@@ -385,6 +337,7 @@ const lectureGroups = [
           <div class="course-group">
             <h4 class="course-group-title" data-lang="fr">Ingénieur CNAM</h4>
             <h4 class="course-group-title" data-lang="en" hidden>CNAM Engineering</h4>
+            <h4 class="course-group-title" data-lang="vi" hidden>Kỹ sư CNAM</h4>
             <table class="course-table">
               <tbody>
                 <tr>
@@ -400,6 +353,12 @@ const lectureGroups = [
                       data-lang="en"
                       hidden
                       >PO43 (OOP, Git, Containers)</a
+                    >
+                    <a
+                      href="https://bruno.univ-tln.fr/teaching-material/lecture-CNAM-MI_A2-PO43/develop/"
+                      data-lang="vi"
+                      hidden
+                      >PO43 (Lập trình hướng đối tượng, Git, Container)</a
                     >
                   </td>
                 </tr>
@@ -417,6 +376,12 @@ const lectureGroups = [
                       hidden
                       >PM44 (Mobile development)</a
                     >
+                    <a
+                      href="https://bruno.univ-tln.fr/teaching-material/lecture-CNAM-MI_A2-PM44/develop/"
+                      data-lang="vi"
+                      hidden
+                      >PM44 (Phát triển di động)</a
+                    >
                   </td>
                 </tr>
               </tbody>
@@ -427,6 +392,7 @@ const lectureGroups = [
         <div class="group">
           <h3 data-lang="fr">Catalogue des supports pédagogiques</h3>
           <h3 data-lang="en" hidden>Teaching materials catalogue</h3>
+          <h3 data-lang="vi" hidden>Danh mục tài liệu giảng dạy</h3>
           <p data-lang="fr">
             Mes supports de cours, notebooks, présentations, documents
             HTML/PDF et exemples fonctionnels sont regroupés dans un catalogue
@@ -438,6 +404,12 @@ const lectureGroups = [
             and working examples are gathered in a dedicated catalogue,
             organised by course and produced using continuous integration
             (CI/CD) practices.
+          </p>
+          <p data-lang="vi" hidden>
+            Các tài liệu giảng dạy, notebooks, bài trình bày, tài liệu
+            HTML/PDF và các ví dụ hoạt động của tôi được tập hợp trong một
+            danh mục chuyên dụng, tổ chức theo môn học và được tạo theo các
+            thực hành tích hợp liên tục (CI/CD).
           </p>
           <p data-lang="fr">
             <a
@@ -451,12 +423,22 @@ const lectureGroups = [
               href={`${base}/catalog/`}>Browse the teaching catalogue</a
             >
           </p>
+          <p data-lang="vi" hidden>
+            <a
+              class="catalogue-btn"
+              href={`${base}/catalog/`}>Xem danh mục giảng dạy</a
+            >
+          </p>
           <p class="cta-legacy" data-lang="fr">
             Ancien catalogue :
             <a href="https://bruno.univ-tln.fr/teaching-material/catalog/">bruno.univ-tln.fr/teaching-material/catalog/</a>
           </p>
           <p class="cta-legacy" data-lang="en" hidden>
             Legacy catalogue:
+            <a href="https://bruno.univ-tln.fr/teaching-material/catalog/">bruno.univ-tln.fr/teaching-material/catalog/</a>
+          </p>
+          <p class="cta-legacy" data-lang="vi" hidden>
+            Danh mục cũ:
             <a href="https://bruno.univ-tln.fr/teaching-material/catalog/">bruno.univ-tln.fr/teaching-material/catalog/</a>
           </p>
         </div>
@@ -475,6 +457,13 @@ const lectureGroups = [
                   : 'Courses, CNAM'
                 : 'Other courses'}
             </h3>
+            <h3 data-lang="vi" hidden>
+              {group.formation
+                ? group.formation === 'utln'
+                  ? 'Môn học, Đại học Toulon'
+                  : 'Môn học, CNAM'
+                : 'Môn học khác'}
+            </h3>
             <div class="grid">
               {group.cards.map((card) => (
                 <Card card={card} />
@@ -486,6 +475,7 @@ const lectureGroups = [
         <div class="group">
           <h3 data-lang="fr">Notebooks pédagogiques</h3>
           <h3 data-lang="en" hidden>Teaching notebooks</h3>
+          <h3 data-lang="vi" hidden>Notebooks giảng dạy</h3>
           <div class="grid">
             {notebooks.map((card) => (
               <Card card={card} />
@@ -496,6 +486,7 @@ const lectureGroups = [
         <div class="group">
           <h3 data-lang="fr">Exemples et applications de démonstration</h3>
           <h3 data-lang="en" hidden>Examples and demonstration applications</h3>
+          <h3 data-lang="vi" hidden>Ví dụ và ứng dụng minh họa</h3>
           <div class="grid">
             {samples.map((card) => (
               <Card card={card} />
@@ -508,6 +499,7 @@ const lectureGroups = [
       <section id="recherche" class="page-section">
         <h2 data-lang="fr">Recherche</h2>
         <h2 data-lang="en" hidden>Research</h2>
+        <h2 data-lang="vi" hidden>Nghiên cứu</h2>
         <p data-lang="fr">
           Mes travaux portent sur la <strong>gestion des données</strong>, la
           <strong>recherche d'information</strong> et les <strong>interactions
@@ -523,10 +515,18 @@ const lectureGroups = [
           around two main axes, both conducted in collaboration with
           <strong>Elisabeth Murisasco</strong> and <strong>Patrice Bellot</strong>.
         </p>
+        <p data-lang="vi" hidden>
+          Công trình của tôi tập trung vào <strong>quản lý dữ liệu</strong>,
+          <strong>truy xuất thông tin</strong> và <strong>tương tác giữa trí
+          tuệ nhân tạo và con người</strong>. Nghiên cứu hiện tại của tôi
+          xoay quanh hai hướng chính, cả hai đều được thực hiện hợp tác với
+          <strong>Elisabeth Murisasco</strong> và <strong>Patrice Bellot</strong>.
+        </p>
 
         <div class="group">
           <h3 data-lang="fr">Interaction humains–grands modèles de langage</h3>
           <h3 data-lang="en" hidden>Human–large language model interaction</h3>
+          <h3 data-lang="vi" hidden>Tương tác con người – mô hình ngôn ngữ lớn</h3>
           <p data-lang="fr">
             Ces travaux prolongent la thèse de <strong>Xavier Daull</strong>,
             co-encadrée avec Elisabeth Murisasco et Patrice Bellot. Je conçois
@@ -541,6 +541,14 @@ const lectureGroups = [
             architectures combining <strong>large language models (LLMs)</strong>
             and human expertise to solve complex problems, notably in contexts
             involving sensitive data.
+          </p>
+          <p data-lang="vi" hidden>
+            Các công trình này mở rộng luận án của
+            <strong>Xavier Daull</strong>, do Elisabeth Murisasco và Patrice
+            Bellot đồng hướng dẫn. Tôi thiết kế các kiến trúc kết hợp
+            <strong>mô hình ngôn ngữ lớn (LLM)</strong> và chuyên môn con
+            người để giải quyết các vấn đề phức tạp, đặc biệt trong các ngữ
+            cảnh liên quan đến dữ liệu nhạy cảm.
           </p>
           <p data-lang="fr">
             Ces architectures sont <strong>multi-agents avec expert dans la
@@ -557,11 +565,19 @@ const lectureGroups = [
             generation of scientific documents (papers, patents) from limited
             initial information such as a title and an abstract.
           </p>
+          <p data-lang="vi" hidden>
+            Các kiến trúc này là <strong>đa tác tử với chuyên gia trong vòng
+            lặp</strong>: nhiều tác tử LLM phối hợp để thiết kế, kiểm chứng
+            và tích lũy các công cụ tái sử dụng được. Ứng dụng bao gồm
+            đặc biệt việc tạo tài liệu khoa học (bài báo, bằng sáng chế) từ
+            thông tin ban đầu hạn chế như một tiêu đề và một tóm tắt.
+          </p>
         </div>
 
         <div class="group">
           <h3 data-lang="fr">Analyse des émotions et des sentiments</h3>
           <h3 data-lang="en" hidden>Emotion and sentiment analysis</h3>
+          <h3 data-lang="vi" hidden>Phân tích cảm xúc và cảm tình</h3>
           <p data-lang="fr">
             Ces travaux s'inscrivent dans la continuité de la thèse de
             <strong>Soelie Lerch</strong>, co-encadrée avec Elisabeth Murisasco
@@ -582,6 +598,16 @@ const lectureGroups = [
             the <strong>EMOLIS</strong> project, devoted to emotion analysis,
             multimodal datasets and the recommendation of adapted contents.
           </p>
+          <p data-lang="vi" hidden>
+            Các công trình này nằm trong sự tiếp nối luận án của
+            <strong>Soelie Lerch</strong>, do Elisabeth Murisasco và Patrice
+            Bellot đồng hướng dẫn. Tôi phát triển các phương pháp
+            <strong>đa phương tiện</strong> kết hợp văn bản, âm thanh, video
+            và tín hiệu sinh lý để mô hình hóa cảm xúc được trải nghiệm và
+            nghiên cứu sự gần gũi cảm xúc giữa các nội dung. Luận án này đã
+            dẫn đến dự án <strong>EMOLIS</strong>, dành cho phân tích cảm
+            xúc, các bộ dữ liệu đa phương tiện và đề xuất nội dung phù hợp.
+          </p>
         </div>
       </section>
 
@@ -589,6 +615,7 @@ const lectureGroups = [
         <h2>Publications</h2>
         <p data-lang="fr">Toutes les publications :</p>
         <p data-lang="en" hidden>All publications:</p>
+        <p data-lang="vi" hidden>Tất cả các công bố:</p>
         <ul class="hero-links" aria-label="Index de publications">
           <li>
             <a
@@ -608,6 +635,7 @@ const lectureGroups = [
         <div class="group">
           <h3 data-lang="fr">Interaction LLM–humain</h3>
           <h3 data-lang="en" hidden>LLM–human interaction</h3>
+          <h3 data-lang="vi" hidden>Tương tác LLM – con người</h3>
           <div class="grid">
             <article class="card">
               <h4 class="card-title">
@@ -630,6 +658,11 @@ const lectureGroups = [
                 CollabToolBuilder: a multi-agent framework (Coach, Coder,
                 Critic, Capitalizer) with an expert in the loop to generate,
                 validate, and capitalise on reusable tools.
+              </p>
+              <p class="card-desc" data-lang="vi" hidden>
+                CollabToolBuilder: khung đa tác tử (Coach, Coder, Critic,
+                Capitalizer) với chuyên gia trong vòng lặp để tạo, xác
+                thực và tích lũy các công cụ tái sử dụng được.
               </p>
               <p class="card-meta">
                 <a href="https://doi.org/10.1109/wi-iat67162.2025.00058">DOI</a>
@@ -659,6 +692,11 @@ const lectureGroups = [
                 the supervision of a human expert to retrieve information and
                 generate documents.
               </p>
+              <p class="card-desc" data-lang="vi" hidden>
+                Kiến trúc tác tử tổng quát khai thác nhiều tác tử LLM và sự
+                giám sát của một chuyên gia con người để truy xuất thông tin
+                và tạo tài liệu.
+              </p>
               <p class="card-meta">
                 <a href="https://doi.org/10.1145/3704268.3748670">DOI</a>
                 <a href="https://hal.science/hal-05261897">HAL</a>
@@ -686,6 +724,11 @@ const lectureGroups = [
                 neuro-symbolic Python functions and progressively builds
                 reusable tools.
               </p>
+              <p class="card-desc" data-lang="vi" hidden>
+                Cách tiếp cận hợp tác LLM – con người cho phép tạo và xác
+                thực các hàm neuro-symbolic Python và dần xây dựng các công
+                cụ tái sử dụng được.
+              </p>
               <p class="card-meta">
                 <a href="https://hal.science/hal-05173669">HAL</a>
               </p>
@@ -712,6 +755,11 @@ const lectureGroups = [
                 hybrid architectures combining reasoning, external tools, and
                 human supervision.
               </p>
+              <p class="card-desc" data-lang="vi" hidden>
+                Tổng quan hiện trạng về giới hạn của các mô hình ngôn ngữ lớn
+                và các kiến trúc lai kết hợp suy luận, công cụ bên ngoài và
+                giám sát con người.
+              </p>
               <p class="card-meta">
                 <a href="https://doi.org/10.48550/arXiv.2302.09051">DOI</a>
                 <a href="https://arxiv.org/abs/2302.09051">arXiv</a>
@@ -724,6 +772,7 @@ const lectureGroups = [
         <div class="group">
           <h3 data-lang="fr">Analyse émotionnelle</h3>
           <h3 data-lang="en" hidden>Emotion analysis</h3>
+          <h3 data-lang="vi" hidden>Phân tích cảm xúc</h3>
           <div class="grid">
             <article class="card">
               <h4 class="card-title">
@@ -746,6 +795,11 @@ const lectureGroups = [
                 physiological signals, accompanied by an application
                 recommending emotionally close contents.
               </p>
+              <p class="card-desc" data-lang="vi" hidden>
+                Bộ dữ liệu đa phương tiện kết hợp các bản chuyển tự cảm xúc
+                và tín hiệu sinh lý, kèm một ứng dụng đề xuất các nội dung
+                gần gũi về mặt cảm xúc.
+              </p>
               <p class="card-meta">
                 <a href="https://doi.org/10.63317/456gz9oyxe8w">DOI</a>
                 <a href="https://aclanthology.org/2024.lrec-main.502/">ACL</a>
@@ -758,6 +812,7 @@ const lectureGroups = [
         <div class="group">
           <h3 data-lang="fr">Classification documentaire</h3>
           <h3 data-lang="en" hidden>Document classification</h3>
+          <h3 data-lang="vi" hidden>Phân loại tài liệu</h3>
           <div class="grid">
             <article class="card">
               <h4 class="card-title">
@@ -779,6 +834,10 @@ const lectureGroups = [
                 An approach exploiting label dependencies to improve
                 Transformer-based multi-label document classification.
               </p>
+              <p class="card-desc" data-lang="vi" hidden>
+                Cách tiếp cận khai thác các mối phụ thuộc giữa các nhãn để
+                cải thiện phân loại tài liệu đa nhãn dựa trên Transformers.
+              </p>
               <p class="card-meta">
                 <a href="https://doi.org/10.1145/3573128.3609356">DOI</a>
                 <a href="https://hal.science/hal-04222602">HAL</a>
@@ -794,6 +853,7 @@ const lectureGroups = [
           <div>
             <h3 data-lang="fr">Coordonnées</h3>
             <h3 data-lang="en" hidden>Contact details</h3>
+            <h3 data-lang="vi" hidden>Thông tin liên hệ</h3>
             <address>
               Emmanuel Bruno<br />
               Université de Toulon<br />
@@ -807,8 +867,10 @@ const lectureGroups = [
           <div>
             <h3 data-lang="fr">Clé PGP</h3>
             <h3 data-lang="en" hidden>PGP key</h3>
+            <h3 data-lang="vi" hidden>Khóa PGP</h3>
             <p data-lang="fr">Empreinte de la clé publique :</p>
             <p data-lang="en" hidden>Public key fingerprint:</p>
+            <p data-lang="vi" hidden>Dấu vân tay khóa công khai:</p>
             <pre class="pgp-fingerprint"><code>116C CE5F BA2C 0D37 D355 940E 400F 583C 1F81 2EDB</code></pre>
             <p data-lang="fr">
               Clé publique sur demande :
@@ -816,6 +878,10 @@ const lectureGroups = [
             </p>
             <p data-lang="en" hidden>
               Public key on request:
+              <a href="mailto:emmanuel.bruno@univ-tln.fr">emmanuel.bruno@univ-tln.fr</a>
+            </p>
+            <p data-lang="vi" hidden>
+              Cấp khóa công khai theo yêu cầu:
               <a href="mailto:emmanuel.bruno@univ-tln.fr">emmanuel.bruno@univ-tln.fr</a>
             </p>
           </div>
@@ -833,6 +899,11 @@ const lectureGroups = [
         Emmanuel Bruno, University of Toulon, LIS (UMR 7020).
         Catalogue: <time datetime={manifest.generated_at}>{manifest.generated_at.slice(0, 10)}</time>,
         {manifest.count} repositories.
+      </p>
+      <p data-lang="vi" hidden>
+        Emmanuel Bruno, Đại học Toulon, LIS (UMR 7020).
+        Danh mục: <time datetime={manifest.generated_at}>{manifest.generated_at.slice(0, 10)}</time>,
+        {manifest.count} kho lưu trữ.
       </p>
     </footer>
 
@@ -878,7 +949,8 @@ const lectureGroups = [
         tabs.forEach((t) =>
           t.addEventListener("click", () => apply(t.dataset.langBtn))
         );
-        apply(root.dataset.lang === "en" ? "en" : "fr");
+        const pinned = root.dataset.lang;
+        apply(pinned === "en" || pinned === "vi" ? pinned : "fr");
       })();
     </script>
   </body>
