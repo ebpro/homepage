@@ -1,58 +1,17 @@
 ---
 import manifest from '../data/manifest.json';
-import Card from '../components/Card.astro';
 import CertBanner from '../components/CertBanner.astro';
-import { deriveCards } from '../data/cards.mjs';
 import '../styles/global.css';
 
 // Catalogue data is read at build time from the vendored manifest
-// (src/data/manifest.json). Refresh with `npm run data`.
-//
-// Cards are derived by the shared module src/data/cards.mjs (states
-// live / dead / no-develop from the v8.6 manifest `site_live`, deny-list
-// applied, ordering = teaching-catalog default sort). The homepage shows the
-// teaching-material subset: lectures, notebooks and samples — stub repos are
-// scaffolds, not teaching material.
-
-const cards = deriveCards(manifest);
+// (src/data/manifest.json). Refresh with `npm run data`. On this page the
+// manifest only feeds the "Enseignement" intro line and the footer (data
+// date + repo count): every catalogue card now lives on /catalog/
+// (src/pages/catalog.astro), so the homepage keeps the "Cours
+// universitaires" table, the teaching-areas block and the catalogue CTA
+// instead of card grids.
 
 const base = import.meta.env.BASE_URL;
-
-// The five university courses are presented in the "Cours universitaires"
-// table on this page; they must not appear twice as catalogue cards.
-const tableCourses = [
-  'lecture-UTLN-M1_Info_Math-DEV-OOCOL',
-  'lecture-UTLN-M1_Info_Math-DEV-ADV',
-  'lecture-UTLN-M2_Info_Math-DEV-EXP',
-  'lecture-CNAM-MI_A2-PO43',
-  'lecture-CNAM-MI_A2-PM44',
-];
-
-const shown = cards.filter(
-  (c) =>
-    (c.category === 'lecture' ||
-      c.category === 'notebook' ||
-      c.category === 'sample') &&
-    c.status !== 'stub',
-);
-
-const lectures = shown.filter(
-  (c) => c.category === 'lecture' && !tableCourses.includes(c.name),
-);
-const notebooks = shown.filter((c) => c.category === 'notebook');
-const samples = shown.filter((c) => c.category === 'sample');
-
-function formationLabel(formation) {
-  if (formation === 'cnam') return 'CNAM';
-  if (formation === 'utln') return 'Université de Toulon';
-  return null;
-}
-
-const lectureGroups = [
-  { formation: 'cnam', cards: lectures.filter((c) => c.formation === 'cnam') },
-  { formation: 'utln', cards: lectures.filter((c) => c.formation === 'utln') },
-  { formation: '', cards: lectures.filter((c) => !c.formation) },
-].filter((g) => g.cards.length > 0);
 ---
 
 <!doctype html>
@@ -441,57 +400,6 @@ const lectureGroups = [
             Danh mục cũ:
             <a href="https://bruno.univ-tln.fr/teaching-material/catalog/">bruno.univ-tln.fr/teaching-material/catalog/</a>
           </p>
-        </div>
-
-        {lectureGroups.map((group) => (
-          <div class="group">
-            <h3 data-lang="fr">
-              {group.formation
-                ? `Cours, formation ${formationLabel(group.formation)}`
-                : 'Autres cours'}
-            </h3>
-            <h3 data-lang="en" hidden>
-              {group.formation
-                ? group.formation === 'utln'
-                  ? 'Courses, University of Toulon'
-                  : 'Courses, CNAM'
-                : 'Other courses'}
-            </h3>
-            <h3 data-lang="vi" hidden>
-              {group.formation
-                ? group.formation === 'utln'
-                  ? 'Môn học, Đại học Toulon'
-                  : 'Môn học, CNAM'
-                : 'Môn học khác'}
-            </h3>
-            <div class="grid">
-              {group.cards.map((card) => (
-                <Card card={card} />
-              ))}
-            </div>
-          </div>
-        ))}
-
-        <div class="group">
-          <h3 data-lang="fr">Notebooks pédagogiques</h3>
-          <h3 data-lang="en" hidden>Teaching notebooks</h3>
-          <h3 data-lang="vi" hidden>Notebooks giảng dạy</h3>
-          <div class="grid">
-            {notebooks.map((card) => (
-              <Card card={card} />
-            ))}
-          </div>
-        </div>
-
-        <div class="group">
-          <h3 data-lang="fr">Exemples et applications de démonstration</h3>
-          <h3 data-lang="en" hidden>Examples and demonstration applications</h3>
-          <h3 data-lang="vi" hidden>Ví dụ và ứng dụng minh họa</h3>
-          <div class="grid">
-            {samples.map((card) => (
-              <Card card={card} />
-            ))}
-          </div>
         </div>
 
       </section>

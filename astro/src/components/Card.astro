@@ -2,15 +2,31 @@
 // One catalogue card, rendered from the shared derivation in
 // src/data/cards.mjs (states: live / dead / no-develop).
 //
-//   live       — published develop (or tagged release): title, description
-//                and the "Latest" pill all link to `primary`.
+// Anatomy (all states, in order):
+//   1. title row — plain <h4> repo name (no link) + status badge (right);
+//   2. description — plain text (no link);
+//   3. meta row (muted) — content date dd/MM/yyyy + filière tag;
+//   4. action band (visually separated) — Stable / Latest / Branches / Source;
+//   5. topic pill zone (filter toggles, distinct from the action band).
+//
+// State semantics (from the teaching-catalog v8.6 manifest):
+//   live       — published develop: "Latest" links to the develop landing.
 //   dead       — develop ref exists but the public site is not (or no
-//                longer) reachable: NO site links at all (the host is a
-//                DokuWiki catch-all, a 200 is not proof of publication);
-//                muted title, disabled "Latest" button + "Non publié" chip —
-//                parity with teaching-catalog v8.6 (`btn-disabled
-//                title="non publie"`).
-//   no-develop — no develop branch: GitHub links only.
+//                longer) reachable (the host is a DokuWiki catch-all, a 200
+//                is not proof of publication): disabled "Latest" button +
+//                "Non publié" chip — parity with teaching-catalog v8.6
+//                (`btn-disabled title="non publie"`).
+//   no-develop — no develop branch: no "Latest" at all.
+//
+// "Stable" is rendered ONLY when `releases_live && latest_vtag` (the tagged
+// release is the published stable content); a vtag without a live release
+// renders no Stable action.
+//
+// "Branches": when the manifest lists branches, a native <details> dropdown
+// enumerates them (plain-text items — per-branch site URLs are not
+// liveness-probed, so the card keeps exactly one Source link to github.com
+// plus at most one fallback Branches link); otherwise a single link to
+// `<github_url>/branches`.
 //
 // The `data-*` attributes power the client-side catalogue controls
 // (search / category / topic / formation / filière filters / sort) on
@@ -44,6 +60,7 @@ interface Props {
     formation: string;
     filiere: string;
     topics: string[];
+    branches: string[];
     githubUrl: string;
     state: 'live' | 'dead' | 'no-develop';
     branch: string;
@@ -60,12 +77,13 @@ interface Props {
 }
 
 const { card } = Astro.props;
-const { name, description, githubUrl, primary, state } = card;
+const { name, description, githubUrl, state } = card;
 const badge = STATUS_LABELS[card.status] ?? null;
 const dateShown = card.dateAbs ?? card.date;
-const stableTitle = card.stableUrl
-  ? `Stable · ${card.latestVtag} · contenu du ${card.stableDateAbs ?? 'date inconnue'}`
-  : 'version stable pas encore publiée';
+const stableTitle = `Stable · ${card.latestVtag} · contenu du ${
+  card.stableDateAbs ?? 'date inconnue'
+}`;
+const hasStable = card.releasesLive && !!card.latestVtag;
 ---
 
 <article
@@ -80,18 +98,58 @@ const stableTitle = card.stableUrl
   data-formation={card.formation}
   data-filiere={card.filiere}
 >
-  <h4 class="card-title">
-    {state === 'live'
-      ? <a href={primary}>{name}</a>
-      : state === 'no-develop'
-        ? <a href={githubUrl}>{name}</a>
-        : <span>{name}</span>}
-  </h4>
-  <p class="card-desc">
-    {state === 'live'
-      ? <a href={primary}>{description}</a>
-      : description}
+  <div class="card-title-row">
+    <h4 class="card-title">{name}</h4>
+    {badge && <span class="badge">{badge}</span>}
+  </div>
+  <p class="card-desc">{description}</p>
+  <p class="card-meta">
+    {card.date && (
+      <time
+        class="card-date"
+        datetime={card.dateFull}
+        data-commit={card.dateFull}
+        title={`Contenu du ${dateShown}`}>
+        {dateShown}
+      </time>
+    )}
+    {card.filiere && <span class="tag">{card.filiere}</span>}
   </p>
+  <div class="card-actions">
+    {hasStable && (
+      <a class="card-action card-action--stable" href={card.stableUrl} title={stableTitle}>
+        Stable
+      </a>
+    )}
+    {state === 'live' && (
+      <a class="card-action card-action--latest" href={card.landing}>
+        Latest
+      </a>
+    )}
+    {state === 'dead' && (
+      <button type="button" class="card-action card-action--latest" disabled title="non publie">
+        Latest
+      </button>
+    )}
+    {state === 'dead' && <span class="chip-off">Non publié</span>}
+    {card.branches.length > 0 ? (
+      <details class="card-branches">
+        <summary class="card-action card-action--branches">Branches</summary>
+        <ul class="card-branches-list">
+          {card.branches.map((b) => (
+            <li>{b}</li>
+          ))}
+        </ul>
+      </details>
+    ) : (
+      <a class="card-action card-action--branches" href={`${githubUrl}/branches`}>
+        Branches
+      </a>
+    )}
+    <a class="card-action card-action--source" href={githubUrl}>
+      Source
+    </a>
+  </div>
   {card.topics.length > 0 && (
     <div class="card-pills">
       {card.topics.map((topic) => (
@@ -106,42 +164,4 @@ const stableTitle = card.stableUrl
       ))}
     </div>
   )}
-  <div class="card-actions">
-    {card.latestVtag &&
-      (card.releasesLive ? (
-        <a class="card-latest card-stable" href={card.stableUrl} title={stableTitle}>
-          Stable
-        </a>
-      ) : state !== 'no-develop' ? (
-        <button
-          type="button"
-          class="card-latest card-stable"
-          disabled
-          title={stableTitle}>
-          Stable
-        </button>
-      ) : null)}
-    {state === 'live' ? (
-      <a class="card-latest" href={primary}>Latest</a>
-    ) : state === 'dead' ? (
-      <button type="button" class="card-latest" disabled title="non publie">
-        Latest
-      </button>
-    ) : null}
-  </div>
-  <p class="card-meta">
-    {badge && <span class="badge">{badge}</span>}
-    {card.filiere && <span class="tag">{card.filiere}</span>}
-    {state === 'dead' && <span class="chip-off">Non publié</span>}
-    {card.date && (
-      <time
-        class="card-date"
-        datetime={card.dateFull}
-        data-commit={card.dateFull}
-        title={`Contenu du ${dateShown}`}>
-        {dateShown}
-      </time>
-    )}
-    <a class="card-src" href={githubUrl}>Source</a>
-  </p>
 </article>

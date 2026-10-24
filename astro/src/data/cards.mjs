@@ -1,8 +1,9 @@
-// Shared card derivation for the homepage catalogue.
+// Shared card derivation for the teaching-material catalogue.
 //
-// Pure function: no network, no I/O. Consumed by BOTH card surfaces:
-//   - src/pages/index.astro  (teaching subset: lectures, notebooks, samples)
+// Pure function: no network, no I/O. Consumed by the catalogue page:
 //   - src/pages/catalog.astro (full catalogue, grouped by category)
+// The homepage (src/pages/index.astro) no longer renders cards — it keeps
+// the "Cours universitaires" table and links to /catalog/ instead.
 //
 // Card states (from the teaching-catalog v8.6 manifest):
 //   live       — a develop ref exists and `site_live` is true: the published
@@ -14,6 +15,11 @@
 //                links — only GitHub (parity with teaching-catalog v8.6's
 //                `btn-disabled title="non publie"` demotion).
 //   no-develop — the repo has no develop branch: GitHub links only.
+//
+// Branches: the card's "Branches" action uses the deduped union of the
+// manifest's `branches` array and the `dates.branches` keys (both shapes are
+// tolerated — manifests before the v8.6 liveness probe ship the array only);
+// an empty union falls back to a plain `<github_url>/branches` link.
 //
 // `primary` (where title/description/"Latest" point for a live card):
 //   1. a live tagged release (`releases_live && latest_vtag`) — stable URL,
@@ -160,6 +166,16 @@ export function deriveCards(manifest) {
       releasesLive && latestVtag
         ? `${SITE_BASE}/${r.name}/releases/${latestVtag}/`
         : '';
+    const branches = [
+      ...new Set([
+        ...(Array.isArray(r.branches)
+          ? r.branches.filter((b) => typeof b === 'string' && b)
+          : []),
+        ...(r.dates && typeof r.dates.branches === 'object' && r.dates.branches
+          ? Object.keys(r.dates.branches)
+          : []),
+      ]),
+    ];
 
     return {
       name: r.name,
@@ -169,6 +185,7 @@ export function deriveCards(manifest) {
       formation: r.formation || '',
       filiere: r.filiere || '',
       topics: displayTopics(r.topics),
+      branches,
       githubUrl: r.github_url,
       state,
       branch,

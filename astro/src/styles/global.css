@@ -570,6 +570,16 @@ code {
   box-shadow: var(--shadow-2);
 }
 
+.card-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.card-title-row .badge {
+  margin-left: auto;
+}
+
 .card-title {
   font-size: var(--text-base);
   font-weight: 650;
@@ -577,13 +587,14 @@ code {
   line-height: 1.35;
 }
 
+/* Publication cards keep the title link (catalogue titles are plain text —
+   the action band is the affordance there). */
+
 .card-title a {
   color: var(--fg);
   word-break: break-word;
 }
 
-/* Title doubles as the hover affordance: underline the whole card via the
-   stretched source link below; keep the title accent on hover only. */
 .card:hover .card-title a {
   color: var(--accent);
 }
@@ -651,17 +662,6 @@ code {
   transform: none;
   box-shadow: var(--shadow-1);
   border-color: var(--border);
-}
-
-.card-src {
-  margin-left: auto;
-  font-weight: 650;
-  color: var(--accent);
-  white-space: nowrap;
-}
-
-.card-src:hover {
-  color: var(--accent-hover);
 }
 
 /* ---------- Publication cards (section Publications) ---------- */
@@ -939,24 +939,27 @@ address a {
   color: var(--fg-muted);
 }
 
-/* "Latest" affordance on catalogue cards (live cards) */
+/* Action band button (Stable / Latest / Branches / Source): outlined pill;
+   the band itself (`.card-actions`) provides the visual separation. */
 
-.card-latest {
-  align-self: flex-start;
+.card-action {
   display: inline-block;
-  border: 1px solid var(--border-strong);
-  background: var(--surface-2);
-  border-radius: var(--radius-full);
-  padding: 0.15rem 0.7rem;
+  font: inherit;
   font-size: var(--text-xs);
   font-weight: 650;
+  line-height: 1;
   color: var(--fg);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
   text-decoration: none;
   transition: color 0.15s ease, border-color 0.15s ease,
     background-color 0.15s ease;
 }
 
-a.card-latest:hover {
+a.card-action:hover {
   color: var(--accent);
   border-color: var(--accent);
   background: var(--accent-soft);
@@ -965,21 +968,10 @@ a.card-latest:hover {
 
 /* Disabled "Latest" (dead cards): affordance stays visible, muted */
 
-.card-latest:disabled {
+.card-action:disabled {
   cursor: not-allowed;
   color: var(--fg-muted);
   opacity: 0.7;
-}
-
-/* Description doubles as the site link on live cards */
-
-.card-desc a {
-  color: inherit;
-}
-
-.card-desc a:hover {
-  color: var(--accent);
-  text-decoration: underline;
 }
 
 /* Dead cards: muted title (the title is plain text, no link) */
@@ -1057,14 +1049,18 @@ html[data-lang="vi"] .notice-panel[data-lang="en"] {
    chips, empty state (teaching-catalog v8.6 parity; existing tokens only,
    light/dark adaptive, mobile-safe) ---------- */
 
+/* Topic pill zone: visually distinct from the action band (separator). */
+
 .card-pills {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-1);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border);
 }
 
 /* Topic pill: filter toggle button (inert without JS); pressed = solid
-   accent, mirroring .card-stable. */
+   accent, mirroring the stable action. */
 
 .chip-pill {
   font: inherit;
@@ -1097,36 +1093,81 @@ html[data-lang="vi"] .notice-panel[data-lang="en"] {
   border-color: var(--accent-hover);
 }
 
-/* Stable / Latest action row (Latest affordance moved here). */
+/* Action band: its own surface + border separates it from the card body. */
 
 .card-actions {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
 }
 
-/* "Stable": solid accent. Kept after the .card-latest rules above so the
-   same-specificity hover override wins. */
+/* "Stable": solid accent (rendered only when the tagged release is live).
+   Kept after the .card-action rules above so the same-specificity hover
+   override wins. */
 
-.card-stable {
+.card-action--stable {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--bg);
 }
 
-a.card-stable:hover {
+a.card-action--stable:hover {
   background: var(--accent-hover);
   border-color: var(--accent-hover);
   color: var(--bg);
 }
 
-.card-stable:disabled {
-  background: var(--surface-2);
-  border-color: var(--border);
+/* "Branches": native <details> dropdown enumerating the manifest branches
+   (plain-text items — per-branch site URLs are not liveness-probed). */
+
+.card-branches {
+  position: relative;
+}
+
+.card-branches > summary.card-action {
+  list-style: none;
+}
+
+.card-branches > summary.card-action::-webkit-details-marker {
+  display: none;
+}
+
+.card-branches > summary.card-action::before {
+  content: '▾ ';
   color: var(--fg-muted);
-  cursor: not-allowed;
-  opacity: 0.7;
+  font-size: 0.85em;
+}
+
+.card-branches[open] > summary.card-action::before {
+  content: '▴ ';
+}
+
+.card-branches-list {
+  position: absolute;
+  top: calc(100% + var(--space-1));
+  left: 0;
+  z-index: 20;
+  min-width: 100%;
+  max-width: 280px;
+  margin: 0;
+  padding: var(--space-1) 0;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.card-branches-list li {
+  padding: var(--space-1) var(--space-3);
+  overflow-wrap: anywhere;
 }
 
 /* Dead cards: the description (plain text, no link) stays muted. */
