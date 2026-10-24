@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-22T00:49:44Z",
+  "generated_at": "2026-10-24T00:48:16Z",
   "org": "ebpro",
-  "count": 116,
+  "count": 115,
   "repos": [
     {
       "name": "lecture-CNAM-MI_A2-PM44",
@@ -36,7 +36,7 @@
     },
     {
       "name": "lecture-CNAM-MI_A2-PO43",
-      "description": "CNAM MI A2 PO43 : POO — Java, Git, Conteneurs, Persistance",
+      "description": "CNAM MI A2 PO43 : POO (Java, Git, Conteneurs, Persistance).",
       "topics": [
         "area-lecture",
         "docker",
@@ -110,36 +110,6 @@
       },
       "releases_live": false,
       "site_live": true
-    },
-    {
-      "name": "dev-oocol-fil-rouge",
-      "description": "Fil rouge DEV-OOCOL (M1 Info & Math) : projet Java multi-module guidé — domaine transport public Trans'U",
-      "topics": [
-        "area-lecture",
-        "filiere-m1-info-math",
-        "formation-utln",
-        "java",
-        "maven",
-        "status-active"
-      ],
-      "category": "lecture",
-      "default_branch": "develop",
-      "private": true,
-      "status": "active",
-      "formation": "utln",
-      "filiere": "m1-info-math",
-      "pushed_at": "2026-10-21T23:53:10Z",
-      "github_url": "https://github.com/ebpro/dev-oocol-fil-rouge",
-      "branches": [],
-      "latest_vtag": null,
-      "dates": {
-        "latest_ref": "develop",
-        "latest": "2026-10-21T23:53:08Z",
-        "stable": null,
-        "branches": {}
-      },
-      "releases_live": false,
-      "site_live": false
     },
     {
       "name": "lecture-UTLN-M1_Info_Math-DEV-ADV",
@@ -247,124 +217,6 @@
       "site_live": true
     },
     {
-      "name": "ConflictBot",
-      "description": "Dépôt Java/Maven minimal de support aux exercices Git du cours : fusions et conflits de branches.",
-      "topics": [
-        "area-lecture",
-        "area-sample",
-        "status-active"
-      ],
-      "category": "lecture",
-      "default_branch": "develop",
-      "private": true,
-      "status": "active",
-      "formation": "",
-      "filiere": "",
-      "pushed_at": "2026-01-26T21:53:18Z",
-      "github_url": "https://github.com/ebpro/ConflictBot",
-      "branches": [
-        "dependabot/maven/org.assertj-assertj-core-3.27.7"
-      ],
-      "latest_vtag": null,
-      "dates": {
-        "latest_ref": "develop",
-        "latest": "2024-11-14T08:24:43Z",
-        "stable": null,
-        "branches": {
-          "dependabot/maven/org.assertj-assertj-core-3.27.7": "2026-01-26T21:53:17Z"
-        }
-      },
-      "releases_live": false,
-      "site_live": false
-    },
-    {
-      "name": "HelloGit",
-      "description": "Dépôt Java/Maven minimal de support aux exercices Git du cours : clonage, commits, branches et tags.",
-      "topics": [
-        "area-lecture",
-        "area-sample",
-        "status-active"
-      ],
-      "category": "lecture",
-      "default_branch": "master",
-      "private": false,
-      "status": "active",
-      "formation": "",
-      "filiere": "",
-      "pushed_at": "2025-09-12T10:01:29Z",
-      "github_url": "https://github.com/ebpro/HelloGit",
-      "branches": [],
-      "latest_vtag": null,
-      "dates": {
-        "latest_ref": null,
-        "latest": null,
-        "stable": null,
-        "branches": {}
-      },
-      "releases_live": false,
-      "site_live": false
-    },
-    {
-      "name": "sample-jakarta-rest-full",
-      "description": "Exemple JAX-RS complet (Jakarta REST)",
-      "topics": [
-        "area-lecture",
-        "area-sample",
-        "java",
-        "jax-rs",
-        "rest",
-        "status-partial"
-      ],
-      "category": "lecture",
-      "default_branch": "develop",
-      "private": false,
-      "status": "partial",
-      "formation": "",
-      "filiere": "",
-      "pushed_at": "2026-10-07T12:24:55Z",
-      "github_url": "https://github.com/ebpro/sample-jakarta-rest-full",
-      "branches": [],
-      "latest_vtag": null,
-      "dates": {
-        "latest_ref": "develop",
-        "latest": "2026-10-07T12:24:54Z",
-        "stable": null,
-        "branches": {}
-      },
-      "releases_live": false,
-      "site_live": false
-    },
-    {
-      "name": "sample-java-tcp-client-server",
-      "description": "Exemple TCP Client/Server Java",
-      "topics": [
-        "area-lecture",
-        "area-sample",
-        "java",
-        "network",
-        "status-partial",
-        "tcp"
-      ],
-      "category": "lecture",
-      "default_branch": "develop",
-      "private": false,
-      "status": "partial",
-      "formation": "",
-      "filiere": "",
-      "pushed_at": "2026-10-07T12:24:53Z",
-      "github_url": "https://github.com/ebpro/sample-java-tcp-client-server",
-      "branches": [],
-      "latest_vtag": null,
-      "dates": {
-        "latest_ref": "develop",
-        "latest": "2026-10-07T12:24:51Z",
-        "stable": null,
-        "branches": {}
-      },
-      "releases_live": false,
-      "site_live": false
-    },
-    {
       "name": "notebook-ci",
       "description": "CI/CD : fondamentaux, écosystème, GitOps",
       "topics": [
@@ -405,7 +257,7 @@
     },
     {
       "name": "notebook-containers-intro",
-      "description": "Introduction aux conteneurs Docker — cours et travaux pratiques",
+      "description": "Introduction aux conteneurs Docker : cours et travaux pratiques.",
       "topics": [
         "area-notebook",
         "containers",
@@ -1071,7 +923,7 @@
     },
     {
       "name": "notebook-java-jdbc",
-      "description": "A introduction to Java JDBC",
+      "description": "Introduction à JDBC en Java.",
       "topics": [
         "area-notebook",
         "database",
@@ -1151,7 +1003,7 @@
     },
     {
       "name": "notebook-java-jpa",
-      "description": "A notebook to learn Jakarta Persistence API (JPA)",
+      "description": "Notebook d'apprentissage de l'API Jakarta Persistence (JPA).",
       "topics": [
         "area-notebook",
         "database",
@@ -1547,7 +1399,7 @@
     },
     {
       "name": "notebook-revision-shell",
-      "description": "Mise à niveau : Shell Unix — TP de révision (bash)",
+      "description": "Mise à niveau : Shell Unix, TP de révision (bash).",
       "topics": [
         "area-notebook",
         "notebook",
@@ -1633,6 +1485,66 @@
       "site_live": true
     },
     {
+      "name": "ConflictBot",
+      "description": "Dépôt Java/Maven minimal de support aux exercices Git du cours : fusions et conflits de branches.",
+      "topics": [
+        "area-sample",
+        "status-active"
+      ],
+      "category": "sample",
+      "default_branch": "develop",
+      "private": true,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-01-26T21:53:18Z",
+      "github_url": "https://github.com/ebpro/ConflictBot",
+      "branches": [
+        "dependabot/maven/org.assertj-assertj-core-3.27.7"
+      ],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2024-11-14T08:24:43Z",
+        "stable": null,
+        "branches": {
+          "dependabot/maven/org.assertj-assertj-core-3.27.7": "2026-01-26T21:53:17Z"
+        }
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "dev-oocol-fil-rouge",
+      "description": "Fil rouge DEV-OOCOL (M1 Info & Math) : projet Java multi-module guidé, domaine transport public Trans'U.",
+      "topics": [
+        "area-sample",
+        "filiere-m1-info-math",
+        "formation-utln",
+        "java",
+        "maven",
+        "status-active"
+      ],
+      "category": "sample",
+      "default_branch": "develop",
+      "private": true,
+      "status": "active",
+      "formation": "utln",
+      "filiere": "m1-info-math",
+      "pushed_at": "2026-10-21T23:53:10Z",
+      "github_url": "https://github.com/ebpro/dev-oocol-fil-rouge",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2026-10-21T23:53:08Z",
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
       "name": "ecommerce-catalog",
       "description": "Product-catalog monorepo : API REST Express et PostgreSQL (Drizzle ORM) avec client React Vite Tailwind.",
       "topics": [
@@ -1668,7 +1580,7 @@
     },
     {
       "name": "fullstack-minimal-app",
-      "description": "Minimal full-stack product catalogue (React, Express, MySQL, Docker), teaching sample of the WebLang course.",
+      "description": "Catalogue produit full-stack minimal (React, Express, MySQL, Docker), exemple d'enseignement du cours WebLang.",
       "topics": [
         "area-sample",
         "status-active"
@@ -1703,6 +1615,32 @@
       "site_live": false
     },
     {
+      "name": "HelloGit",
+      "description": "Dépôt Java/Maven minimal de support aux exercices Git du cours : clonage, commits, branches et tags.",
+      "topics": [
+        "area-sample",
+        "status-active"
+      ],
+      "category": "sample",
+      "default_branch": "master",
+      "private": false,
+      "status": "active",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2025-09-12T10:01:29Z",
+      "github_url": "https://github.com/ebpro/HelloGit",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
       "name": "kubernetes-quarkus-demo",
       "description": "Application Quarkus de raccourcisseur de liens, démontrée comme charge de travail sur Kubernetes.",
       "topics": [
@@ -1730,7 +1668,7 @@
     },
     {
       "name": "lab-quarto-lookandfeel",
-      "description": "Sandbox galerie de thèmes Quarto — comparaison visuelle baseline + 3 thèmes académiques (html/revealjs/typst)",
+      "description": "Sandbox galerie de thèmes Quarto : comparaison visuelle baseline + 3 thèmes académiques (html/revealjs/typst).",
       "topics": [
         "area-sample",
         "status-active"
@@ -2134,7 +2072,7 @@
     },
     {
       "name": "sample-containers-rabbitmq",
-      "description": "Exemple canonique RabbitMQ. Producteur/Consommateur pika). Sous-module de notebook-containers-intro",
+      "description": "Exemple canonique RabbitMQ (producteur/consommateur pika). Sous-module de notebook-containers-intro.",
       "topics": [
         "area-sample",
         "status-active"
@@ -2219,6 +2157,64 @@
       "site_live": false
     },
     {
+      "name": "sample-jakarta-rest-full",
+      "description": "Exemple JAX-RS complet (Jakarta REST)",
+      "topics": [
+        "area-sample",
+        "java",
+        "jax-rs",
+        "rest",
+        "status-partial"
+      ],
+      "category": "sample",
+      "default_branch": "develop",
+      "private": false,
+      "status": "partial",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-07T12:24:55Z",
+      "github_url": "https://github.com/ebpro/sample-jakarta-rest-full",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2026-10-07T12:24:54Z",
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
+      "name": "sample-java-tcp-client-server",
+      "description": "Exemple TCP Client/Server Java",
+      "topics": [
+        "area-sample",
+        "java",
+        "network",
+        "status-partial",
+        "tcp"
+      ],
+      "category": "sample",
+      "default_branch": "develop",
+      "private": false,
+      "status": "partial",
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-10-07T12:24:53Z",
+      "github_url": "https://github.com/ebpro/sample-java-tcp-client-server",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": "develop",
+        "latest": "2026-10-07T12:24:51Z",
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
+    },
+    {
       "name": "sample-javafx-client",
       "description": "Exemple client JavaFX",
       "topics": [
@@ -2278,7 +2274,7 @@
     },
     {
       "name": "sample-jpa",
-      "description": "A simple JPA Application",
+      "description": "Application JPA simple.",
       "topics": [
         "area-sample",
         "status-frozen"
@@ -2404,7 +2400,7 @@
     },
     {
       "name": "sample-websocket",
-      "description": "A sample Websocket application",
+      "description": "Exemple d'application WebSocket.",
       "topics": [
         "area-sample",
         "java",
@@ -2602,7 +2598,7 @@
     },
     {
       "name": "demo-simple-sensors",
-      "description": "A comprehensive example project demonstrating core Java concepts through a sensor network simulation.",
+      "description": "Projet d'exemple complet illustrant les concepts fondamentaux de Java via une simulation de réseau de capteurs.",
       "topics": [
         "area-standard",
         "status-frozen"
@@ -2632,7 +2628,7 @@
     },
     {
       "name": "DemoJAXRS",
-      "description": "A simple JAX-RS Application",
+      "description": "Application JAX-RS simple.",
       "topics": [
         "area-standard",
         "status-frozen"
@@ -2688,7 +2684,7 @@
     },
     {
       "name": "DemoJPA",
-      "description": "A simple JPA Application",
+      "description": "Application JPA simple.",
       "topics": [
         "area-standard",
         "status-frozen"
@@ -2720,7 +2716,7 @@
     },
     {
       "name": "DemoWebSocket",
-      "description": "A simple WebSocket Application",
+      "description": "Application WebSocket simple.",
       "topics": [
         "area-standard",
         "java",
@@ -2754,7 +2750,7 @@
     },
     {
       "name": "jakartaee-minimal-jpa-jaxrs",
-      "description": "A simple JakartaEE application with JPA and JAX-RS, launched via Docker Compose (Payara Micro + PostgreSQL).",
+      "description": "Application JakartaEE simple avec JPA et JAX-RS, lancée via Docker Compose (Payara Micro, PostgreSQL).",
       "topics": [
         "area-standard",
         "status-frozen"
@@ -2794,7 +2790,7 @@
     },
     {
       "name": "maven-parentpom",
-      "description": "Production-ready parent POM for Java 25 + Maven 3.9 + Docker CI/CD (quality gates, security scanning, app.image packaging (libs/jlink/native), Central Portal release)",
+      "description": "POM parent prêt pour la production : Java 25, Maven 3.9, CI/CD Docker (portes de qualité, analyse de sécurité, packaging app.image libs/jlink/native, publication Central Portal).",
       "topics": [
         "area-standard",
         "central-portal",
@@ -2864,7 +2860,7 @@
     },
     {
       "name": "minimal-jpa",
-      "description": "Minimal JPA is a simple application that uses Jakarta Persistence to interact with a PostgreSQL database.",
+      "description": "Application simple qui utilise Jakarta Persistence pour interagir avec une base PostgreSQL.",
       "topics": [
         "area-standard",
         "status-active"
@@ -2894,7 +2890,7 @@
     },
     {
       "name": "quarkus-ms-platform",
-      "description": "Quarkus Microservices Platform: shared build parents, BOM, and domain/application/infrastructure commons libraries (fr.ebpro)",
+      "description": "Plateforme microservices Quarkus : parents de build partagés, BOM et bibliothèques communes domaine/application/infrastructure (fr.ebpro).",
       "topics": [
         "area-standard",
         "status-active"
@@ -2946,7 +2942,7 @@
     },
     {
       "name": "simplejee91",
-      "description": "A quickstart for JakartaEE 9 (Hello World, REST API, CDI) on Payara, based on Payara blog tutorials.",
+      "description": "Quickstart JakartaEE 9 (Hello World, API REST, CDI) sur Payara, issu des tutoriels du blog Payara.",
       "topics": [
         "area-standard",
         "status-frozen"
@@ -2976,7 +2972,7 @@
     },
     {
       "name": "ai-review",
-      "description": "Canonical ebpro AI code-review reusable workflow (11 opencode agents on self-hosted runners)",
+      "description": "Workflow réutilisable canonique de revue de code par IA pour ebpro (11 agents opencode sur runners auto-hébergés).",
       "topics": [
         "area-cicd",
         "status-active"
@@ -3002,7 +2998,7 @@
     },
     {
       "name": "ci-java",
-      "description": "Shared GitHub Actions workflows for ebpro Java/Maven samples (reusable SonarQube)",
+      "description": "Workflows GitHub Actions partagés pour les dépôts Java/Maven ebpro (SonarQube réutilisable).",
       "topics": [
         "area-cicd",
         "status-active"
@@ -3028,7 +3024,7 @@
     },
     {
       "name": "ci-java-build-action",
-      "description": "GitHub composite action building a Java Maven project with Docker for CI.",
+      "description": "Action GitHub composite qui construit un projet Maven Java avec Docker pour la CI.",
       "topics": [
         "area-cicd",
         "ci",
@@ -3057,7 +3053,7 @@
     },
     {
       "name": "ci-java-site-action",
-      "description": "GitHub composite action building and deploying the Maven site of a Java project.",
+      "description": "Action GitHub composite qui construit et publie le site Maven d'un projet Java.",
       "topics": [
         "area-cicd",
         "status-active"
@@ -3087,7 +3083,7 @@
     },
     {
       "name": "ci-java-sonar-action",
-      "description": "GitHub composite action running SonarQube analysis on a Java Maven project.",
+      "description": "Action GitHub composite qui exécute l'analyse SonarQube d'un projet Maven Java.",
       "topics": [
         "area-cicd",
         "status-active"
@@ -3267,7 +3263,7 @@
     },
     {
       "name": "gitops",
-      "description": "GitOps source of truth for the Kubernetes platform foundation, deployed with ArgoCD (core infrastructure and toolchain).",
+      "description": "Source de vérité GitOps de la plateforme Kubernetes, déployée avec ArgoCD (infrastructure cœur et chaîne d'outils).",
       "topics": [
         "area-cicd",
         "status-active"
@@ -3278,7 +3274,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-21T06:57:27Z",
+      "pushed_at": "2026-10-23T16:49:09Z",
       "github_url": "https://github.com/ebpro/gitops",
       "branches": [
         "fix/sonarqube-265-reset",
@@ -3328,7 +3324,7 @@
     },
     {
       "name": "jupyter-base",
-      "description": "A base image for the UTLN Jupyter",
+      "description": "Image de base Jupyter de l'UTLN, source de l'image solen utilisée par la flotte Quarto.",
       "topics": [
         "area-image",
         "docker",
@@ -3369,7 +3365,7 @@
     },
     {
       "name": "jupyter-db-pg",
-      "description": "A jupyter image for PostgreSQL Database",
+      "description": "Image Jupyter pour base de données PostgreSQL.",
       "topics": [
         "area-image",
         "database",
@@ -3405,7 +3401,7 @@
     },
     {
       "name": "jupyter-java",
-      "description": "A jupyter image for Java",
+      "description": "Image Jupyter pour Java.",
       "topics": [
         "area-image",
         "docker",
@@ -3442,7 +3438,7 @@
     },
     {
       "name": "quarkus-ci-runner",
-      "description": "Custom ARC GitHub Actions runner image (Quarkus CI toolchain) - builds and deploys to Harbor + Kubernetes cluster",
+      "description": "Image de runner ARC (GitHub Actions auto-hébergés) pour la chaîne CI Quarkus ; construite et poussée sur Harbor, déployée sur le cluster Kubernetes.",
       "topics": [
         "area-cicd",
         "status-active"
@@ -3472,7 +3468,7 @@
     },
     {
       "name": "tooling-visual-qa",
-      "description": "Deterministic visual-QA checker for rendered Quarto sites (Playwright, headless Chromium). S0 tool candidate.",
+      "description": "Contrôle visuel déterministe des sites Quarto rendus (Playwright, Chromium headless). Candidat outil S0.",
       "topics": [
         "area-cicd",
         "status-active"
@@ -3586,20 +3582,22 @@
       "site_live": false
     },
     {
-      "name": "giscus",
-      "description": "Dépôt vide, sans contenu versionné.",
+      "name": "argos-quarto-2027",
+      "description": "Plateforme de publication computationnelle : étude NIR, spikes SP-1/SP-2, prototypes Astro/Web Components (projet argos).",
       "topics": [
         "area-infra",
+        "astro",
+        "quarto",
         "status-active"
       ],
       "category": "infra",
-      "default_branch": "master",
-      "private": false,
+      "default_branch": "main",
+      "private": true,
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2024-01-30T10:03:01Z",
-      "github_url": "https://github.com/ebpro/giscus",
+      "pushed_at": "2026-10-23T09:42:50Z",
+      "github_url": "https://github.com/ebpro/argos-quarto-2027",
       "branches": [],
       "latest_vtag": null,
       "dates": {
@@ -3613,7 +3611,7 @@
     },
     {
       "name": "IJava",
-      "description": "A Jupyter kernel for executing Java code.",
+      "description": "Noyau Jupyter pour exécuter du code Java (fork embarqué dans l'image solen).",
       "topics": [
         "area-infra",
         "status-active"
@@ -3653,7 +3651,7 @@
     },
     {
       "name": "lecture-UTLN-M1_Info_Math-DEV-ADV_devenv",
-      "description": "Devcontainer environment for DEV-ADV lecture",
+      "description": "Environnement devcontainer du cours DEV-ADV.",
       "topics": [
         "area-infra",
         "devcontainer",
@@ -3681,7 +3679,7 @@
     },
     {
       "name": "maven-archetypes",
-      "description": "Best practices Maven archetype",
+      "description": "Archétypes Maven appliquant les bonnes pratiques (générateurs de structure de projet).",
       "topics": [
         "archetype",
         "area-infra",
@@ -3697,32 +3695,6 @@
       "filiere": "",
       "pushed_at": "2026-10-03T14:28:38Z",
       "github_url": "https://github.com/ebpro/maven-archetypes",
-      "branches": [],
-      "latest_vtag": null,
-      "dates": {
-        "latest_ref": null,
-        "latest": null,
-        "stable": null,
-        "branches": {}
-      },
-      "releases_live": false,
-      "site_live": false
-    },
-    {
-      "name": "utterances",
-      "description": "Dépôt ne contenant qu'un README titré utterances, sans autre contenu.",
-      "topics": [
-        "area-infra",
-        "status-active"
-      ],
-      "category": "infra",
-      "default_branch": "master",
-      "private": false,
-      "status": "active",
-      "formation": "",
-      "filiere": "",
-      "pushed_at": "2025-02-06T14:07:33Z",
-      "github_url": "https://github.com/ebpro/utterances",
       "branches": [],
       "latest_vtag": null,
       "dates": {
