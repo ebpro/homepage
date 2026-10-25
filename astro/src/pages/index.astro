@@ -74,7 +74,7 @@ const base = import.meta.env.BASE_URL;
             <a href="#contact" data-lang="vi" hidden>Liên hệ</a>
           </li>
           <li>
-            <a href={`${base}/catalog/`} data-lang="fr">Catalogue</a>
+            <a href={`${base}/catalog/`} data-lang="fr">Supports d'enseignement</a>
             <a href={`${base}/catalog/`} data-lang="en" hidden>Catalog</a>
             <a href={`${base}/catalog/`} data-lang="vi" hidden>Danh mục</a>
           </li>
@@ -86,19 +86,25 @@ const base = import.meta.env.BASE_URL;
               class="lang-tab"
               data-lang-btn="fr"
               aria-pressed="true"
-              lang="fr">Français</button>
+              lang="fr"
+              aria-label="Français"
+              title="Français">🇫🇷</button>
             <button
               type="button"
               class="lang-tab"
               data-lang-btn="en"
               aria-pressed="false"
-              lang="en">English</button>
+              lang="en"
+              aria-label="English"
+              title="English">🇬🇧</button>
             <button
               type="button"
               class="lang-tab"
               data-lang-btn="vi"
               aria-pressed="false"
-              lang="vi">Tiếng Việt</button>
+              lang="vi"
+              aria-label="Tiếng Việt"
+              title="Tiếng Việt">🇻🇳</button>
           </div>
           <button
             id="theme-toggle"
@@ -608,70 +614,6 @@ const base = import.meta.env.BASE_URL;
               <p class="card-meta">
                 <a href="https://doi.org/10.1145/3704268.3748670">DOI</a>
                 <a href="https://hal.science/hal-05261897">HAL</a>
-              </p>
-            </article>
-            <article class="card">
-              <h4 class="card-title">
-                <a href="https://hal.science/hal-05173669"
-                  >Développement collaboratif d'outils par des agents LLM et
-                  humains : application à la synthèse scientifique</a
-                >
-              </h4>
-              <p class="card-authors">
-                X. Daull, E. Murisasco, P. Bellot, <strong>E. Bruno</strong>,
-                V. Martin
-              </p>
-              <p class="card-venue"><em>EGC 2025 / RNTI-E-41</em>, 2025</p>
-              <p class="card-desc" data-lang="fr">
-                Approche collaborative LLM–humain permettant de générer et
-                valider des fonctions neuro-symboliques Python et de construire
-                progressivement des outils réutilisables.
-              </p>
-              <p class="card-desc" data-lang="en" hidden>
-                A collaborative LLM–human approach that generates and validates
-                neuro-symbolic Python functions and progressively builds
-                reusable tools.
-              </p>
-              <p class="card-desc" data-lang="vi" hidden>
-                Cách tiếp cận hợp tác LLM – con người cho phép tạo và xác
-                thực các hàm neuro-symbolic Python và dần xây dựng các công
-                cụ tái sử dụng được.
-              </p>
-              <p class="card-meta">
-                <a href="https://hal.science/hal-05173669">HAL</a>
-              </p>
-            </article>
-            <article class="card">
-              <h4 class="card-title">
-                <a href="https://doi.org/10.48550/arXiv.2302.09051"
-                  >Complex QA and language models hybrid architectures —
-                  Survey</a
-                >
-              </h4>
-              <p class="card-authors">
-                X. Daull, P. Bellot, <strong>E. Bruno</strong>, V. Martin,
-                E. Murisasco
-              </p>
-              <p class="card-venue"><em>Prépublication</em>, 2023 (v. 2025)</p>
-              <p class="card-desc" data-lang="fr">
-                État de l'art sur les limites des grands modèles de langage et
-                les architectures hybrides combinant raisonnement, outils
-                externes et supervision humaine.
-              </p>
-              <p class="card-desc" data-lang="en" hidden>
-                A state of the art on the limits of large language models and on
-                hybrid architectures combining reasoning, external tools, and
-                human supervision.
-              </p>
-              <p class="card-desc" data-lang="vi" hidden>
-                Tổng quan hiện trạng về giới hạn của các mô hình ngôn ngữ lớn
-                và các kiến trúc lai kết hợp suy luận, công cụ bên ngoài và
-                giám sát con người.
-              </p>
-              <p class="card-meta">
-                <a href="https://doi.org/10.48550/arXiv.2302.09051">DOI</a>
-                <a href="https://arxiv.org/abs/2302.09051">arXiv</a>
-                <a href="https://hal.science/hal-05173860">HAL</a>
               </p>
             </article>
           </div>
