@@ -3,10 +3,18 @@
 // src/data/cards.mjs (states: live / dead / no-develop).
 //
 // Anatomy (all states, in order):
-//   1. title row — plain <h4> repo name (no link) + status badge (right);
-//   2. description — plain text (no link);
-//   3. meta row (muted) — content date dd/MM/yyyy + filière tag;
-//   4. action band (visually separated) — Stable / Latest / Branches / Source;
+//   1. title row — human-readable label in a plain <h4> (no link) = the
+//      manifest `description` (a single trailing « . » is stripped for the
+//      h4 display ONLY — data-search/data-name keep the raw values) +
+//      status badge (right);
+//   2. subtitle (muted, monospace) — the repository name, directly under
+//      the h4; not rendered when the description is empty (the repo name
+//      then stays the h4, no subtitle);
+//   3. meta row (muted) — filière tag (the content date moved to the
+//      per-action date chips, spec 2026-10-24);
+//   4. action band (visually separated) — Stable / Latest / Branches /
+//      Source, ALL rendered on every card; unavailable actions are grayed
+//      <button disabled> with the reason in `title`;
 //   5. topic pill zone (filter toggles, distinct from the action band).
 //
 // State semantics (from the teaching-catalog v8.6 manifest):
@@ -16,11 +24,14 @@
 //                is not proof of publication): disabled "Latest" button +
 //                "Non publié" chip — parity with teaching-catalog v8.6
 //                (`btn-disabled title="non publie"`).
-//   no-develop — no develop branch: no "Latest" at all.
+//   no-develop — no develop branch: disabled "Latest" button (title « pas
+//                de branche develop »).
 //
-// "Stable" is rendered ONLY when `releases_live && latest_vtag` (the tagged
-// release is the published stable content); a vtag without a live release
-// renders no Stable action.
+// "Stable" is rendered on EVERY card: the enabled link exists only when
+// `releases_live && latest_vtag` (the tagged release is the published stable
+// content); otherwise the action is a grayed disabled button (title « non
+// publié » when a vtag exists but is not live, « aucun tag stable » when
+// there is no vtag).
 //
 // "Branches": when the manifest lists branches, a native <details> dropdown
 // enumerates them (plain-text items — per-branch site URLs are not
@@ -44,10 +55,15 @@
 // without JS), sharing one active-topic Set with the Thèmes select and the
 // "Filtres actifs" chip row (parity with teaching-catalog v8.6).
 //
-// The content date is the ABSOLUTE FR date (build-time, `dd/MM/yyyy`,
-// `title` tooltip + no-JS fallback); the raw ISO travels in `datetime` and
-// `data-commit` — the load-time JS rewrites the visible text to "il y a X"
-// re-computed from that ISO on every view (nothing relative is ever baked).
+// Date chips (spec 2026-10-24): the Stable and Latest actions each carry a
+// clickable chip when their manifest timestamp exists (`dates.stable` /
+// `dates.latest` — no fallback). The server renders the ABSOLUTE FR date
+// (`dd/MM/yyyy HH:mm`, build-time, also the `title` tooltip + no-JS
+// fallback); the raw ISO travels in `data-iso` and the scoped script below
+// re-computes the RELATIVE duration ("il y a X") client-side on load and on
+// every toggle — nothing relative is ever baked. The chip is a SIBLING of
+// its action (inside `.card-action-group`), never a child of the button, so
+// a chip click can never trigger the action's navigation.
 
 import { STATUS_LABELS } from '../data/cards.mjs';
 
@@ -73,17 +89,33 @@ interface Props {
     dateFull: string | null;
     dateAbs: string | null;
     stableDateAbs: string | null;
+    stableIso: string | null;
+    latestIso: string | null;
+    stableDateDT: string | null;
+    latestDateDT: string | null;
   };
 }
 
 const { card } = Astro.props;
 const { name, description, githubUrl, state } = card;
 const badge = STATUS_LABELS[card.status] ?? null;
-const dateShown = card.dateAbs ?? card.date;
-const stableTitle = `Stable · ${card.latestVtag} · contenu du ${
-  card.stableDateAbs ?? 'date inconnue'
-}`;
+// Title/subtitle swap (spec 2026-10-25): the h4 carries the HUMAN-READABLE
+// label = the manifest `description` (display-only — a single trailing « . »
+// is stripped for the h4, never in the data-* attributes, which keep the
+// raw values); the repository name drops to a muted monospace subtitle.
+// Fallback: an empty/whitespace-only description keeps the repo name as h4
+// and renders no subtitle.
+const hasDescription = description.trim().length > 0;
+const titleText = hasDescription ? description.replace(/\.$/, '') : name;
 const hasStable = card.releasesLive && !!card.latestVtag;
+const stableTitle = hasStable
+  ? `Stable · ${card.latestVtag} · contenu du ${
+      card.stableDateAbs ?? 'date inconnue'
+    }`
+  : card.latestVtag
+    ? 'non publié'
+    : 'aucun tag stable';
+const latestTitle = state === 'dead' ? 'non publie' : 'pas de branche develop';
 ---
 
 <article
@@ -99,38 +131,58 @@ const hasStable = card.releasesLive && !!card.latestVtag;
   data-filiere={card.filiere}
 >
   <div class="card-title-row">
-    <h4 class="card-title">{name}</h4>
+    <h4 class="card-title">{titleText}</h4>
     {badge && <span class="badge">{badge}</span>}
   </div>
-  <p class="card-desc">{description}</p>
+  {hasDescription && <p class="card-subtitle">{name}</p>}
   <p class="card-meta">
-    {card.date && (
-      <time
-        class="card-date"
-        datetime={card.dateFull}
-        data-commit={card.dateFull}
-        title={`Contenu du ${dateShown}`}>
-        {dateShown}
-      </time>
-    )}
     {card.filiere && <span class="tag">{card.filiere}</span>}
   </p>
   <div class="card-actions">
-    {hasStable && (
-      <a class="card-action card-action--stable" href={card.stableUrl} title={stableTitle}>
-        Stable
-      </a>
-    )}
-    {state === 'live' && (
-      <a class="card-action card-action--latest" href={card.landing}>
-        Latest
-      </a>
-    )}
-    {state === 'dead' && (
-      <button type="button" class="card-action card-action--latest" disabled title="non publie">
-        Latest
-      </button>
-    )}
+    <span class="card-action-group">
+      {hasStable ? (
+        <a class="card-action card-action--stable" href={card.stableUrl} title={stableTitle}>
+          Stable
+        </a>
+      ) : (
+        <button type="button" class="card-action card-action--stable" disabled title={stableTitle}>
+          Stable
+        </button>
+      )}
+      {card.stableDateDT && (
+        <span
+          class="date-chip"
+          role="button"
+          tabindex="0"
+          aria-pressed="false"
+          data-iso={card.stableIso}
+          title={card.stableDateDT}>
+          {card.stableDateDT}
+        </span>
+      )}
+    </span>
+    <span class="card-action-group">
+      {state === 'live' ? (
+        <a class="card-action card-action--latest" href={card.landing}>
+          Latest
+        </a>
+      ) : (
+        <button type="button" class="card-action card-action--latest" disabled title={latestTitle}>
+          Latest
+        </button>
+      )}
+      {card.latestDateDT && (
+        <span
+          class="date-chip"
+          role="button"
+          tabindex="0"
+          aria-pressed="false"
+          data-iso={card.latestIso}
+          title={card.latestDateDT}>
+          {card.latestDateDT}
+        </span>
+      )}
+    </span>
     {state === 'dead' && <span class="chip-off">Non publié</span>}
     {card.branches.length > 0 ? (
       <details class="card-branches">
@@ -165,3 +217,75 @@ const hasStable = card.releasesLive && !!card.latestVtag;
     </div>
   )}
 </article>
+
+<script>
+  // Date chips (spec 2026-10-24): clicking a chip toggles between the
+  // RELATIVE duration (« aujourd'hui », « hier », « il y a N jours/… »)
+  // and the ABSOLUTE « dd/MM/yyyy HH:mm ». The server renders the absolute
+  // form (progressive enhancement — without JS the chip stays absolute);
+  // the relative duration is computed CLIENT-SIDE on load and re-computed
+  // with a fresh Date.now() on every toggle — nothing relative is ever
+  // baked at build time. Each chip is a SIBLING of its action button, so a
+  // chip click can never trigger the button's navigation.
+  (() => {
+    const chips = Array.from(
+      document.querySelectorAll('.date-chip[data-iso]'),
+    );
+    if (chips.length === 0) return;
+
+    const absFmt = new Intl.DateTimeFormat('fr-FR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+
+    const DAY = 86400000;
+
+    function relFr(iso, now) {
+      const t = new Date(iso).getTime();
+      if (Number.isNaN(t)) return null;
+      const startOfToday = new Date(now);
+      startOfToday.setHours(0, 0, 0, 0);
+      if (t >= startOfToday.getTime()) return "aujourd'hui";
+      if (t >= startOfToday.getTime() - DAY) return 'hier';
+      const d = Math.floor((now - t) / DAY);
+      if (d < 7) return `il y a ${d} ${d > 1 ? 'jours' : 'jour'}`;
+      if (d < 30) {
+        const w = Math.floor(d / 7);
+        return `il y a ${w} ${w > 1 ? 'semaines' : 'semaine'}`;
+      }
+      if (d < 365) return `il y a ${Math.max(1, Math.floor(d / 30))} mois`;
+      const a = Math.floor(d / 365);
+      return `il y a ${a} ${a > 1 ? 'années' : 'année'}`;
+    }
+
+    function toggle(chip) {
+      const iso = chip.dataset.iso;
+      const rel = relFr(iso, Date.now());
+      if (rel === null) return; // unparseable ISO: keep the absolute text
+      const toRelative = chip.getAttribute('aria-pressed') !== 'true';
+      chip.textContent = toRelative ? rel : absFmt.format(new Date(iso));
+      chip.setAttribute('aria-pressed', String(toRelative));
+    }
+
+    for (const chip of chips) {
+      // Load-time pass: the relative duration is computed (and the embedded
+      // ISO validated) now; the visible text stays the server-rendered
+      // absolute form until the first toggle.
+      if (relFr(chip.dataset.iso, Date.now()) === null) {
+        chip.removeAttribute('tabindex');
+        chip.setAttribute('aria-disabled', 'true');
+        continue;
+      }
+      chip.addEventListener('click', () => toggle(chip));
+      chip.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle(chip);
+        }
+      });
+    }
+  })();
+</script>

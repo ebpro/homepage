@@ -21,6 +21,12 @@
 // tolerated — manifests before the v8.6 liveness probe ship the array only);
 // an empty union falls back to a plain `<github_url>/branches` link.
 //
+// Per-action dates (spec 2026-10-24): cards expose `stableIso`/`latestIso`
+// (the manifest's `dates.stable`/`dates.latest`, no fallback) plus their
+// absolute `dd/MM/yyyy HH:mm` rendering (`stableDateDT`/`latestDateDT`).
+// The per-action date chips are the only date display on a card — the
+// generic meta-row date was removed.
+//
 // `primary` (where title/description/"Latest" point for a live card):
 //   1. a live tagged release (`releases_live && latest_vtag`) — stable URL,
 //      survives develop re-renders;
@@ -125,6 +131,23 @@ export function frDateAbs(iso) {
   return Number.isNaN(d.getTime()) ? null : frDateFmt.format(d);
 }
 
+const frDateTimeFmt = new Intl.DateTimeFormat('fr-FR', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+});
+
+/** `2026-10-17T12:32:00Z` -> `17/10/2026 14:32` (build-time, local TZ).
+    Same Intl options as the client-side chip toggle in Card.astro, so the
+    server-rendered and JS-toggled absolute forms are byte-identical. */
+export function frDateTimeAbs(iso) {
+  if (!iso) return null;
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? null : frDateTimeFmt.format(d);
+}
+
 const rankOf = (category) => CATEGORY_RANK[category] ?? 11;
 
 // Legacy-compatible sort key (catalog.py `_default_sortkey`).
@@ -198,6 +221,10 @@ export function deriveCards(manifest) {
       date: dateFull ? dateFull.slice(0, 10) : null,
       dateAbs: frDateAbs(dateFull),
       stableDateAbs: frDateAbs(r.dates?.stable || r.pushed_at || null),
+      stableIso: r.dates?.stable || null,
+      latestIso: r.dates?.latest || null,
+      stableDateDT: frDateTimeAbs(r.dates?.stable),
+      latestDateDT: frDateTimeAbs(r.dates?.latest),
     };
   });
 
