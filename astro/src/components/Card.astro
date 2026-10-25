@@ -55,15 +55,18 @@
 // without JS), sharing one active-topic Set with the Thèmes select and the
 // "Filtres actifs" chip row (parity with teaching-catalog v8.6).
 //
-// Date chips (spec 2026-10-24): the Stable and Latest actions each carry a
-// clickable chip when their manifest timestamp exists (`dates.stable` /
-// `dates.latest` — no fallback). The server renders the ABSOLUTE FR date
-// (`dd/MM/yyyy HH:mm`, build-time, also the `title` tooltip + no-JS
-// fallback); the raw ISO travels in `data-iso` and the scoped script below
-// re-computes the RELATIVE duration ("il y a X") client-side on load and on
-// every toggle — nothing relative is ever baked. The chip is a SIBLING of
-// its action (inside `.card-action-group`), never a child of the button, so
-// a chip click can never trigger the action's navigation.
+// Date captions (spec 2026-10-24, restyled as captions 2026-10-25): the
+// Stable and Latest actions each carry a clickable CAPTION (visually
+// subordinate, rendered UNDER the button it describes by CSS) when their
+// manifest timestamp exists (`dates.stable` / `dates.latest` — no fallback).
+// The server renders the ABSOLUTE FR date (`dd/MM/yyyy HH:mm`, build-time)
+// as the visible text (no-JS fallback); the raw ISO travels in `data-iso`
+// and the scoped script below re-computes the RELATIVE duration ("il y a X")
+// client-side on load and on every toggle — nothing relative is ever baked.
+// The caption's `title` tooltip carries the French context sentence (NOT the
+// date; the script never rewrites `title`). The caption is a SIBLING of its
+// action (inside `.card-action-group`), never a child of the button, so a
+// caption click can never trigger the action's navigation.
 
 import { STATUS_LABELS } from '../data/cards.mjs';
 
@@ -116,6 +119,14 @@ const stableTitle = hasStable
     ? 'non publié'
     : 'aucun tag stable';
 const latestTitle = state === 'dead' ? 'non publie' : 'pas de branche develop';
+// Date-caption tooltips (spec 2026-10-25): a French context sentence in
+// `title` — NOT the date. The visible text stays the server-rendered
+// absolute date, and the toggle script never rewrites `title`, so the
+// sentence is static.
+const stableCaptionTitle =
+  "Date de la version stable — cliquer pour afficher l'ancienneté";
+const latestCaptionTitle =
+  "Dernière publication — cliquer pour afficher l'ancienneté";
 ---
 
 <article
@@ -156,7 +167,7 @@ const latestTitle = state === 'dead' ? 'non publie' : 'pas de branche develop';
           tabindex="0"
           aria-pressed="false"
           data-iso={card.stableIso}
-          title={card.stableDateDT}>
+          title={stableCaptionTitle}>
           {card.stableDateDT}
         </span>
       )}
@@ -178,7 +189,7 @@ const latestTitle = state === 'dead' ? 'non publie' : 'pas de branche develop';
           tabindex="0"
           aria-pressed="false"
           data-iso={card.latestIso}
-          title={card.latestDateDT}>
+          title={latestCaptionTitle}>
           {card.latestDateDT}
         </span>
       )}
@@ -219,14 +230,16 @@ const latestTitle = state === 'dead' ? 'non publie' : 'pas de branche develop';
 </article>
 
 <script>
-  // Date chips (spec 2026-10-24): clicking a chip toggles between the
-  // RELATIVE duration (« aujourd'hui », « hier », « il y a N jours/… »)
-  // and the ABSOLUTE « dd/MM/yyyy HH:mm ». The server renders the absolute
-  // form (progressive enhancement — without JS the chip stays absolute);
-  // the relative duration is computed CLIENT-SIDE on load and re-computed
-  // with a fresh Date.now() on every toggle — nothing relative is ever
-  // baked at build time. Each chip is a SIBLING of its action button, so a
-  // chip click can never trigger the button's navigation.
+  // Date captions (spec 2026-10-24, caption restyle 2026-10-25): clicking a
+  // caption toggles between the RELATIVE duration (« aujourd'hui », « hier
+  // », « il y a N jours/… ») and the ABSOLUTE « dd/MM/yyyy HH:mm ». The
+  // server renders the absolute form (progressive enhancement — without JS
+  // the caption stays absolute); the relative duration is computed
+  // CLIENT-SIDE on load and re-computed with a fresh Date.now() on every
+  // toggle — nothing relative is ever baked at build time. Each caption is
+  // a SIBLING of its action button (stacked UNDER it by CSS), so a caption
+  // click can never trigger the button's navigation. `title` (the French
+  // context sentence) is never rewritten.
   (() => {
     const chips = Array.from(
       document.querySelectorAll('.date-chip[data-iso]'),
