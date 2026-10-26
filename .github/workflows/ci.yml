@@ -1,0 +1,168 @@
+# Homepage CI — build, structural checks, gated rsync deploy to vai.
+#
+# Pattern provenance (copied from proven org workflow code, nothing invented):
+#   - runner pool [self-hosted, linux, ebpro-org, x64]: ebpro/_quarto-utils
+#     render-quarto.yml render job (shared ARC pool, scale-to-zero — cold starts
+#     of a few minutes are normal).
+#   - SHA-pinned actions/checkout + actions/setup-node (deliberately NO cache:
+#     key) + runner-local npm cache (npm_config_cache + --prefer-offline):
+#     ebpro/starter-quarkus-microservices security-audit.yml (Actions caches
+#     were the org's storage pressure; see that file's comment).
+#   - deploy mechanics (empty-secret guard, mktemp + printf + chmod 600, key
+#     path exported via GITHUB_ENV, StrictHostKeyChecking=accept-new, $KEY
+#     UNQUOTED inside the rsync -e string, no --delete): ebpro/_quarto-utils
+#     render-quarto.yml deploy-static job ("Write SSH key" / rsync steps).
+#
+# Deploy is gated to non-PR events: PR runs build + structural checks only and
+# never touch vai. The post-publish sha256 equality gate makes the
+# "200 != published" fallback class un-silicable: the host catch-all served a
+# ~23 KB DokuWiki fallback body on HTTP 200 for absent paths (documented
+# 2026-10-16); absent paths now return a stock Apache 404 — both classes are
+# caught (curl -f on non-2xx, byte-for-byte sha equality on 200).
+
+name: Homepage CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: homepage-ci-${{ github.ref }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build-check-deploy:
+    runs-on: [self-hosted, linux, ebpro-org, x64]
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        # SHA pin copied verbatim from starter-quarkus-microservices/security-audit.yml.
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+
+      - name: Setup Node.js 24
+        # Same pin as security-audit.yml; NO cache key on purpose (runner-local
+        # npm cache below instead — proven pattern, avoids Actions-cache growth).
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: "24"
+
+      - name: Install lockfile dependencies
+        working-directory: astro
+        env:
+          npm_config_cache: /home/runner/.npm
+        run: |
+          set -euo pipefail
+          mkdir -p /home/runner/.npm
+          npm ci --prefer-offline
+
+      - name: Build site
+        working-directory: astro
+        run: |
+          set -euo pipefail
+          npm run build
+
+      - name: Structural checks
+        run: |
+          set -euo pipefail
+          bash .github/ci-checks.sh
+
+      # --- Deploy (push to main / workflow_dispatch only — never PRs) ----------
+      # Mechanics copied from _quarto-utils/render-quarto.yml deploy-static.
+
+      - name: Write SSH key
+        if: github.event_name != 'pull_request'
+        env:
+          TEACHING_DEPLOY_SSH_KEY: ${{ secrets.TEACHING_DEPLOY_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "$TEACHING_DEPLOY_SSH_KEY" ]; then
+            echo "::error::TEACHING_DEPLOY_SSH_KEY secret is empty or not visible for this repo; deploy impossible"
+            exit 1
+          fi
+          KEY="$(mktemp /tmp/homepage-deploy-key.XXXXXX)"
+          printf '%s\n' "$TEACHING_DEPLOY_SSH_KEY" > "$KEY"
+          chmod 600 "$KEY"
+          echo "KEY=$KEY" >> "$GITHUB_ENV"
+
+      - name: Remote timestamped backup (keep 10)
+        if: github.event_name != 'pull_request'
+        run: |
+          set -euo pipefail
+          # Prune is scoped STRICTLY to the homepage-astro.bak-*.tar.gz pattern
+          # (keep the 10 newest) — nothing else on the host is touched.
+          ssh -i "$KEY" -o StrictHostKeyChecking=accept-new bruno@vai.univ-tln.fr \
+            'cd ~ && tar -czf homepage-astro.bak-$(date +%Y%m%dT%H%M)CEST.tar.gz homepage-astro && ls -1t homepage-astro.bak-*.tar.gz 2>/dev/null | tail -n +11 | xargs -r rm -f'
+
+      - name: Rsync dist to vai (no --delete)
+        if: github.event_name != 'pull_request'
+        run: |
+          set -euo pipefail
+          # $KEY is UNQUOTED inside the rsync -e string on purpose: rsync splits
+          # -e on whitespace and escaped inner quotes would reach ssh literally
+          # (proven gotcha, render-quarto.yml "rsync to personal server" step).
+          rsync -az --mkpath -e "ssh -i $KEY -o StrictHostKeyChecking=accept-new" astro/dist/ bruno@vai.univ-tln.fr:homepage-astro/
+
+      - name: Verify live publish (sha256 equality)
+        if: github.event_name != 'pull_request'
+        run: |
+          set -euo pipefail
+          # "200 != published" guard (see file header): the live body must be
+          # byte-for-byte the local build for BOTH pages, else the run is red.
+          hash_of() {
+            if command -v sha256sum >/dev/null 2>&1; then
+              sha256sum "$1" | awk '{print $1}'
+            else
+              shasum -a 256 "$1" | awk '{print $1}'
+            fi
+          }
+          fetch() { # $1=url $2=dest — retry x3, 5 s apart
+            local url="$1" dest="$2" i
+            for i in 1 2 3; do
+              if curl --connect-timeout 3 --max-time 20 -fsS "$url" -o "$dest"; then
+                return 0
+              fi
+              echo ">> fetch attempt $i/3 failed for $url"
+              sleep 5
+            done
+            return 1
+          }
+          fail() {
+            echo "::error::ci-deploy-verify: $1"
+            exit 1
+          }
+
+          pages=(index.html catalog/index.html)
+          for page in "${pages[@]}"; do
+            local_hash="$(hash_of "astro/dist/$page")"
+            url="https://bruno.univ-tln.fr/homepage/${page%index.html}"
+            live="$(mktemp)"
+            fetch "$url" "$live" || fail "live fetch failed after 3 attempts: $url"
+            live_hash="$(hash_of "$live")"
+            rm -f "$live"
+            echo ">> $page local=$local_hash live=$live_hash"
+            if [ "$local_hash" != "$live_hash" ]; then
+              fail "sha256 mismatch for $page — live body is not the local build (fallback-page class)"
+            fi
+          done
+          echo "✅ live publish verified: both pages byte-identical to the local build"
+
+      - name: Remove SSH key
+        # always(): the key must be removed from the persistent self-hosted
+        # runner even when an earlier deploy step turned the job red (proven
+        # fleet pattern — render-quarto.yml "Clean up staging key").
+        if: always() && github.event_name != 'pull_request'
+        run: |
+          set -uo pipefail
+          if [ -n "${KEY:-}" ]; then
+            rm -f "$KEY"
+          fi
