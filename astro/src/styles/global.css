@@ -1,0 +1,1388 @@
+/* Homepage shell — professional 2026 light/dark theme.
+   Design system: token-driven custom properties, one restrained accent
+   (indigo), soft-depth surfaces, system font stack (no runtime font fetch).
+   Theme resolution: :root = light defaults; @media (prefers-color-scheme:
+   dark) applies dark tokens unless the user pinned light; [data-theme="dark"]
+   pins dark explicitly. JS (inline, pre-paint) manages data-theme +
+   localStorage; CSS-only fallback works without JS. */
+
+/* ---------- Tokens: light (default) ---------- */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces & ink */
+  --bg: #f7f8fc;
+  --surface: #ffffff;
+  --surface-2: #eef0f7;
+  --fg: #16181d;
+  --fg-muted: #5b6373;
+  --border: #e4e6ef;
+  --border-strong: #d3d6e2;
+  --header-bg: rgba(247, 248, 252, 0.78);
+
+  /* Accent (single, restrained) */
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-ink: #3730a3;
+  --accent-soft: rgba(79, 70, 229, 0.08);
+  --accent-chip: #4338ca;
+  --accent-chip-bg: rgba(79, 70, 229, 0.1);
+
+  /* Status chip (Partiel / Gelé) */
+  --warn-ink: #92610a;
+  --warn-bg: rgba(217, 148, 22, 0.12);
+
+  /* Depth */
+  --shadow-color: 230 40% 20%;
+  --shadow-1: 0 1px 2px 0 hsl(var(--shadow-color) / 0.06),
+    0 1px 3px 0 hsl(var(--shadow-color) / 0.08);
+  --shadow-2: 0 4px 10px -2px hsl(var(--shadow-color) / 0.12),
+    0 12px 28px -8px hsl(var(--shadow-color) / 0.18);
+
+  /* Typography (system stack — self-contained build, no downloads) */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
+    monospace;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-hero: clamp(2.1rem, 5.5vw, 3.1rem);
+  --leading: 1.6;
+
+  /* Spacing scale (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 999px;
+
+  --maxw: 1080px;
+}
+
+/* ---------- Tokens: dark (system preference, unpinned) ---------- */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --bg: #0e1015;
+    --surface: #161922;
+    --surface-2: #1d212c;
+    --fg: #e7e9f1;
+    --fg-muted: #99a1b4;
+    --border: #262b38;
+    --border-strong: #333a4b;
+    --header-bg: rgba(14, 16, 21, 0.72);
+
+    --accent: #8a91ff;
+    --accent-hover: #a7acff;
+    --accent-ink: #bcbfff;
+    --accent-soft: rgba(138, 145, 255, 0.12);
+    --accent-chip: #b4b9ff;
+    --accent-chip-bg: rgba(138, 145, 255, 0.16);
+
+    --warn-ink: #f5c76e;
+    --warn-bg: rgba(245, 199, 110, 0.14);
+
+    --shadow-color: 240 60% 2%;
+    --shadow-1: 0 1px 2px 0 hsl(var(--shadow-color) / 0.4),
+      0 1px 3px 0 hsl(var(--shadow-color) / 0.5);
+    --shadow-2: 0 4px 12px -2px hsl(var(--shadow-color) / 0.55),
+      0 14px 32px -8px hsl(var(--shadow-color) / 0.65);
+  }
+}
+
+/* ---------- Tokens: dark (explicitly pinned, wins over system) ---------- */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0e1015;
+  --surface: #161922;
+  --surface-2: #1d212c;
+  --fg: #e7e9f1;
+  --fg-muted: #99a1b4;
+  --border: #262b38;
+  --border-strong: #333a4b;
+  --header-bg: rgba(14, 16, 21, 0.72);
+
+  --accent: #8a91ff;
+  --accent-hover: #a7acff;
+  --accent-ink: #bcbfff;
+  --accent-soft: rgba(138, 145, 255, 0.12);
+  --accent-chip: #b4b9ff;
+  --accent-chip-bg: rgba(138, 145, 255, 0.16);
+
+  --warn-ink: #f5c76e;
+  --warn-bg: rgba(245, 199, 110, 0.14);
+
+  --shadow-color: 240 60% 2%;
+  --shadow-1: 0 1px 2px 0 hsl(var(--shadow-color) / 0.4),
+    0 1px 3px 0 hsl(var(--shadow-color) / 0.5);
+  --shadow-2: 0 4px 12px -2px hsl(var(--shadow-color) / 0.55),
+    0 14px 32px -8px hsl(var(--shadow-color) / 0.65);
+}
+
+/* ---------- Base ---------- */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading);
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 0.12em 0.4em;
+  border-radius: var(--radius-sm);
+  overflow-wrap: anywhere;
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+/* ---------- Header (sticky, faint glass) ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  background: var(--header-bg);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  backdrop-filter: blur(12px) saturate(1.4);
+  border-bottom: 1px solid var(--border);
+  z-index: 10;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.site-header nav {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.site-header .brand {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+.site-header .brand:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.site-header ul {
+  list-style: none;
+  display: flex;
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+}
+
+.site-header ul a {
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  padding: var(--space-1) 0;
+}
+
+.site-header ul a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* Theme toggle */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  color: var(--fg-muted);
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s ease, border-color 0.15s ease,
+    background-color 0.25s ease, transform 0.15s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.theme-toggle svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  display: block;
+}
+
+/* Language switch (index header): pill group + theme toggle share the
+   right-aligned slot. `.header-controls` only exists on the index page;
+   catalog keeps the bare `.theme-toggle` with its own margin-left:auto. */
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-left: auto;
+}
+
+.header-controls .theme-toggle {
+  margin-left: 0;
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.lang-tab {
+  appearance: none;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--fg-muted);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1;
+  padding: 0.45em 1em;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.lang-tab:hover {
+  border-color: var(--accent);
+  color: var(--fg);
+}
+
+.lang-tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.lang-tab[aria-pressed="true"] {
+  background: var(--surface);
+  border-color: var(--accent);
+  color: var(--fg);
+  box-shadow: var(--shadow-1);
+}
+
+/* Icon state: moon in light, sun in dark (system or pinned) */
+
+.icon-sun {
+  display: none;
+}
+
+.icon-moon {
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .icon-sun {
+    display: block;
+  }
+  :root:not([data-theme="light"]) .icon-moon {
+    display: none;
+  }
+}
+
+:root[data-theme="dark"] .icon-sun {
+  display: block;
+}
+
+:root[data-theme="dark"] .icon-moon {
+  display: none;
+}
+
+:root[data-theme="light"] .icon-sun {
+  display: none;
+}
+
+:root[data-theme="light"] .icon-moon {
+  display: block;
+}
+
+/* ---------- Notice banner (first block of <main>, above the hero) ----------
+   Calm alert: reuses the existing --warn-* status tokens (Partiel / Gelé)
+   so it stays readable in light and dark without introducing new colors. */
+
+.notice-banner {
+  background: var(--warn-bg);
+  border-left: 4px solid var(--warn-ink);
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.notice-banner-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-5) var(--space-5);
+}
+
+.notice-banner p {
+  margin: 0;
+  font-size: var(--text-sm);
+  line-height: var(--leading);
+  color: var(--fg-muted);
+}
+
+.notice-banner p + p {
+  margin-top: var(--space-2);
+}
+
+.notice-banner-title {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.notice-banner a {
+  font-weight: 600;
+}
+
+/* Inactive language panel: out of layout and tab order. */
+.notice-panel[hidden] {
+  display: none;
+}
+
+/* Materials section headings (the ## levels of the taught structure).
+   Compact uppercase labels — no heading-scale jump inside the note. */
+.notice-materials-h {
+  margin: var(--space-3) 0 var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+/* Compact materials list (EN/VI link blocks inside the banner).
+   Single column at every width — no columns/grid, mobile-safe. */
+.notice-links {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  line-height: 1.7;
+  font-size: 0.95em;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-5) var(--space-7);
+}
+
+.hero h1 {
+  font-size: var(--text-hero);
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0 0 var(--space-3);
+  letter-spacing: -0.03em;
+}
+
+.hero-role {
+  font-size: var(--text-lg);
+  font-weight: 500;
+  margin: 0 0 var(--space-2);
+}
+
+.hero-affiliation {
+  color: var(--fg-muted);
+  margin: 0 0 var(--space-4);
+}
+
+.hero-domains {
+  display: inline-block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-1);
+  padding: var(--space-3) var(--space-5);
+  margin: 0 0 var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+  line-height: 1.8;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.hero-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+}
+
+.hero-links a {
+  display: inline-block;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--fg);
+  box-shadow: var(--shadow-1);
+  transition: color 0.15s ease, border-color 0.15s ease,
+    background-color 0.15s ease, transform 0.15s ease;
+}
+
+.hero-links a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+/* ---------- Sections ---------- */
+
+.page-section {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-5);
+}
+
+.page-section h2 {
+  font-size: var(--text-2xl);
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  border-bottom: 2px solid var(--accent);
+  display: inline-block;
+  padding-bottom: var(--space-1);
+  margin: 0 0 var(--space-4);
+}
+
+.group {
+  margin: var(--space-7) 0;
+}
+
+.group h3 {
+  font-size: var(--text-lg);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  margin: 0 0 var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.group h3::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ---------- Cards ---------- */
+
+.grid {
+  display: grid;
+  /* min(…, 100%) prevents horizontal overflow at 375px viewports */
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: var(--space-4);
+}
+
+.card {
+  /* position:relative — stacking context for the open-branches lift below */
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    border-color 0.18s ease, background-color 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-2);
+}
+
+.card-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.card-title-row .badge {
+  margin-left: auto;
+}
+
+.card-title {
+  font-size: var(--text-base);
+  font-weight: 650;
+  margin: 0;
+  line-height: 1.35;
+  /* The title is the (longer) human-readable label — allow multi-line
+     wrapping, incl. long unbroken tokens. */
+  overflow-wrap: anywhere;
+}
+
+/* Repository-name subtitle (title/subtitle swap, spec 2026-10-25): muted
+   monospace, NOT a link (Source stays the only GitHub link per card). */
+
+.card-subtitle {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--fg-muted);
+  overflow-wrap: anywhere;
+}
+
+/* Publication cards keep the title link (catalogue titles are plain text —
+   the action band is the affordance there). */
+
+.card-title a {
+  color: var(--fg);
+  word-break: break-word;
+}
+
+.card:hover .card-title a {
+  color: var(--accent);
+}
+
+.card-desc {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+}
+
+.card-meta {
+  margin: auto 0 0;
+  padding-top: var(--space-2);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--fg-muted);
+}
+
+/* Catalogue cards: the content date moved to the per-action date chips
+   (spec 2026-10-24) — the meta row can be empty (no filière). Keep the
+   flex push but drop the padding so an empty row has zero height. */
+
+.card-meta:empty {
+  padding-top: 0;
+}
+
+/* Status chip (Partiel / Gelé) */
+
+.badge {
+  background: var(--warn-bg);
+  color: var(--warn-ink);
+  border-radius: var(--radius-full);
+  padding: 0.1rem 0.6rem;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+
+/* Category chip (filière) */
+
+.tag {
+  background: var(--accent-chip-bg);
+  color: var(--accent-chip);
+  border-radius: var(--radius-full);
+  padding: 0.1rem 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: lowercase;
+}
+
+/* Dead/unpublished marker (rendered only when manifest ships site_live:false) */
+
+.chip-off {
+  background: var(--surface-2);
+  color: var(--fg-muted);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-full);
+  padding: 0.1rem 0.6rem;
+  font-weight: 600;
+}
+
+.card--dead {
+  opacity: 0.72;
+}
+
+.card--dead:hover {
+  transform: none;
+  box-shadow: var(--shadow-1);
+  border-color: var(--border);
+}
+
+/* ---------- Publication cards (section Publications) ---------- */
+
+.card-authors {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.card-venue {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+}
+
+/* ---------- Placeholders, contact, footer ---------- */
+
+.placeholder {
+  background: var(--surface);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: var(--space-6);
+}
+
+.contact-grid h3 {
+  font-size: var(--text-base);
+  margin: 0 0 var(--space-3);
+}
+
+address {
+  font-style: normal;
+  line-height: 1.8;
+  color: var(--fg-muted);
+}
+
+address a {
+  color: var(--accent);
+}
+
+/* PGP fingerprint: copyable monospace block (section Contact) */
+
+.pgp-fingerprint {
+  margin: 0 0 var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+}
+
+.pgp-fingerprint code {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--fg);
+  letter-spacing: 0.04em;
+  overflow-wrap: normal;
+}
+
+/* Catalogue CTA button (section Enseignement) */
+
+.catalogue-btn {
+  display: inline-block;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--fg);
+  box-shadow: var(--shadow-1);
+  transition: color 0.15s ease, border-color 0.15s ease,
+    background-color 0.15s ease, transform 0.15s ease;
+}
+
+.catalogue-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+/* Secondary "legacy catalogue" line under the CTA button */
+
+.cta-legacy {
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+}
+
+/* ---------- Course table (section Enseignement, "Cours universitaires") ----------
+    Compact table ported from the legacy DokuWiki sidebar. Auto table
+    layout, no fixed column widths (mobile-safe at 375px); the term
+    badges reuse the accent-chip token pair so they adapt to light/dark
+    exactly like .tag (no text-transform: term labels are case-sensitive). */
+
+.course-group {
+  margin: 0 0 var(--space-5);
+}
+
+.course-group:last-child {
+  margin-bottom: 0;
+}
+
+.course-group-title {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-base);
+  font-weight: 650;
+  color: var(--fg);
+}
+
+.course-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.course-table td {
+  padding: var(--space-2);
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.course-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.course-table a {
+  word-break: break-word;
+}
+
+/* Term badge (M1 S1 / PO43 …): pill geometry mirrors .tag/.badge. */
+
+.course-badge {
+  display: inline-block;
+  background: var(--accent-chip-bg);
+  color: var(--accent-chip);
+  border-radius: var(--radius-full);
+  padding: 0.1rem 0.6rem;
+  font-size: var(--text-xs);
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* Retired row: the course cell is struck through and muted (the <del>
+   wraps plain text only — no link). */
+
+.course-table del {
+  color: var(--fg-muted);
+}
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  margin-top: var(--space-7);
+  background: var(--surface);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.site-footer p {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: var(--space-5);
+  color: var(--fg-muted);
+  font-size: var(--text-sm);
+}
+
+/* ---------- Mobile refinements ---------- */
+
+@media (max-width: 640px) {
+  .hero {
+    padding-top: var(--space-7);
+  }
+
+  .site-header nav {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .site-header ul {
+    gap: var(--space-4);
+  }
+
+  .page-section {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  .notice-banner-inner {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+
+  .card:hover,
+  .hero-links a:hover,
+  .theme-toggle:hover {
+    transform: none;
+  }
+}
+
+/* ---------- Catalog page (/catalog/) ---------- */
+
+/* Intro paragraphs: readable measure inside .page-section */
+
+.catalog-lead {
+  max-width: 75ch;
+}
+
+/* Live-updating count line (only #catalog-count-n changes via JS) */
+
+.catalog-count {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--fg-muted);
+}
+
+/* Filter controls: search / category / sort */
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-5);
+}
+
+.filter-bar input[type="search"],
+.filter-bar select {
+  font: inherit;
+  font-size: var(--text-sm);
+  color: var(--fg);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+}
+
+.filter-bar input[type="search"] {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+
+.filter-bar input[type="search"]::placeholder {
+  color: var(--fg-muted);
+}
+
+/* Per-section card count inside the .group h3 flex row */
+
+.section-count {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--fg-muted);
+}
+
+/* Action band button (Stable / Latest / Branches / Source): outlined pill;
+   the band itself (`.card-actions`) provides the visual separation. */
+
+.card-action {
+  display: inline-block;
+  font: inherit;
+  font-size: var(--text-xs);
+  font-weight: 650;
+  line-height: 1;
+  color: var(--fg);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+a.card-action:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  text-decoration: none;
+}
+
+/* Disabled "Latest" (dead cards): affordance stays visible, muted */
+
+.card-action:disabled {
+  cursor: not-allowed;
+  color: var(--fg-muted);
+  opacity: 0.7;
+}
+
+/* Dead cards: muted title (the title is plain text, no link) */
+
+.card--dead .card-title {
+  color: var(--fg-muted);
+}
+
+/* Generic [hidden] support: .card is display:flex, so a bare hidden
+   attribute would not remove it from layout. */
+
+[hidden] {
+  display: none !important;
+}
+
+/* FR/EN/VI panel switching (index): the pre-paint head script sets
+   html[data-lang="en"|"vi"] from the pinned choice (hp-lang), so the target
+   panels are revealed BEFORE first paint (no FOUC). `display: revert` restores
+   the element's own display (block/flex/inline-block); group h3s are display:
+   flex via `.group h3`, so their non-FR variant needs an explicit restore.
+   The end-of-body controller keeps the `hidden` attributes in sync, so the
+   generic [hidden] rule above covers the FR side and JS-driven switches. */
+
+html[data-lang="en"] [data-lang="fr"],
+html[data-lang="vi"] [data-lang="fr"] {
+  display: none !important;
+}
+
+html[data-lang="en"] [data-lang="en"],
+html[data-lang="vi"] [data-lang="vi"] {
+  display: revert !important;
+}
+
+html[data-lang="en"] .group > h3[data-lang="en"],
+html[data-lang="vi"] .group > h3[data-lang="vi"] {
+  display: flex !important;
+}
+
+/* Non-active language panels inside the banner are hidden by the controller;
+   mirror that in CSS so a vi/en pin never shows the FR banner pre-paint. */
+html[data-lang="en"] .notice-panel[data-lang="vi"],
+html[data-lang="vi"] .notice-panel[data-lang="en"] {
+  display: none !important;
+}
+
+/* Folded taught-materials list: closed by default (the LP ECMN/WebLang
+   lecture has ended — the links stay reachable but out of the way). The
+   summary reads as the former intro line; the CERT warning stays visible. */
+.notice-materials {
+  margin-top: var(--space-3);
+}
+
+.notice-materials > summary {
+  cursor: pointer;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--fg);
+  list-style: none;
+}
+
+.notice-materials > summary::-webkit-details-marker {
+  display: none;
+}
+
+.notice-materials > summary::before {
+  content: "▸ ";
+  color: var(--fg-muted);
+}
+
+.notice-materials[open] > summary::before {
+  content: "▾ ";
+}
+
+/* ---------- Catalog parity: topic pills, Stable actions, active-filter
+   chips, empty state (teaching-catalog v8.6 parity; existing tokens only,
+   light/dark adaptive, mobile-safe) ---------- */
+
+/* Topic pill zone: visually distinct from the action band (separator). */
+
+.card-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border);
+}
+
+/* Topic pill: filter toggle button (inert without JS); pressed = solid
+   accent, mirroring the stable action. */
+
+.chip-pill {
+  font: inherit;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--fg-muted);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 0.25rem 0.6rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.chip-pill:hover {
+  color: var(--fg);
+  border-color: var(--accent);
+}
+
+.chip-pill[aria-pressed="true"] {
+  color: var(--bg);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.chip-pill[aria-pressed="true"]:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+/* Action band: its own surface + border separates it from the card body.
+   Top-aligned (spec 2026-10-25): the Stable/Latest date captions extend
+   BELOW their buttons, so the band items align at their top edge. */
+
+.card-actions {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+/* "Stable": solid accent (rendered only when the tagged release is live).
+   Kept after the .card-action rules above so the same-specificity hover
+   override wins. */
+
+.card-action--stable {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+a.card-action--stable:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--bg);
+}
+
+/* Action + its date caption: one column — the caption sits UNDER the
+   button it describes (spec 2026-10-25); a caption click can never
+   trigger the action's navigation. */
+
+.card-action-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .15rem;
+}
+
+/* Date caption (Stable / Latest): visually SUBORDINATE to its button — no
+   border, no pill background, a dotted underline reads "clickable
+   caption". Toggles between the RELATIVE duration and the ABSOLUTE
+   « dd/MM/yyyy HH:mm » (JS in Card.astro; the server renders the absolute
+   form — no-JS fallback). Line-height + padding keep a ~36 px effective
+   touch zone; the global :focus-visible outline covers focus. */
+
+.date-chip {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  line-height: var(--leading);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--fg-muted);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px dotted var(--fg-muted);
+  padding: .5rem .35rem;
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+/* Hover: a very subtle wash only — the caption stays subordinate (no
+   accent border, no solid fill). */
+
+.date-chip:hover {
+  color: var(--fg);
+  background: var(--accent-soft);
+}
+
+/* Pressed = relative duration shown: the ink shifts slightly toward --fg
+   but stays subordinate to the button. */
+
+.date-chip[aria-pressed="true"] {
+  color: var(--fg);
+  border-bottom-color: var(--fg);
+}
+
+/* Disabled "Stable": the solid-accent look must not survive — grayed
+   outlined pill (same family as the disabled "Latest"). */
+
+button.card-action--stable:disabled {
+  background: var(--surface);
+  border-color: var(--border-strong);
+  color: var(--fg-muted);
+}
+
+/* "Branches": native <details> dropdown enumerating the manifest branches
+   (plain-text items — per-branch site URLs are not liveness-probed). */
+
+.card-branches {
+  position: relative;
+}
+
+.card-branches > summary.card-action {
+  list-style: none;
+}
+
+.card-branches > summary.card-action::-webkit-details-marker {
+  display: none;
+}
+
+.card-branches > summary.card-action::before {
+  content: '▾ ';
+  color: var(--fg-muted);
+  font-size: 0.85em;
+}
+
+.card-branches[open] > summary.card-action::before {
+  content: '▴ ';
+}
+
+/* The dropdown panel must clear sibling cards: it is position:absolute
+   (z-index 20) inside the card, so the card holding it open needs its own
+   stacking lift above its grid neighbours (`.card` is position:relative). */
+
+.card:has(.card-branches[open]) {
+  z-index: 10;
+}
+
+/* Full branch names: the panel sizes to its content (no 280px wrap) and
+   scrolls horizontally only on very narrow viewports (90vw cap). */
+
+.card-branches-list {
+  position: absolute;
+  top: calc(100% + var(--space-1));
+  left: 0;
+  z-index: 20;
+  width: max-content;
+  min-width: 100%;
+  max-width: min(90vw, max-content);
+  white-space: nowrap;
+  overflow-x: auto;
+  margin: 0;
+  padding: var(--space-1) 0;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.card-branches-list li {
+  padding: var(--space-1) var(--space-3);
+  white-space: nowrap;
+}
+
+/* Dead cards: the description (plain text, no link) stays muted. */
+
+.card--dead .card-desc {
+  color: var(--fg-muted);
+}
+
+/* "Réinitialiser": matches the .filter-bar control geometry. */
+
+.filter-reset {
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--fg);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.filter-reset:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* New axis selects inherit the .filter-bar control styling; cap their
+   width so long option labels never force horizontal scroll on narrow
+   viewports. */
+
+.filter-bar select {
+  max-width: 100%;
+}
+
+/* "Filtres actifs" chip row (hidden until a filter is set). */
+
+.active-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: calc(-1 * var(--space-3)) 0 var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+}
+
+.active-filters-label {
+  font-weight: 650;
+  color: var(--fg-muted);
+}
+
+.active-filters-chips {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+/* Active-filter chip: label + "×" mark (JS-built <button>). */
+
+.chip-x {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font: inherit;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--accent-chip);
+  background: var(--accent-chip-bg);
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  padding: 0.15rem 0.6rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.chip-x:hover {
+  border-color: var(--accent);
+}
+
+.chip-x-mark {
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0.75;
+}
+
+/* "Tout effacer" (end of the chip row). */
+
+.filters-clear {
+  margin-left: auto;
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--accent);
+  background: none;
+  border: 0;
+  padding: 0.15rem 0;
+  cursor: pointer;
+}
+
+.filters-clear:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* Empty state (hidden while at least one card is visible). */
+
+.catalog-empty {
+  margin: var(--space-5) 0 0;
+  padding: var(--space-5);
+  text-align: center;
+  color: var(--fg-muted);
+  background: var(--surface);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+}
