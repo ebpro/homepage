@@ -55,18 +55,24 @@
 // without JS), sharing one active-topic Set with the Thèmes select and the
 // "Filtres actifs" chip row (parity with teaching-catalog v8.6).
 //
-// Date captions (spec 2026-10-24, restyled as captions 2026-10-25): the
-// Stable and Latest actions each carry a clickable CAPTION (visually
-// subordinate, rendered UNDER the button it describes by CSS) when their
-// manifest timestamp exists (`dates.stable` / `dates.latest` — no fallback).
+// Date captions (spec 2026-10-24, restyled as captions 2026-10-25,
+// duration-as-default 2026-10-25): the Stable and Latest actions each
+// carry a clickable CAPTION (visually subordinate, rendered UNDER the
+// button it describes by CSS) when their manifest timestamp exists
+// (`dates.stable` / `dates.latest` — no fallback).
 // The server renders the ABSOLUTE FR date (`dd/MM/yyyy HH:mm`, build-time)
-// as the visible text (no-JS fallback); the raw ISO travels in `data-iso`
-// and the scoped script below re-computes the RELATIVE duration ("il y a X")
-// client-side on load and on every toggle — nothing relative is ever baked.
-// The caption's `title` tooltip carries the French context sentence (NOT the
-// date; the script never rewrites `title`). The caption is a SIBLING of its
-// action (inside `.card-action-group`), never a child of the button, so a
-// caption click can never trigger the action's navigation.
+// as the visible text (no-JS fallback for users and crawlers); the raw ISO
+// travels in `data-iso` and the scoped script below computes the RELATIVE
+// duration (bare « N jours » / « N semaines » / « N mois » / « N an(s) » —
+// no leading phrase) client-side: on load each caption switches to the
+// DURATION as its default state, and every toggle re-computes with a fresh
+// Date.now() — nothing relative is ever baked.
+// The caption's `title` tooltip carries the French context sentence (NOT
+// the date); the script rewrites `title` to match the displayed form:
+// « … afficher la date » while the duration is shown, « … afficher
+// l'ancienneté » while the absolute date is shown. The caption is a
+// SIBLING of its action (inside `.card-action-group`), never a child of
+// the button, so a caption click can never trigger the action's navigation.
 
 import { STATUS_LABELS } from '../data/cards.mjs';
 
@@ -230,16 +236,22 @@ const latestCaptionTitle =
 </article>
 
 <script>
-  // Date captions (spec 2026-10-24, caption restyle 2026-10-25): clicking a
-  // caption toggles between the RELATIVE duration (« aujourd'hui », « hier
-  // », « il y a N jours/… ») and the ABSOLUTE « dd/MM/yyyy HH:mm ». The
-  // server renders the absolute form (progressive enhancement — without JS
-  // the caption stays absolute); the relative duration is computed
-  // CLIENT-SIDE on load and re-computed with a fresh Date.now() on every
-  // toggle — nothing relative is ever baked at build time. Each caption is
-  // a SIBLING of its action button (stacked UNDER it by CSS), so a caption
-  // click can never trigger the button's navigation. `title` (the French
-  // context sentence) is never rewritten.
+  // Date captions (spec 2026-10-24, caption restyle 2026-10-25,
+  // duration-as-default 2026-10-25): clicking a caption toggles between
+  // the RELATIVE duration (« aujourd'hui », « hier », « N jours »,
+  // « N semaines », « N mois », « N an » / « N ans » — bare values, no
+  // leading phrase) and the ABSOLUTE « dd/MM/yyyy HH:mm ». The server
+  // renders the absolute form (progressive enhancement — without JS the
+  // caption stays absolute); once the script runs, each caption switches
+  // to the DURATION as its default state (aria-pressed="true"). The
+  // duration is computed CLIENT-SIDE on load and re-computed with a fresh
+  // Date.now() on every toggle — nothing relative is ever baked at build
+  // time. `title` (the French context sentence) is rewritten by the
+  // script to match the displayed form: « … afficher la date » while the
+  // duration is shown, « … afficher l'ancienneté » while the absolute
+  // date is shown. Each caption is a SIBLING of its action button
+  // (stacked UNDER it by CSS), so a caption click can never trigger the
+  // button's navigation.
   (() => {
     const chips = Array.from(
       document.querySelectorAll('.date-chip[data-iso]'),
@@ -256,6 +268,27 @@ const latestCaptionTitle =
 
     const DAY = 86400000;
 
+    const TITLES = {
+      stable: {
+        duration: "Date de la version stable — cliquer pour afficher la date",
+        absolute: "Date de la version stable — cliquer pour afficher l'ancienneté",
+      },
+      latest: {
+        duration: "Dernière publication — cliquer pour afficher la date",
+        absolute: "Dernière publication — cliquer pour afficher l'ancienneté",
+      },
+    };
+
+    // The chip's group also holds its action: the stable caption sits next
+    // to `.card-action--stable`, every other caption next to
+    // `.card-action--latest` — that selects the right sentence pair.
+    function titlesFor(chip) {
+      const group = chip.closest('.card-action-group');
+      return group && group.querySelector('.card-action--stable')
+        ? TITLES.stable
+        : TITLES.latest;
+    }
+
     function relFr(iso, now) {
       const t = new Date(iso).getTime();
       if (Number.isNaN(t)) return null;
@@ -264,34 +297,48 @@ const latestCaptionTitle =
       if (t >= startOfToday.getTime()) return "aujourd'hui";
       if (t >= startOfToday.getTime() - DAY) return 'hier';
       const d = Math.floor((now - t) / DAY);
-      if (d < 7) return `il y a ${d} ${d > 1 ? 'jours' : 'jour'}`;
+      if (d < 7) return d > 1 ? `${d} jours` : `${d} jour`;
       if (d < 30) {
         const w = Math.floor(d / 7);
-        return `il y a ${w} ${w > 1 ? 'semaines' : 'semaine'}`;
+        return w > 1 ? `${w} semaines` : `${w} semaine`;
       }
-      if (d < 365) return `il y a ${Math.max(1, Math.floor(d / 30))} mois`;
+      if (d < 365) return `${Math.max(1, Math.floor(d / 30))} mois`;
       const a = Math.floor(d / 365);
-      return `il y a ${a} ${a > 1 ? 'années' : 'année'}`;
+      return a > 1 ? `${a} ans` : `${a} an`;
+    }
+
+    function showDuration(chip) {
+      const rel = relFr(chip.dataset.iso, Date.now());
+      if (rel === null) return;
+      chip.textContent = rel;
+      chip.setAttribute('aria-pressed', 'true');
+      chip.title = titlesFor(chip).duration;
+    }
+
+    function showAbsolute(chip) {
+      chip.textContent = absFmt.format(new Date(chip.dataset.iso));
+      chip.setAttribute('aria-pressed', 'false');
+      chip.title = titlesFor(chip).absolute;
     }
 
     function toggle(chip) {
-      const iso = chip.dataset.iso;
-      const rel = relFr(iso, Date.now());
-      if (rel === null) return; // unparseable ISO: keep the absolute text
-      const toRelative = chip.getAttribute('aria-pressed') !== 'true';
-      chip.textContent = toRelative ? rel : absFmt.format(new Date(iso));
-      chip.setAttribute('aria-pressed', String(toRelative));
+      if (chip.getAttribute('aria-pressed') === 'true') {
+        showAbsolute(chip);
+      } else {
+        showDuration(chip);
+      }
     }
 
     for (const chip of chips) {
-      // Load-time pass: the relative duration is computed (and the embedded
-      // ISO validated) now; the visible text stays the server-rendered
-      // absolute form until the first toggle.
+      // Load-time pass: validate the embedded ISO, then switch the caption
+      // to its default DURATION state (the absolute SSR text is what no-JS
+      // users and crawlers see).
       if (relFr(chip.dataset.iso, Date.now()) === null) {
         chip.removeAttribute('tabindex');
         chip.setAttribute('aria-disabled', 'true');
         continue;
       }
+      showDuration(chip);
       chip.addEventListener('click', () => toggle(chip));
       chip.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
