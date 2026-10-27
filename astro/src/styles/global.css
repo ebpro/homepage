@@ -1405,8 +1405,10 @@ button.card-action--stable:disabled {
   color: var(--fg-muted);
 }
 
-/* "Branches": native <details> dropdown enumerating the manifest branches
-   (plain-text items — per-branch site URLs are not liveness-probed). */
+/* "Branches": native <details> dropdown enumerating the card's branch list;
+   items are links following the hybrid rule (branchHref in cards.mjs) —
+   render previews for develop/year branches of live repos, GitHub tree
+   links otherwise. */
 
 .card-branches {
   position: relative;
