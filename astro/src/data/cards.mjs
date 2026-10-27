@@ -18,8 +18,12 @@
 //
 // Branches: the card's "Branches" action uses the deduped union of the
 // manifest's `branches` array and the `dates.branches` keys (both shapes are
-// tolerated — manifests before the v8.6 liveness probe ship the array only);
-// an empty union falls back to a plain `<github_url>/branches` link.
+// tolerated — manifests before the v8.6 liveness probe ship the array only).
+// Each listed branch renders as a dropdown item whose href follows the
+// hybrid link rule (branchHref below): a render-preview URL for `develop` /
+// `YYYY` year-snapshot branches of a site-publishing repo (state 'live'), a
+// GitHub tree link for every other branch. An empty union renders a disabled
+// "Branches" button (title « aucune branche listée ») — no fallback link.
 //
 // Per-action dates (spec 2026-10-24): cards expose `stableIso`/`latestIso`
 // (the manifest's `dates.stable`/`dates.latest`, no fallback) plus their
@@ -240,4 +244,32 @@ export function deriveCards(manifest) {
   );
 
   return cards;
+}
+
+// Hybrid branch-link rule (spec 2026-10-27, user-approved): a branch item
+// links to the render preview `${SITE_BASE}/<name>/<branch>/` IFF the repo
+// publishes a site — card state 'live', i.e. the manifest's build-time
+// `site_live === true` develop-liveness probe (the same static signal that
+// enables the "Latest" site link) — AND the branch is `develop` or a `YYYY`
+// year snapshot (org branch policy). Every other branch name (feature/test/
+// prefixes, master/main/…, repos without a live site) keeps the GitHub
+// source link. Branch names are never percent-encoded (PR #7 precedent:
+// `/`-bearing names ship verbatim in the URL).
+const PREVIEW_BRANCH_RE = /^\d{4}$/;
+
+/**
+ * Href for one "Branches" dropdown item (hybrid rule, spec 2026-10-27).
+ *
+ * @param {{ name: string, githubUrl: string, state: 'live'|'dead'|'no-develop' }} card
+ * @param {string} branch
+ * @returns {string} render-preview URL (site-eligible repo + develop/year
+ *   branch) or GitHub tree URL (every other branch)
+ */
+export function branchHref(card, branch) {
+  const preview =
+    card.state === 'live' &&
+    (branch === 'develop' || PREVIEW_BRANCH_RE.test(branch));
+  return preview
+    ? `${SITE_BASE}/${card.name}/${branch}/`
+    : `${card.githubUrl}/tree/${branch}`;
 }

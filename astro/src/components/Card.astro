@@ -34,10 +34,15 @@
 // there is no vtag).
 //
 // "Branches": when the manifest lists branches, a native <details> dropdown
-// enumerates them as GitHub tree links (`<github_url>/tree/<branch>` —
-// per-branch SITE URLs are not liveness-probed, so the destination is
-// github.com, never bruno.univ-tln.fr; the card keeps exactly one Source
-// link to github.com); otherwise the action is a grayed disabled button
+// enumerates them with the hybrid link rule (spec 2026-10-27, computed by
+// branchHref() in cards.mjs): an item links to the render preview
+// `SITE_BASE/<repo>/<branch>/` IFF the repo publishes a site (state 'live' —
+// the manifest's `site_live` build-time probe, the same signal that enables
+// the "Latest" link) AND the branch is `develop` or a `YYYY` year snapshot
+// (org branch policy); every other item (feature/test branches, repos
+// without a live site) keeps the GitHub source link
+// `<github_url>/tree/<branch>`. The card keeps exactly one Source link to
+// github.com; otherwise the action is a grayed disabled button
 // (title « aucune branche listée ») — the same unavailable-action pattern
 // as Stable/Latest.
 //
@@ -76,7 +81,7 @@
 // SIBLING of its action (inside `.card-action-group`), never a child of
 // the button, so a caption click can never trigger the action's navigation.
 
-import { STATUS_LABELS } from '../data/cards.mjs';
+import { STATUS_LABELS, branchHref } from '../data/cards.mjs';
 
 interface Props {
   card: {
@@ -210,7 +215,7 @@ const latestCaptionTitle =
         <ul class="card-branches-list">
           {card.branches.map((b) => (
             <li>
-              <a href={`${githubUrl}/tree/${b}`}>{b}</a>
+              <a href={branchHref(card, b)}>{b}</a>
             </li>
           ))}
         </ul>
