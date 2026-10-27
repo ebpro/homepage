@@ -340,9 +340,7 @@ const generatedDate = manifest.generated_at
       // nodes, never innerHTML). The visible count updates only
       // #catalog-count-n so the "manifeste généré le …" suffix stays
       // visible. Content dates: the absolute FR date is baked (no-JS
-      // fallback + title tooltip); on load the visible text is rewritten to
-      // "il y a X" re-computed from the embedded ISO (data-commit) on every
-      // view — nothing relative is ever baked.
+      // fallback + title tooltip).
       (() => {
         const root = document.getElementById('catalog-cards');
         if (!root) return;
@@ -366,30 +364,9 @@ const generatedDate = manifest.generated_at
           const grid = section.querySelector('.grid');
           defaultOrder.set(grid, Array.from(grid.children));
         }
-        const total = root.querySelectorAll('article[data-catalog-card]').length;
         const activeTopics = new Set();
         let formation = '';
         let filiere = '';
-
-        function relFr(iso) {
-          const s = (Date.now() - new Date(iso).getTime()) / 1000;
-          if (s < 3600) return 'il y a ' + Math.max(1, Math.floor(s / 60)) + ' min';
-          const d = Math.floor(s / 86400);
-          if (d < 1) return 'il y a ' + Math.floor(s / 3600) + ' h';
-          if (d < 7) return 'il y a ' + d + (d > 1 ? ' jours' : ' jour');
-          if (d < 28) {
-            const w = Math.floor(d / 7);
-            return 'il y a ' + w + (w > 1 ? ' semaines' : ' semaine');
-          }
-          if (d < 365) return 'il y a ' + Math.max(1, Math.floor(d / 30)) + ' mois';
-          const a = Math.floor(d / 365);
-          return 'il y a ' + a + (a > 1 ? ' ans' : ' an');
-        }
-
-        document.querySelectorAll('[data-commit]').forEach((el) => {
-          el.textContent = relFr(el.dataset.commit);
-          el.setAttribute('aria-label', el.textContent);
-        });
 
         function optionLabel(sel, value) {
           const opt = Array.from(sel.options).find((o) => o.value === value);
@@ -539,7 +516,7 @@ const generatedDate = manifest.generated_at
                 .filter(Boolean);
               const ok =
                 (!q || (card.dataset.search || '').includes(q)) &&
-                activeTopics.every((t) => topics.includes(t)) &&
+                Array.from(activeTopics).every((t) => topics.includes(t)) &&
                 (!formation || (card.dataset.formation || '') === formation) &&
                 (!filiere || (card.dataset.filiere || '') === filiere);
               card.hidden = !ok;
