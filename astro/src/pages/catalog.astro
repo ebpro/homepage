@@ -181,7 +181,7 @@ const generatedDate = manifest.generated_at
           correspondant n'était pas accessible à cet instant — le contenu
           reste disponible sur GitHub (bouton <em>Source</em>).
         </p>
-        <p class="catalog-count" id="catalog-count">
+        <p class="catalog-count" id="catalog-count" aria-live="polite">
           <span
             id="catalog-count-n">{cards.length}
             {cards.length > 1 ? 'dépôts' : 'dépôt'}</span
@@ -368,6 +368,11 @@ const generatedDate = manifest.generated_at
         let formation = '';
         let filiere = '';
 
+        // Accent-folded comparison (Événement == événement): subsumes the
+        // previous lowercasing; applied to BOTH the query and data-search.
+        const fold = (s) =>
+          s.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+
         function optionLabel(sel, value) {
           const opt = Array.from(sel.options).find((o) => o.value === value);
           return opt ? (opt.dataset.label || opt.textContent).trim() : value;
@@ -483,7 +488,7 @@ const generatedDate = manifest.generated_at
         }
 
         const apply = () => {
-          const q = (search.value || '').trim().toLowerCase();
+          const q = fold((search.value || '').trim());
           const cat = catSel.value;
           const sort = sortSel.value;
           let visible = 0;
@@ -515,13 +520,21 @@ const generatedDate = manifest.generated_at
                 .split(' ')
                 .filter(Boolean);
               const ok =
-                (!q || (card.dataset.search || '').includes(q)) &&
-                Array.from(activeTopics).every((t) => topics.includes(t)) &&
+                (!q || fold(card.dataset.search || '').includes(q)) &&
+                // OR within the topics facet: a card matches when it carries
+                // ANY of the active topics (empty set matches all); the
+                // facets themselves stay AND-combined.
+                (!activeTopics.size ||
+                  Array.from(activeTopics).some((t) => topics.includes(t))) &&
                 (!formation || (card.dataset.formation || '') === formation) &&
                 (!filiere || (card.dataset.filiere || '') === filiere);
               card.hidden = !ok;
               if (ok) sectionVisible += 1;
             }
+            // Live section count (replaces the static build-time total).
+            const sectionCount = section.querySelector('.section-count');
+            if (sectionCount)
+              sectionCount.textContent = `(${sectionVisible})`;
             const catOk = !cat || section.dataset.category === cat;
             section.hidden = !catOk || sectionVisible === 0;
             if (catOk) visible += sectionVisible;
@@ -533,11 +546,77 @@ const generatedDate = manifest.generated_at
           if (emptyEl) emptyEl.hidden = visible !== 0;
         };
 
+        // URL state (shareable deep links): the five filter params q, cat,
+        // topics (comma-separated), form, fil — sort is deliberately NOT
+        // persisted. Empties are omitted; with nothing set the query string
+        // is dropped entirely (the plain page URL stays canonical).
+        function stateFromControls() {
+          const params = new URLSearchParams();
+          const q = (search.value || '').trim();
+          if (q) params.set('q', q);
+          const cat = catSel.value;
+          if (cat) params.set('cat', cat);
+          const topics = Array.from(activeTopics).sort((a, b) =>
+            a.localeCompare(b, 'fr'),
+          );
+          if (topics.length) params.set('topics', topics.join(','));
+          if (formation) params.set('form', formation);
+          if (filiere) params.set('fil', filiere);
+          const qs = params.toString();
+          history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
+        }
+
+        // Restore the URL state into the controls BEFORE the first update().
+        // Out-of-domain values (no matching <option>) are ignored silently;
+        // the filière cascade runs after both axes are restored, then the
+        // regular update() syncs pills / chips / visibility.
+        function restoreFromUrl() {
+          const params = new URLSearchParams(location.search);
+          const q = params.get('q');
+          if (q !== null) search.value = q;
+          const cat = params.get('cat');
+          if (cat !== null) {
+            catSel.value = Array.from(catSel.options).some(
+              (o) => o.value === cat,
+            )
+              ? cat
+              : '';
+          }
+          const topics = params.get('topics');
+          if (topics !== null) {
+            for (const t of topics.split(',').filter(Boolean)) {
+              if (Array.from(topicSel.options).some((o) => o.value === t)) {
+                activeTopics.add(t);
+              }
+            }
+          }
+          const form = params.get('form');
+          if (form !== null) {
+            formationSel.value = Array.from(formationSel.options).some(
+              (o) => o.value === form,
+            )
+              ? form
+              : '';
+          }
+          const fil = params.get('fil');
+          if (fil !== null) {
+            filiereSel.value = Array.from(filiereSel.options).some(
+              (o) => o.value === fil,
+            )
+              ? fil
+              : '';
+          }
+          formation = formationSel.value;
+          filiere = filiereSel.value;
+          narrowFiliere();
+        }
+
         function update() {
           syncPills();
           syncTopicSelect();
           renderActiveFilters();
           apply();
+          stateFromControls();
         }
 
         function clearFilters() {
@@ -582,6 +661,7 @@ const generatedDate = manifest.generated_at
         });
         resetBtn.addEventListener('click', clearFilters);
         clearBtn.addEventListener('click', clearFilters);
+        restoreFromUrl();
         update();
       })();
     </script>
