@@ -122,6 +122,7 @@ const frDateFmt = new Intl.DateTimeFormat('fr-FR', {
   day: '2-digit',
   month: '2-digit',
   year: 'numeric',
+  timeZone: 'Europe/Paris',
 });
 
 /** `2026-10-17T12:32:00Z` -> `17/10/2026` (build-time, date only). */
@@ -137,9 +138,12 @@ const frDateTimeFmt = new Intl.DateTimeFormat('fr-FR', {
   year: 'numeric',
   hour: '2-digit',
   minute: '2-digit',
+  timeZone: 'Europe/Paris',
 });
 
-/** `2026-10-17T12:32:00Z` -> `17/10/2026 14:32` (build-time, local TZ).
+/** `2026-10-17T12:32:00Z` -> `17/10/2026 14:32` (build-time, Europe/Paris —
+    pinned, so the output is identical on any build machine regardless of its
+    own TZ; Intl resolves the per-instant offset, DST included).
     Same Intl options as the client-side chip toggle in Card.astro, so the
     server-rendered and JS-toggled absolute forms are byte-identical. */
 export function frDateTimeAbs(iso) {
