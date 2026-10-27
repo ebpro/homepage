@@ -34,10 +34,12 @@
 // there is no vtag).
 //
 // "Branches": when the manifest lists branches, a native <details> dropdown
-// enumerates them (plain-text items — per-branch site URLs are not
-// liveness-probed, so the card keeps exactly one Source link to github.com);
-// otherwise the action is a grayed disabled button (title « aucune branche
-// listée ») — the same unavailable-action pattern as Stable/Latest.
+// enumerates them as GitHub tree links (`<github_url>/tree/<branch>` —
+// per-branch SITE URLs are not liveness-probed, so the destination is
+// github.com, never bruno.univ-tln.fr; the card keeps exactly one Source
+// link to github.com); otherwise the action is a grayed disabled button
+// (title « aucune branche listée ») — the same unavailable-action pattern
+// as Stable/Latest.
 //
 // The `data-*` attributes power the client-side catalogue controls
 // (search / category / topic / formation / filière filters / sort) on
@@ -207,7 +209,9 @@ const latestCaptionTitle =
         <summary class="card-action card-action--branches">Branches</summary>
         <ul class="card-branches-list">
           {card.branches.map((b) => (
-            <li>{b}</li>
+            <li>
+              <a href={`${githubUrl}/tree/${b}`}>{b}</a>
+            </li>
           ))}
         </ul>
       </details>
