@@ -13,7 +13,7 @@
 import manifest from '../data/manifest.json';
 import Card from '../components/Card.astro';
 import {
-  deriveCards,
+  deriveCardsProbed,
   CATEGORY_LABELS,
   CATEGORY_RANK,
   TOPIC_FREQUENT_MIN,
@@ -23,7 +23,12 @@ import {
 } from '../data/cards.mjs';
 import '../styles/global.css';
 
-const cards = deriveCards(manifest);
+// Build-time preview-liveness probe runs here (cards.mjs, PR #11): every
+// branch item's candidate preview page is fetched and signature-checked
+// before rendering. Kill-switch: PREVIEW_PROBE=off (pure /tree/ fallback).
+// NOTE: dist bytes are time-dependent on the live previews/ family — the
+// CI runner==live sha256 gate is the authority (see cards.mjs header).
+const cards = await deriveCardsProbed(manifest);
 
 const byCategory = new Map();
 for (const card of cards) {

@@ -21,12 +21,40 @@
 // tolerated — manifests before the v8.6 liveness probe ship the array only).
 // For state-'live' cards, `develop` is PREPENDED to the union (the manifest
 // never lists the default branch — 0/115 fleet-wide — so the dropdown leads
-// with the develop preview link). Each listed branch renders as a dropdown
-// item whose href follows the hybrid link rule (branchHref below): a
-// render-preview URL for `develop` / `YYYY` year-snapshot branches of a
-// site-publishing repo (state 'live'), a GitHub tree link for every other
-// branch. An empty union renders a disabled "Branches" button (title
-// « aucune branche listée ») — no fallback link.
+// with the develop preview link; seeding stays gated on state 'live').
+// Each branch item renders with the preview-liveness href (branchHref
+// below): the item links to its RENDER PREVIEW when a build-time probe
+// (deriveCardsProbed) confirmed the preview page is live — `develop` ->
+// `${SITE_BASE}/<name>/develop/` (literal folder), any other branch ->
+// `${SITE_BASE}/<name>/previews/<branch, / -> ->/` (the ephemeral
+// previews/ family) — and falls back to the GitHub tree link
+// `${githubUrl}/tree/<branch>` when the preview is absent. An empty union
+// renders a disabled "Branches" button (title « aucune branche listée »)
+// — no fallback link.
+//
+// Preview liveness probe (build-time, PR #11): the previews/ family is
+// EPHEMERAL (rm'd on branch delete) and the vendored manifest carries no
+// per-branch liveness, so deriveCardsProbed() probes the candidate preview
+// page for every branch item EXCEPT the seeded `develop` of a state-'live'
+// card (the manifest's site_live probe already proves that one):
+//   develop          -> ${SITE_BASE}/<name>/develop/index.html
+//   any other branch -> ${SITE_BASE}/<name>/previews/<branch, / -> ->/index.html
+// Bounded pool (<= PREVIEW_PROBE_CONCURRENCY in flight), per-probe
+// AbortSignal.timeout, and ANY error / non-200 / signature mismatch = DEAD
+// (fail closed — a dead preview must fall back to the tree link, never a
+// dead site link). Liveness = HTTP 200 AND body matches the established
+// Quarto signature: contains 'quarto-' OR is >= QUARTO_BODY_MIN_BYTES (the
+// host catch-all once answered 200 with a ~23 KB fallback page — a 200
+// alone is NOT evidence of publication; same doctrine as the
+// teaching-catalog develop probe). Kill-switch: PREVIEW_PROBE=off skips all
+// probes (pure /tree/ fallback; develop items of live cards unchanged).
+//
+// DETERMINISM CAVEAT: the live-preview set is time-dependent — the
+// previews/ family churns upstream between builds, so dist bytes are NOT
+// reproducible across days (local==runner byte equality holds only while
+// no preview appeared or disappeared in between). CI authority remains the
+// runner==live sha256 gate in ci.yml; do not treat a local-vs-runner byte
+// diff as a build defect.
 //
 // Per-action dates (spec 2026-10-24): cards expose `stableIso`/`latestIso`
 // (the manifest's `dates.stable`/`dates.latest`, no fallback) plus their
@@ -253,41 +281,119 @@ export function deriveCards(manifest) {
   return cards;
 }
 
-// Hybrid branch-link rule (spec 2026-10-27, user-approved; publish-path
-// correction 2026-10-27): a branch item links to the render preview IFF the
-// repo publishes a site — card state 'live', i.e. the manifest's build-time
-// `site_live === true` develop-liveness probe (the same static signal that
-// enables the "Latest" site link) — AND the branch is `develop` or a `YYYY`
-// year snapshot (org branch policy). The publish path is NOT one shape
-// (deploy-static in render-quarto.yml): the default branch renders into the
-// LITERAL `develop/` folder, every other branch into `previews/<slug>/`
-// (`/` → `-`, ephemeral), `v*` tags into `releases/<tag>/` — so the two
-// preview arms build different URLs. Every other branch name (feature/test/
-// prefixes, master/main/…, repos without a live site) keeps the GitHub
-// source link. Branch names are never percent-encoded (PR #7 precedent:
-// `/`-bearing names ship verbatim in the URL).
-const PREVIEW_BRANCH_RE = /^\d{4}$/;
+// --- Preview liveness probe (build-time, PR #11) -------------------------------
+// Fail-closed probe of the candidate preview page per branch item. Liveness
+// signature = HTTP 200 AND (body contains 'quarto-' OR byte length >=
+// QUARTO_BODY_MIN_BYTES) — the same body-signature doctrine as the
+// teaching-catalog develop probe (a 200 alone is not evidence of
+// publication: the host catch-all historically answered 200 with a ~23 KB
+// fallback page, and 24576 B sits just above that signature).
+const PREVIEW_PROBE_CONCURRENCY = 16;
+const PREVIEW_PROBE_TIMEOUT_MS = 8000;
+const QUARTO_BODY_MARKER = 'quarto-';
+const QUARTO_BODY_MIN_BYTES = 24576;
+
+/** Probe one candidate preview page; true = live (200 + Quarto signature). */
+async function probePreviewLive(url) {
+  try {
+    const res = await fetch(url, {
+      signal: AbortSignal.timeout(PREVIEW_PROBE_TIMEOUT_MS),
+    });
+    if (!res.ok) return false;
+    const body = Buffer.from(await res.arrayBuffer());
+    return (
+      body.byteLength >= QUARTO_BODY_MIN_BYTES ||
+      body.toString('latin1').includes(QUARTO_BODY_MARKER)
+    );
+  } catch {
+    return false;
+  }
+}
 
 /**
- * Href for one "Branches" dropdown item (hybrid rule, spec 2026-10-27,
- * publish-path-corrected 2026-10-27).
+ * deriveCards + build-time preview probe (the catalogue page's entry point).
  *
- * Preview arms (state 'live' only):
- *   `develop`          -> `${SITE_BASE}/<name>/develop/` (literal folder)
- *   `YYYY` year branch -> `${SITE_BASE}/<name>/previews/<YYYY>/`
- * Every other branch   -> `${githubUrl}/tree/<branch>` (GitHub source).
+ * Attaches `card.previewLive` — a Set of branch names whose render preview
+ * the probe confirmed live — to EVERY card (empty when PREVIEW_PROBE=off,
+ * so branchHref degrades to the pure /tree/ fallback). The seeded `develop`
+ * item of a state-'live' card is not probed: the manifest's site_live
+ * probe already proves it. A `develop` listed on a NON-live card IS probed
+ * (candidate `…/develop/index.html` — develop always publishes to the
+ * literal folder, never previews/); inert today, the manifest lists 0/115
+ * develop entries.
  *
- * @param {{ name: string, githubUrl: string, state: 'live'|'dead'|'no-develop' }} card
+ * @param {{ repos: Array<object> }} manifest
+ * @returns {Promise<Array<object>>} cards as deriveCards, each carrying
+ *   `previewLive: Set<string>`
+ */
+export async function deriveCardsProbed(manifest) {
+  const cards = deriveCards(manifest);
+  for (const card of cards) card.previewLive = new Set();
+  if (process.env.PREVIEW_PROBE === 'off') return cards;
+
+  const targets = [];
+  for (const card of cards) {
+    for (const branch of card.branches) {
+      if (branch === 'develop' && card.state === 'live') continue;
+      const url =
+        branch === 'develop'
+          ? `${SITE_BASE}/${card.name}/develop/index.html`
+          : `${SITE_BASE}/${card.name}/previews/${branch.replace(/\//g, '-')}/index.html`;
+      targets.push({ card, branch, url });
+    }
+  }
+
+  let next = 0;
+  const workers = Array.from(
+    { length: Math.min(PREVIEW_PROBE_CONCURRENCY, targets.length) },
+    async () => {
+      while (next < targets.length) {
+        const t = targets[next++];
+        if (await probePreviewLive(t.url)) t.card.previewLive.add(t.branch);
+      }
+    },
+  );
+  await Promise.all(workers);
+
+  // Build-log evidence (also shows in CI): the probe split for this build.
+  const liveCount = cards.reduce((n, c) => n + c.previewLive.size, 0);
+  console.log(
+    `[preview-probe] ${liveCount}/${targets.length} branch previews live`,
+  );
+  return cards;
+}
+
+// Branch-link rule (spec 2026-10-27, preview-liveness wave PR #11): a branch
+// dropdown item links to its RENDER PREVIEW when the build-time probe marked
+// it live — `develop` to the LITERAL `develop/` folder, every other branch to
+// `previews/<slug>/` (`/` → `-`, the deploy-static publish path for
+// non-default branches; ephemeral, rm'd on branch delete) — and otherwise to
+// the GitHub tree link. The rule is NOT gated on card state: a
+// feature-branch preview can exist while develop is unpublished (precedent:
+// notebook-dev-web). Only the develop SEEDING in deriveCards stays gated on
+// state 'live'. Branch names are never percent-encoded (PR #7 precedent:
+// `/`-bearing names ship verbatim in the URL).
+/**
+ * Href for one "Branches" dropdown item (preview-liveness rule, PR #11).
+ *
+ *   `develop` (live card, or probed live) -> `${SITE_BASE}/<name>/develop/`
+ *   other branch, probed live             -> `${SITE_BASE}/<name>/previews/<branch, / -> ->/`
+ *   everything else                        -> `${githubUrl}/tree/<branch>`
+ *
+ * @param {{ name: string, githubUrl: string, state: 'live'|'dead'|'no-develop', previewLive?: Set<string> }} card
  * @param {string} branch
- * @returns {string} render-preview URL (site-eligible repo + develop/year
- *   branch) or GitHub tree URL (every other branch)
+ * @returns {string} render-preview URL (probed live) or GitHub tree URL
  */
 export function branchHref(card, branch) {
-  if (card.state === 'live' && branch === 'develop') {
-    return `${SITE_BASE}/${card.name}/develop/`;
+  const live = card.previewLive;
+  if (branch === 'develop') {
+    if (card.state === 'live' || (live && live.has('develop'))) {
+      return `${SITE_BASE}/${card.name}/develop/`;
+    }
+    return `${card.githubUrl}/tree/develop`;
   }
-  if (card.state === 'live' && PREVIEW_BRANCH_RE.test(branch)) {
-    return `${SITE_BASE}/${card.name}/previews/${branch}/`;
+  if (live && live.has(branch)) {
+    return `${SITE_BASE}/${card.name}/previews/${branch.replace(/\//g, '-')}/`;
   }
   return `${card.githubUrl}/tree/${branch}`;
 }
