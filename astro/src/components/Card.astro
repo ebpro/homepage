@@ -36,18 +36,18 @@
 // "Branches": a native <details> dropdown enumerates the card's branch list
 // (the manifest's branch union, with `develop` prepended for state-'live'
 // cards — the manifest never lists the default branch). Items follow the
-// hybrid link rule (spec 2026-10-27, publish-path-corrected, computed by
-// branchHref() in cards.mjs): an item links to the render preview IFF the
-// repo publishes a site (state 'live' — the manifest's `site_live`
-// build-time probe, the same signal that enables the "Latest" link) AND the
-// branch is `develop` (→ `SITE_BASE/<repo>/develop/`) or a `YYYY` year
-// snapshot (→ `SITE_BASE/<repo>/previews/<YYYY>/` — non-default branches
-// publish into the ephemeral `previews/` family, not `<repo>/<branch>/`);
-// every other item (feature/test branches, repos without a live site) keeps
-// the GitHub source link `<github_url>/tree/<branch>`. The card keeps
-// exactly one Source link to github.com; when the branch list is empty the
-// action is a grayed disabled button (title « aucune branche listée ») —
-// the same unavailable-action pattern as Stable/Latest.
+// preview-liveness link rule (spec 2026-10-27, PR #11, computed by
+// branchHref() in cards.mjs): an item links to its RENDER PREVIEW when the
+// build-time probe (deriveCardsProbed) confirmed the preview page is live —
+// `develop` → `SITE_BASE/<repo>/develop/` (literal folder), every other
+// branch → `SITE_BASE/<repo>/previews/<branch, / -> ->/` (the ephemeral
+// previews/ family, rm'd on branch delete); the seeded develop item of a
+// state-'live' card is not probed (site_live already proves it). Items
+// whose preview is absent (or PREVIEW_PROBE=off) keep the GitHub source
+// link `<github_url>/tree/<branch>`. The card keeps exactly one Source
+// link to github.com; when the branch list is empty the action is a grayed
+// disabled button (title « aucune branche listée ») — the same
+// unavailable-action pattern as Stable/Latest.
 //
 // The `data-*` attributes power the client-side catalogue controls
 // (search / category / topic / formation / filière filters / sort) on
