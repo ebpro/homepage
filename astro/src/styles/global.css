@@ -459,70 +459,6 @@ code {
   display: block;
 }
 
-/* ---------- Notice banner (first block of <main>, above the hero) ----------
-   Calm alert: reuses the existing --warn-* status tokens (Partiel / Gelé)
-   so it stays readable in light and dark without introducing new colors. */
-
-.notice-banner {
-  background: var(--warn-bg);
-  border-left: 4px solid var(--warn-ink);
-  border-bottom: 1px solid var(--border);
-  transition: background-color 0.25s ease, border-color 0.25s ease;
-}
-
-.notice-banner-inner {
-  max-width: var(--maxw);
-  margin: 0 auto;
-  padding: var(--space-4) var(--space-5) var(--space-5);
-}
-
-.notice-banner p {
-  margin: 0;
-  font-size: var(--text-sm);
-  line-height: var(--leading);
-  color: var(--fg-muted);
-}
-
-.notice-banner p + p {
-  margin-top: var(--space-2);
-}
-
-.notice-banner-title {
-  font-size: var(--text-base);
-  font-weight: 700;
-  color: var(--fg);
-}
-
-.notice-banner a {
-  font-weight: 600;
-}
-
-/* Inactive language panel: out of layout and tab order. */
-.notice-panel[hidden] {
-  display: none;
-}
-
-/* Materials section headings (the ## levels of the taught structure).
-   Compact uppercase labels — no heading-scale jump inside the note. */
-.notice-materials-h {
-  margin: var(--space-3) 0 var(--space-1);
-  font-size: var(--text-sm);
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--fg);
-}
-
-/* Compact materials list (EN/VI link blocks inside the banner).
-   Single column at every width — no columns/grid, mobile-safe. */
-.notice-links {
-  list-style: none;
-  margin: 0.5rem 0 0;
-  padding: 0;
-  line-height: 1.7;
-  font-size: 0.95em;
-}
-
 /* ---------- Hero ---------- */
 
 .hero {
@@ -868,13 +804,6 @@ address a {
   transform: translateY(-1px);
 }
 
-/* Secondary "legacy catalogue" line under the CTA button */
-
-.cta-legacy {
-  font-size: var(--text-sm);
-  color: var(--fg-muted);
-}
-
 /* ---------- Course table (section Enseignement, "Cours universitaires") ----------
     Compact table ported from the legacy DokuWiki sidebar. Auto table
     layout, no fixed column widths (mobile-safe at 375px); the term
@@ -985,11 +914,6 @@ address a {
   }
 
   .page-section {
-    padding-left: var(--space-4);
-    padding-right: var(--space-4);
-  }
-
-  .notice-banner-inner {
     padding-left: var(--space-4);
     padding-right: var(--space-4);
   }
@@ -1230,41 +1154,6 @@ html[data-lang="vi"] [data-lang="vi"] {
 html[data-lang="en"] .group > h3[data-lang="en"],
 html[data-lang="vi"] .group > h3[data-lang="vi"] {
   display: flex !important;
-}
-
-/* Non-active language panels inside the banner are hidden by the controller;
-   mirror that in CSS so a vi/en pin never shows the FR banner pre-paint. */
-html[data-lang="en"] .notice-panel[data-lang="vi"],
-html[data-lang="vi"] .notice-panel[data-lang="en"] {
-  display: none !important;
-}
-
-/* Folded taught-materials list: closed by default (the LP ECMN/WebLang
-   lecture has ended — the links stay reachable but out of the way). The
-   summary reads as the former intro line; the CERT warning stays visible. */
-.notice-materials {
-  margin-top: var(--space-3);
-}
-
-.notice-materials > summary {
-  cursor: pointer;
-  font-size: var(--text-sm);
-  font-weight: 700;
-  color: var(--fg);
-  list-style: none;
-}
-
-.notice-materials > summary::-webkit-details-marker {
-  display: none;
-}
-
-.notice-materials > summary::before {
-  content: "▸ ";
-  color: var(--fg-muted);
-}
-
-.notice-materials[open] > summary::before {
-  content: "▾ ";
 }
 
 /* ---------- Catalog parity: topic pills, Stable actions, active-filter

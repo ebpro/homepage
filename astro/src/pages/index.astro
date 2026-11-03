@@ -1,6 +1,5 @@
 ---
 import manifest from '../data/manifest.json';
-import CertBanner from '../components/CertBanner.astro';
 import '../styles/global.css';
 
 // Catalogue data is read at build time from the vendored manifest
@@ -164,8 +163,6 @@ const base = import.meta.env.BASE_URL;
     </header>
 
     <main>
-      <CertBanner />
-
       <section id="accueil" class="hero">
         <h1>Emmanuel Bruno</h1>
         <p class="hero-role" data-lang="fr">Maître de conférences</p>
@@ -428,18 +425,6 @@ const base = import.meta.env.BASE_URL;
               class="catalogue-btn"
               href={`${base}/catalog/`}>Xem danh mục giảng dạy</a
             >
-          </p>
-          <p class="cta-legacy" data-lang="fr">
-            Ancien catalogue :
-            <a href="https://bruno.univ-tln.fr/teaching-material/catalog/">bruno.univ-tln.fr/teaching-material/catalog/</a>
-          </p>
-          <p class="cta-legacy" data-lang="en" hidden>
-            Legacy catalogue:
-            <a href="https://bruno.univ-tln.fr/teaching-material/catalog/">bruno.univ-tln.fr/teaching-material/catalog/</a>
-          </p>
-          <p class="cta-legacy" data-lang="vi" hidden>
-            Danh mục cũ:
-            <a href="https://bruno.univ-tln.fr/teaching-material/catalog/">bruno.univ-tln.fr/teaching-material/catalog/</a>
           </p>
         </div>
 
