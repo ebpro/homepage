@@ -107,8 +107,8 @@ Fait date autorise ici uniquement ; la clause 5 de TEACHING-FLEET.md s'arrete a 
   base avec la distante plus l'`AGENTS.md` versionne.
 - La branche `fix/probe-quarto-2026-11` (le seul contenu propre a A) porte la **PR #13 ouverte**, base
   `astro-shell` : `fix(probe): use quarto signature only for liveness`, un seul fichier
-  `astro/src/data/cards.mjs`, 9 ajouts / 16 suppressions ; CI de la PR `completed/success` lu au niveau
-  run le 2026-11-03 ; son contenu n'est pas ancetre de `origin/main` (`git cherry` : signe +).
+  `astro/src/data/cards.mjs`, 9 ajouts / 16 suppressions ; CI de la PR : run `41590955688`, cree le 2026-11-03, job unique
+  `build-check-deploy` `completed/success`, relu au niveau job le 2026-11-07 ; son contenu n'est pas ancetre de `origin/main` (`git cherry` : signe +).
 - Ruling humain de ce jour : « rien n'est en danger, on peut attendre ». La voie de travail nominale
   est B (c'est la que vit l'`AGENTS.md`) ; A n'est pas un depot de travail orphelin, c'est un depot de
   revue : sa seule valeur est la PR #13, dont la fusion vise `astro-shell`, donc **ne publie rien**
