@@ -95,6 +95,26 @@ Fait date autorise ici uniquement ; la clause 5 de TEACHING-FLEET.md s'arrete a 
 - Actualisation du manifest : source = `https://bruno.univ-tln.fr/teaching-material/catalog/manifest.json`, sortie = `src/data/manifest.json` (capture versionnee).
 - CI : un seul job `build-check-deploy` sur le pool auto-helberge ; etapes de publication conditionnees par `github.event_name != 'pull_request'` ; sauvegarde distante a conserver 10 ; rsync `no --delete` vers le repertoire du site ; controle d'egalite d'empreinte apres publication ; suppression de la cle SSH en nettoyage. Mesures de verification : `upload-artifact` 0 occurrence, aucune cle de cache d'Actions demandee.
 
+### Audit comparatif des deux clones (mesure du 2026-11-07)
+
+- Clone A `/Users/bruno/Documents/homepage` : quatre branches locales (`main` a `34afe1d`,
+  `astro-shell` a `268cb55`, `feat/branch-preview-liveness` a `82033f1`, `fix/probe-quarto-2026-11` a
+  `7311e53`), toutes poussees, arbre propre. Apres `git fetch` : `astro-shell` en retard de 3 et `main`
+  en retard de 2 sur la distante. **Aucun `AGENTS.md` nulle part** dans ce clone (ni disque, ni
+  `git ls-files`). Aucun travail local hors distante : `git cherry` ne remonte que la branche de sonde,
+  et ses commits sont deja sur la distante.
+- Clone B `teaching-repos/homepage` (celui du decoupage par projet) : `main` a `68cda0e`, a parite de
+  base avec la distante plus l'`AGENTS.md` versionne.
+- La branche `fix/probe-quarto-2026-11` (le seul contenu propre a A) porte la **PR #13 ouverte**, base
+  `astro-shell` : `fix(probe): use quarto signature only for liveness`, un seul fichier
+  `astro/src/data/cards.mjs`, 9 ajouts / 16 suppressions ; CI de la PR `completed/success` lu au niveau
+  run le 2026-11-03 ; son contenu n'est pas ancetre de `origin/main` (`git cherry` : signe +).
+- Ruling humain de ce jour : « rien n'est en danger, on peut attendre ». La voie de travail nominale
+  est B (c'est la que vit l'`AGENTS.md`) ; A n'est pas un depot de travail orphelin, c'est un depot de
+  revue : sa seule valeur est la PR #13, dont la fusion vise `astro-shell`, donc **ne publie rien**
+  (la publication est conditionnee aux poussees sur `main`). La decision qui reste est celle de la PR,
+  pas celle du clone, et elle appartient a la prochaine session `homepage`.
+
 ### Missions ouvertes
 
 - Choisir le clone de travail nominal de ce depot (deux clones sur le poste, cf. Identite).
