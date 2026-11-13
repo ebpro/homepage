@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-02T17:39:36Z",
+  "generated_at": "2026-11-13T06:22:33Z",
   "org": "ebpro",
-  "count": 114,
+  "count": 115,
   "repos": [
     {
       "name": "lecture-CNAM-MI_A2-PM44",
@@ -21,7 +21,7 @@
       "status": "active",
       "formation": "cnam",
       "filiere": "mi-a2",
-      "pushed_at": "2026-11-01T15:10:14Z",
+      "pushed_at": "2026-11-07T17:20:00Z",
       "github_url": "https://github.com/ebpro/lecture-CNAM-MI_A2-PM44",
       "branches": [
         "chore/repair-solen-v1.3.42-quarto-utils-v1.3.45"
@@ -29,7 +29,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T15:10:13Z",
+        "latest": "2026-11-07T14:32:01Z",
         "stable": null,
         "branches": {
           "chore/repair-solen-v1.3.42-quarto-utils-v1.3.45": "2026-11-01T11:39:05Z"
@@ -58,7 +58,7 @@
       "status": "active",
       "formation": "cnam",
       "filiere": "mi-a2",
-      "pushed_at": "2026-11-02T07:09:20Z",
+      "pushed_at": "2026-11-07T17:17:55Z",
       "github_url": "https://github.com/ebpro/lecture-CNAM-MI_A2-PO43",
       "branches": [
         "chore/repair-solen-v1.3.42-quarto-utils-v1.3.45"
@@ -66,7 +66,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-02T07:09:11Z",
+        "latest": "2026-11-07T14:31:58Z",
         "stable": null,
         "branches": {
           "chore/repair-solen-v1.3.42-quarto-utils-v1.3.45": "2026-11-01T15:49:07Z"
@@ -94,7 +94,7 @@
       "status": "active",
       "formation": "utln",
       "filiere": "lp-ecmn",
-      "pushed_at": "2026-11-01T15:10:16Z",
+      "pushed_at": "2026-11-07T10:40:05Z",
       "github_url": "https://github.com/ebpro/lecture-UTLN-LP_ECMN-WebLang",
       "branches": [
         "chore/elotip-after-hidden-fix",
@@ -107,7 +107,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T15:10:16Z",
+        "latest": "2026-11-07T10:34:59Z",
         "stable": null,
         "branches": {
           "chore/elotip-after-hidden-fix": "2026-10-19T09:55:45Z",
@@ -140,7 +140,7 @@
       "status": "active",
       "formation": "utln",
       "filiere": "m1-info-math",
-      "pushed_at": "2026-11-01T20:52:06Z",
+      "pushed_at": "2026-11-07T10:40:01Z",
       "github_url": "https://github.com/ebpro/lecture-UTLN-M1_Info_Math-DEV-ADV",
       "branches": [
         "chore/repair-solen-v1.3.42-quarto-utils-v1.3.45",
@@ -149,7 +149,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T20:51:54Z",
+        "latest": "2026-11-07T10:35:00Z",
         "stable": null,
         "branches": {
           "chore/repair-solen-v1.3.42-quarto-utils-v1.3.45": "2026-11-01T11:39:24Z",
@@ -177,7 +177,7 @@
       "status": "active",
       "formation": "utln",
       "filiere": "m1-info-math",
-      "pushed_at": "2026-11-02T17:11:26Z",
+      "pushed_at": "2026-11-12T19:51:39Z",
       "github_url": "https://github.com/ebpro/lecture-UTLN-M1_Info_Math-DEV-OOCOL",
       "branches": [
         "feature/retone-2027"
@@ -185,7 +185,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T21:54:12Z",
+        "latest": "2026-11-12T19:32:33Z",
         "stable": null,
         "branches": {
           "feature/retone-2027": "2026-10-31T08:18:40Z"
@@ -213,7 +213,7 @@
       "status": "active",
       "formation": "utln",
       "filiere": "m2-info-math",
-      "pushed_at": "2026-11-01T17:48:12Z",
+      "pushed_at": "2026-11-12T18:23:31Z",
       "github_url": "https://github.com/ebpro/lecture-UTLN-M2_Info_Math-DEV-EXP",
       "branches": [
         "chore/repair-solen-v1.3.42-quarto-utils-v1.3.45"
@@ -221,7 +221,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T17:48:12Z",
+        "latest": "2026-11-12T17:59:40Z",
         "stable": null,
         "branches": {
           "chore/repair-solen-v1.3.42-quarto-utils-v1.3.45": "2026-11-01T15:49:10Z"
@@ -246,7 +246,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T15:55:02Z",
+      "pushed_at": "2026-11-07T17:14:31Z",
       "github_url": "https://github.com/ebpro/notebook-ci",
       "branches": [
         "chore/repair-solen-v1.3.42-quarto-utils-v1.3.45",
@@ -258,7 +258,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T15:54:57Z",
+        "latest": "2026-11-07T14:32:07Z",
         "stable": null,
         "branches": {
           "chore/repair-solen-v1.3.42-quarto-utils-v1.3.45": "2026-11-01T15:49:13Z",
@@ -289,7 +289,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-02T17:17:23Z",
+      "pushed_at": "2026-11-07T17:16:06Z",
       "github_url": "https://github.com/ebpro/notebook-containers-intro",
       "branches": [
         "chore/repair-solen-v1.3.42-quarto-utils-v1.3.45"
@@ -297,7 +297,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-02T17:17:19Z",
+        "latest": "2026-11-07T14:32:09Z",
         "stable": null,
         "branches": {
           "chore/repair-solen-v1.3.42-quarto-utils-v1.3.45": "2026-11-01T15:49:15Z"
@@ -410,7 +410,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-02T06:10:18Z",
+      "pushed_at": "2026-11-07T10:39:47Z",
       "github_url": "https://github.com/ebpro/notebook-git",
       "branches": [
         "feature/retone-2027-git",
@@ -419,7 +419,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T17:34:28Z",
+        "latest": "2026-11-07T10:35:03Z",
         "stable": null,
         "branches": {
           "feature/retone-2027-git": "2026-10-19T13:19:34Z",
@@ -446,7 +446,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T22:15:57Z",
+      "pushed_at": "2026-11-09T17:47:10Z",
       "github_url": "https://github.com/ebpro/notebook-java-after8",
       "branches": [
         "chore/repair-solen-v1.3.42-quarto-utils-v1.3.45",
@@ -456,7 +456,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T22:15:55Z",
+        "latest": "2026-11-09T07:15:32Z",
         "stable": null,
         "branches": {
           "chore/repair-solen-v1.3.42-quarto-utils-v1.3.45": "2026-11-01T15:49:23Z",
@@ -486,13 +486,13 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T22:16:15Z",
+      "pushed_at": "2026-11-09T17:46:56Z",
       "github_url": "https://github.com/ebpro/notebook-java-annotations",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T22:16:13Z",
+        "latest": "2026-11-09T07:15:33Z",
         "stable": null,
         "branches": {}
       },
@@ -515,7 +515,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T22:16:29Z",
+      "pushed_at": "2026-11-12T17:52:46Z",
       "github_url": "https://github.com/ebpro/notebook-java-asynchronous",
       "branches": [
         "master"
@@ -523,7 +523,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T22:16:27Z",
+        "latest": "2026-11-12T17:50:03Z",
         "stable": null,
         "branches": {
           "master": "2024-11-23T08:33:18Z"
@@ -549,13 +549,13 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T15:46:34Z",
+      "pushed_at": "2026-11-10T11:30:39Z",
       "github_url": "https://github.com/ebpro/notebook-java-bases",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T15:46:32Z",
+        "latest": "2026-11-10T11:20:01Z",
         "stable": null,
         "branches": {}
       },
@@ -579,13 +579,13 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T22:18:41Z",
+      "pushed_at": "2026-11-09T17:47:02Z",
       "github_url": "https://github.com/ebpro/notebook-java-beanvalidation",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T22:17:43Z",
+        "latest": "2026-11-09T07:15:35Z",
         "stable": null,
         "branches": {}
       },
@@ -638,7 +638,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T17:26:49Z",
+      "pushed_at": "2026-11-09T18:48:00Z",
       "github_url": "https://github.com/ebpro/notebook-java-collections",
       "branches": [
         "feature/retone-2027",
@@ -647,7 +647,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T17:26:47Z",
+        "latest": "2026-11-08T13:04:11Z",
         "stable": null,
         "branches": {
           "feature/retone-2027": "2026-10-19T12:37:32Z",
@@ -733,7 +733,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T22:18:44Z",
+      "pushed_at": "2026-11-12T21:15:58Z",
       "github_url": "https://github.com/ebpro/notebook-java-heritage",
       "branches": [
         "feature/upgrade-2026"
@@ -741,7 +741,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T22:17:49Z",
+        "latest": "2026-11-12T21:04:58Z",
         "stable": null,
         "branches": {
           "feature/upgrade-2026": "2026-10-15T00:20:08Z"
@@ -749,6 +749,29 @@
       },
       "releases_live": false,
       "site_live": true
+    },
+    {
+      "name": "notebook-java-heritage-corrige",
+      "description": "Corrige executable du TP heritage — reserve aux enseignants",
+      "topics": [],
+      "category": "notebook",
+      "default_branch": "master",
+      "private": true,
+      "status": null,
+      "formation": "",
+      "filiere": "",
+      "pushed_at": "2026-11-12T21:50:05Z",
+      "github_url": "https://github.com/ebpro/notebook-java-heritage-corrige",
+      "branches": [],
+      "latest_vtag": null,
+      "dates": {
+        "latest_ref": null,
+        "latest": null,
+        "stable": null,
+        "branches": {}
+      },
+      "releases_live": false,
+      "site_live": false
     },
     {
       "name": "notebook-java-install",
@@ -767,7 +790,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T22:18:47Z",
+      "pushed_at": "2026-11-07T17:14:23Z",
       "github_url": "https://github.com/ebpro/notebook-java-install",
       "branches": [
         "feature/retone-2027-java",
@@ -776,7 +799,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T22:17:54Z",
+        "latest": "2026-11-07T14:32:11Z",
         "stable": null,
         "branches": {
           "feature/retone-2027-java": "2026-10-18T08:13:12Z",
@@ -802,13 +825,13 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T19:22:40Z",
+      "pushed_at": "2026-11-09T18:47:16Z",
       "github_url": "https://github.com/ebpro/notebook-java-introduction",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T19:22:38Z",
+        "latest": "2026-11-09T17:27:51Z",
         "stable": null,
         "branches": {}
       },
@@ -831,13 +854,13 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T22:59:39Z",
+      "pushed_at": "2026-11-09T18:47:03Z",
       "github_url": "https://github.com/ebpro/notebook-java-io",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T22:59:37Z",
+        "latest": "2026-11-09T17:27:50Z",
         "stable": null,
         "branches": {}
       },
@@ -891,13 +914,13 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T22:59:46Z",
+      "pushed_at": "2026-11-09T17:18:33Z",
       "github_url": "https://github.com/ebpro/notebook-java-javafx",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T22:59:44Z",
+        "latest": "2026-11-09T06:32:29Z",
         "stable": null,
         "branches": {}
       },
@@ -953,7 +976,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T20:55:16Z",
+      "pushed_at": "2026-11-11T21:21:59Z",
       "github_url": "https://github.com/ebpro/notebook-java-jdbc",
       "branches": [
         "feature/retone-2027"
@@ -961,7 +984,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T20:55:14Z",
+        "latest": "2026-11-11T20:59:47Z",
         "stable": null,
         "branches": {
           "feature/retone-2027": "2026-10-18T10:10:15Z"
@@ -987,28 +1010,28 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-02T17:15:36Z",
+      "pushed_at": "2026-11-07T17:17:41Z",
       "github_url": "https://github.com/ebpro/notebook-java-jee",
       "branches": [
-        "dependabot/maven/resources/sample-cdi/org.apache.opennlp-opennlp-tools-2.5.9",
         "feat/java-cdi-intro-restructure-2026",
         "feat/java-jee-intro-application-servers-2026",
         "feat/java-microprofile-restructure-2026",
         "feat/java-security-lecture-2026",
-        "feat/java-transactions-restructure-2026"
+        "feat/java-transactions-restructure-2026",
+        "fix/l04-drop-stale-a-venir-pointer"
       ],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T22:59:49Z",
+        "latest": "2026-11-07T14:32:15Z",
         "stable": null,
         "branches": {
-          "dependabot/maven/resources/sample-cdi/org.apache.opennlp-opennlp-tools-2.5.9": "2026-11-02T17:15:36Z",
           "feat/java-cdi-intro-restructure-2026": "2026-10-07T22:12:33Z",
-          "feat/java-jee-intro-application-servers-2026": "2026-10-07T15:49:19Z",
+          "feat/java-jee-intro-application-servers-2026": "2026-11-02T18:18:43Z",
           "feat/java-microprofile-restructure-2026": "2026-10-09T00:54:54Z",
           "feat/java-security-lecture-2026": "2026-10-09T00:55:12Z",
-          "feat/java-transactions-restructure-2026": "2026-10-09T00:39:58Z"
+          "feat/java-transactions-restructure-2026": "2026-10-09T00:39:58Z",
+          "fix/l04-drop-stale-a-venir-pointer": "2026-11-05T07:31:48Z"
         }
       },
       "releases_live": false,
@@ -1032,13 +1055,13 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T22:20:22Z",
+      "pushed_at": "2026-11-09T17:33:37Z",
       "github_url": "https://github.com/ebpro/notebook-java-jpa",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T22:20:18Z",
+        "latest": "2026-11-09T07:14:34Z",
         "stable": null,
         "branches": {}
       },
@@ -1061,13 +1084,13 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T17:27:14Z",
+      "pushed_at": "2026-11-09T18:47:29Z",
       "github_url": "https://github.com/ebpro/notebook-java-maven",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T17:27:12Z",
+        "latest": "2026-11-09T17:27:55Z",
         "stable": null,
         "branches": {}
       },
@@ -1154,13 +1177,13 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T21:00:37Z",
+      "pushed_at": "2026-11-09T17:33:13Z",
       "github_url": "https://github.com/ebpro/notebook-java-restfulws",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T21:00:35Z",
+        "latest": "2026-11-09T07:14:31Z",
         "stable": null,
         "branches": {}
       },
@@ -1211,13 +1234,13 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T23:35:59Z",
+      "pushed_at": "2026-11-09T17:18:44Z",
       "github_url": "https://github.com/ebpro/notebook-java-serialisation",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T23:35:57Z",
+        "latest": "2026-11-09T06:33:13Z",
         "stable": null,
         "branches": {}
       },
@@ -1330,13 +1353,13 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T23:44:45Z",
+      "pushed_at": "2026-11-09T17:47:16Z",
       "github_url": "https://github.com/ebpro/notebook-mobiledev-101",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T23:44:43Z",
+        "latest": "2026-11-09T07:14:35Z",
         "stable": null,
         "branches": {}
       },
@@ -1389,7 +1412,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T22:59:15Z",
+      "pushed_at": "2026-11-09T17:18:55Z",
       "github_url": "https://github.com/ebpro/notebook-revision-java",
       "branches": [
         "feature/upgrade-2026"
@@ -1397,7 +1420,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T22:59:13Z",
+        "latest": "2026-11-09T06:33:26Z",
         "stable": null,
         "branches": {
           "feature/upgrade-2026": "2026-10-14T14:40:36Z"
@@ -1421,13 +1444,13 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T15:56:30Z",
+      "pushed_at": "2026-11-10T20:02:03Z",
       "github_url": "https://github.com/ebpro/notebook-revision-shell",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T15:56:26Z",
+        "latest": "2026-11-10T16:54:56Z",
         "stable": null,
         "branches": {}
       },
@@ -1450,13 +1473,13 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T23:37:39Z",
+      "pushed_at": "2026-11-11T19:20:17Z",
       "github_url": "https://github.com/ebpro/notebook-revision-sql",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T23:37:37Z",
+        "latest": "2026-11-11T18:17:12Z",
         "stable": null,
         "branches": {}
       },
@@ -1480,13 +1503,13 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T23:39:22Z",
+      "pushed_at": "2026-11-10T18:27:23Z",
       "github_url": "https://github.com/ebpro/notebook-se-101",
       "branches": [],
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T23:39:20Z",
+        "latest": "2026-11-10T17:22:43Z",
         "stable": null,
         "branches": {}
       },
@@ -1506,7 +1529,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-01-26T21:53:18Z",
+      "pushed_at": "2026-11-07T16:45:32Z",
       "github_url": "https://github.com/ebpro/ConflictBot",
       "branches": [
         "dependabot/maven/org.assertj-assertj-core-3.27.7"
@@ -1514,7 +1537,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2024-11-14T08:24:43Z",
+        "latest": "2026-11-07T16:45:31Z",
         "stable": null,
         "branches": {
           "dependabot/maven/org.assertj-assertj-core-3.27.7": "2026-01-26T21:53:17Z"
@@ -1536,14 +1559,13 @@
       ],
       "category": "sample",
       "default_branch": "develop",
-      "private": true,
+      "private": false,
       "status": "active",
       "formation": "utln",
       "filiere": "m1-info-math",
-      "pushed_at": "2026-11-02T06:12:54Z",
+      "pushed_at": "2026-11-03T06:07:28Z",
       "github_url": "https://github.com/ebpro/dev-oocol-fil-rouge",
       "branches": [
-        "chore/devcontainer-solen-java-25",
         "dependabot/github_actions/actions/checkout-7",
         "dependabot/github_actions/actions/setup-java-6",
         "dependabot/maven/org.apache.maven.plugins-maven-enforcer-plugin-3.6.3",
@@ -1556,10 +1578,9 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-02T06:12:54Z",
+        "latest": "2026-11-02T19:58:01Z",
         "stable": null,
         "branches": {
-          "chore/devcontainer-solen-java-25": "2026-11-02T06:02:17Z",
           "dependabot/github_actions/actions/checkout-7": "2026-10-27T20:55:15Z",
           "dependabot/github_actions/actions/setup-java-6": "2026-10-27T20:55:10Z",
           "dependabot/maven/org.apache.maven.plugins-maven-enforcer-plugin-3.6.3": "2026-10-27T20:55:28Z",
@@ -1586,12 +1607,12 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T16:12:28Z",
+      "pushed_at": "2026-11-02T21:30:53Z",
       "github_url": "https://github.com/ebpro/ecommerce-catalog",
       "branches": [
         "dependabot/npm_and_yarn/multi-ab7d3a7fa5",
         "dependabot/npm_and_yarn/multi-d49ef80a9c",
-        "dependabot/npm_and_yarn/vite-6.4.3",
+        "dependabot/npm_and_yarn/vite-6.4.5",
         "dependabot/npm_and_yarn/zod-4.6.6"
       ],
       "latest_vtag": null,
@@ -1602,7 +1623,7 @@
         "branches": {
           "dependabot/npm_and_yarn/multi-ab7d3a7fa5": "2026-10-16T03:07:23Z",
           "dependabot/npm_and_yarn/multi-d49ef80a9c": "2026-10-16T03:07:28Z",
-          "dependabot/npm_and_yarn/vite-6.4.3": "2026-10-16T03:07:26Z",
+          "dependabot/npm_and_yarn/vite-6.4.5": "2026-11-02T21:30:39Z",
           "dependabot/npm_and_yarn/zod-4.6.6": "2026-11-01T16:12:28Z"
         }
       },
@@ -1710,7 +1731,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T17:26:56Z",
+      "pushed_at": "2026-11-07T10:40:10Z",
       "github_url": "https://github.com/ebpro/lab-quarto-lookandfeel",
       "branches": [
         "chore/repair-solen-v1.3.42-quarto-utils-v1.3.45"
@@ -1718,7 +1739,7 @@
       "latest_vtag": null,
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T17:26:54Z",
+        "latest": "2026-11-07T10:34:58Z",
         "stable": null,
         "branches": {
           "chore/repair-solen-v1.3.42-quarto-utils-v1.3.45": "2026-11-01T16:16:51Z"
@@ -3018,15 +3039,19 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-17T14:42:54Z",
+      "pushed_at": "2026-11-07T07:17:31Z",
       "github_url": "https://github.com/ebpro/ai-review",
-      "branches": [],
+      "branches": [
+        "fix/review-invoker-hygiene"
+      ],
       "latest_vtag": null,
       "dates": {
         "latest_ref": null,
         "latest": null,
         "stable": null,
-        "branches": {}
+        "branches": {
+          "fix/review-invoker-hygiene": "2026-11-06T14:16:55Z"
+        }
       },
       "releases_live": false,
       "site_live": false
@@ -3309,7 +3334,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-02T03:02:52Z",
+      "pushed_at": "2026-11-09T03:03:14Z",
       "github_url": "https://github.com/ebpro/gitops",
       "branches": [
         "fix/sonarqube-265-reset",
@@ -3351,7 +3376,7 @@
           "preservation/open-webui-sso-remediation-2026-09-12": "2026-09-12T20:19:17Z",
           "preservation/opencode-sota-7a05f7b-20260912T182320Z": "2026-09-12T18:23:28Z",
           "preservation/sonarqube-267-empty-projects-2026-09-12": "2026-09-12T20:49:24Z",
-          "renovate/argoproj-argo-cd-3.x": "2026-10-26T03:05:43Z"
+          "renovate/argoproj-argo-cd-3.x": "2026-11-09T03:02:41Z"
         }
       },
       "releases_live": false,
@@ -3490,11 +3515,12 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-10-31T05:23:13Z",
+      "pushed_at": "2026-11-07T16:43:44Z",
       "github_url": "https://github.com/ebpro/quarkus-ci-runner",
       "branches": [
         "dependabot/github_actions/actions/setup-python-7",
         "dependabot/github_actions/docker/login-action-4.7.0",
+        "feat/ci-agents-from-config-repo",
         "fix/grype-db-harbor-cache",
         "fix/grype-dbsync-docker-config",
         "strategy-release-pipeline-port"
@@ -3507,6 +3533,7 @@
         "branches": {
           "dependabot/github_actions/actions/setup-python-7": "2026-10-31T05:23:13Z",
           "dependabot/github_actions/docker/login-action-4.7.0": "2026-10-31T05:23:06Z",
+          "feat/ci-agents-from-config-repo": "2026-11-06T14:26:57Z",
           "fix/grype-db-harbor-cache": "2026-10-20T08:22:59Z",
           "fix/grype-dbsync-docker-config": "2026-10-27T08:40:44Z",
           "strategy-release-pipeline-port": "2026-10-26T12:23:45Z"
@@ -3558,7 +3585,7 @@
       "status": "active",
       "formation": "",
       "filiere": "",
-      "pushed_at": "2026-11-01T14:35:41Z",
+      "pushed_at": "2026-11-10T11:30:46Z",
       "github_url": "https://github.com/ebpro/_quarto-utils",
       "branches": [
         "chore/bump-solen-quarto-full-56784a2",
@@ -3617,7 +3644,7 @@
       "latest_vtag": "v1.3.45",
       "dates": {
         "latest_ref": "develop",
-        "latest": "2026-11-01T09:38:37Z",
+        "latest": "2026-11-10T11:18:47Z",
         "stable": "2026-11-01T09:38:37Z",
         "branches": {
           "chore/bump-solen-quarto-full-56784a2": "2026-10-31T16:09:54Z",
