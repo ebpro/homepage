@@ -42,12 +42,11 @@
 // Bounded pool (<= PREVIEW_PROBE_CONCURRENCY in flight), per-probe
 // AbortSignal.timeout, and ANY error / non-200 / signature mismatch = DEAD
 // (fail closed — a dead preview must fall back to the tree link, never a
-// dead site link). Liveness = HTTP 200 AND body matches the established
-// Quarto signature: contains 'quarto-' OR is >= QUARTO_BODY_MIN_BYTES (the
-// host catch-all once answered 200 with a ~23 KB fallback page — a 200
-// alone is NOT evidence of publication; same doctrine as the
-// teaching-catalog develop probe). Kill-switch: PREVIEW_PROBE=off skips all
-// probes (pure /tree/ fallback; develop items of live cards unchanged).
+// dead site link). Liveness = HTTP 200 AND body contains the established
+// Quarto signature 'quarto-' (a 200 alone is NOT evidence of publication;
+// same doctrine as the teaching-catalog develop probe). Kill-switch:
+// PREVIEW_PROBE=off skips all probes (pure /tree/ fallback; develop items
+// of live cards unchanged).
 //
 // DETERMINISM CAVEAT: the live-preview set is time-dependent — the
 // previews/ family churns upstream between builds, so dist bytes are NOT
@@ -283,15 +282,12 @@ export function deriveCards(manifest) {
 
 // --- Preview liveness probe (build-time, PR #11) -------------------------------
 // Fail-closed probe of the candidate preview page per branch item. Liveness
-// signature = HTTP 200 AND (body contains 'quarto-' OR byte length >=
-// QUARTO_BODY_MIN_BYTES) — the same body-signature doctrine as the
-// teaching-catalog develop probe (a 200 alone is not evidence of
-// publication: the host catch-all historically answered 200 with a ~23 KB
-// fallback page, and 24576 B sits just above that signature).
+// signature = HTTP 200 AND body contains the Quarto marker 'quarto-' —
+// the same body-signature doctrine as the teaching-catalog develop probe
+// (a 200 alone is not evidence of publication).
 const PREVIEW_PROBE_CONCURRENCY = 16;
 const PREVIEW_PROBE_TIMEOUT_MS = 8000;
 const QUARTO_BODY_MARKER = 'quarto-';
-const QUARTO_BODY_MIN_BYTES = 24576;
 
 /** Probe one candidate preview page; true = live (200 + Quarto signature). */
 async function probePreviewLive(url) {
@@ -301,10 +297,7 @@ async function probePreviewLive(url) {
     });
     if (!res.ok) return false;
     const body = Buffer.from(await res.arrayBuffer());
-    return (
-      body.byteLength >= QUARTO_BODY_MIN_BYTES ||
-      body.toString('latin1').includes(QUARTO_BODY_MARKER)
-    );
+    return body.toString('latin1').includes(QUARTO_BODY_MARKER);
   } catch {
     return false;
   }
