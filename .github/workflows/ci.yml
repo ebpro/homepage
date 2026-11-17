@@ -27,6 +27,9 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  # '30 */6' trails the catalog cron (teaching-catalog catalog.yml L6: '0 */6 * * *') by 30 min: that build lands 2-10 min after its trigger, so the manifest fetched below is the fresh one.
+  schedule:
+    - cron: '30 */6 * * *'
 
 permissions:
   contents: read
@@ -64,6 +67,16 @@ jobs:
           set -euo pipefail
           mkdir -p /home/runner/.npm
           npm ci --prefer-offline
+
+      - name: Refresh catalog manifest
+        # Runs on EVERY event (push / PR / dispatch / schedule), unconditioned on purpose:
+        # no run may publish the site on the vendored manifest of the last human commit.
+        # No "|| true" here — a failed fetch turns the step red (set -e below, plus the
+        # job's defaults.run.shell: bash, which is already -e), never a stale republish.
+        working-directory: astro
+        run: |
+          set -euo pipefail
+          npm run data
 
       - name: Build site
         working-directory: astro
