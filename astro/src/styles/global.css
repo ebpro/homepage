@@ -576,7 +576,7 @@ code {
 .grid {
   display: grid;
   /* min(…, 100%) prevents horizontal overflow at 375px viewports */
-  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
   gap: var(--space-4);
 }
 
